@@ -191,6 +191,8 @@ public class Token {
 
 		this.type = setType(input, ogType);
 	};
+	
+
 
 	/**
 	 * Prints the token
