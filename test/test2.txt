@@ -1,0 +1,19 @@
+Program Lesson1Program3;
+Var       
+    Num1, Num2, Sum : Integer;
+
+Begin {no semicolon}
+
+12686E20938
+12686E+20938
+12686E-20938
+
+234.32
+	Write(Input number1123:); 
+	Readln(Num1);
+	Writeln(Input number 2:);
+	Readln(Num2);
+	Sum := Num1 + Num2; {addition} 
+	Writeln(Sum);
+	Readln;
+End.
