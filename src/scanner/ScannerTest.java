@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +17,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Joe Miller
- *
+ * @author Joseph Miller <miller12 @ augsburg.edu>
+ * @version JDK/JRE 1.8.0_141
  */
+
 public class ScannerTest {
 
 	/**
@@ -36,37 +38,58 @@ public class ScannerTest {
 	}
 
 	/**
-	 * Test method for {@link scanner.Scanner#nextToken()}.
+	 * Test method for {@link scanner.Scanner#nextToken()}. Verifies that each token
+	 * in the string 'pasc' is being interoeted properly
 	 * 
 	 * @throws IOException
 	 */
 	@Test
+
 	public void testNextToken() throws IOException {
-		// build scanner , point at file , call next token , expected lexeme and actual
-		// lexeme
 
 		// GETTING SCANNER SET UP
-		String filename = "test/test1.txt";
-		FileInputStream fis = null;
+		String pasc = "{ This is the simplest pascal program } program foo; begin end .";
+		StringReader sr = new StringReader(pasc);
 
-		try {
-			fis = new FileInputStream(filename);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		InputStreamReader isr = new InputStreamReader(fis);
-		Scanner scanner = new Scanner(isr);
+		Scanner scanner = new Scanner(sr);
 		Token aToken = null;
 
 		// TESTING
 		aToken = scanner.nextToken();
 		System.out.println(aToken);
+		assertEquals(aToken.lexeme, "{ This is the simplest pascal program }");
+		assertEquals(aToken.type, TokenType.COMMENT);
 
-		assertEquals(aToken.lexeme, "Program");
+		aToken = scanner.nextToken();
+		System.out.println(aToken);
+		assertEquals(aToken.lexeme, "program");
 		assertEquals(aToken.type, TokenType.PROGRAM);
 
+		aToken = scanner.nextToken();
+		System.out.println(aToken);
+		assertEquals(aToken.lexeme, "foo");
+		assertEquals(aToken.type, TokenType.ID);
+
+		aToken = scanner.nextToken();
+		System.out.println(aToken);
+		assertEquals(aToken.lexeme, ";");
+		assertEquals(aToken.type, TokenType.SEMI);
+
+		aToken = scanner.nextToken();
+		System.out.println(aToken);
+		assertEquals(aToken.lexeme, "begin");
+		assertEquals(aToken.type, TokenType.BEGIN);
+
+		aToken = scanner.nextToken();
+		System.out.println(aToken);
+		assertEquals(aToken.lexeme, "end");
+		assertEquals(aToken.type, TokenType.END);
+
+		aToken = scanner.nextToken();
+		System.out.println(aToken);
+		assertEquals(aToken.lexeme, ".");
+		assertEquals(aToken.type, TokenType.PERIOD);
+
 	}
-
-
 
 }
