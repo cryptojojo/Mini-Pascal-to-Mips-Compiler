@@ -8,7 +8,7 @@ package scanner;
 
 %%
 
-%class  MyScanner   /* Names the produced java file */
+%class  Scanner   /* Names the produced java file */
 %function nextToken /* Renames the yylex() function */
 %type   Token      /* Defines the return type of the scanning function */
 %eofval{

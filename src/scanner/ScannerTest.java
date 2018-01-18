@@ -16,10 +16,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Joe
+ * @author Joe Miller
  *
  */
-public class MyScannerTest {
+public class ScannerTest {
 
 	/**
 	 * @throws java.lang.Exception
@@ -36,7 +36,7 @@ public class MyScannerTest {
 	}
 
 	/**
-	 * Test method for {@link scanner.MyScanner#nextToken()}.
+	 * Test method for {@link scanner.Scanner#nextToken()}.
 	 * 
 	 * @throws IOException
 	 */
@@ -55,7 +55,7 @@ public class MyScannerTest {
 			e.printStackTrace();
 		}
 		InputStreamReader isr = new InputStreamReader(fis);
-		MyScanner scanner = new MyScanner(isr);
+		Scanner scanner = new Scanner(isr);
 		Token aToken = null;
 
 		// TESTING

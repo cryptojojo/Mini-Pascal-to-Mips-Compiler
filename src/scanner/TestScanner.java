@@ -9,7 +9,7 @@ import java.util.*;
  * @version JDK/JRE 1.8.0_141
  */
 
-public class TestMyScanner {
+public class TestScanner {
 
 	/**
 	 * Main function, runs program
@@ -33,7 +33,7 @@ public class TestMyScanner {
 			e.printStackTrace();
 		}
 		InputStreamReader isr = new InputStreamReader(fis);
-		MyScanner scanner = new MyScanner(isr);
+		Scanner scanner = new Scanner(isr);
 		Token aToken = null;
 		do {
 			try {
