@@ -37,9 +37,10 @@ public class ScannerTest {
 	public void tearDown() throws Exception {
 	}
 
+	
 	/**
 	 * Test method for {@link scanner.Scanner#nextToken()}. Verifies that each token
-	 * in the string 'pasc' is being interoeted properly
+	 * in the string 'pasc' is being interpreted properly
 	 * 
 	 * @throws IOException
 	 */
