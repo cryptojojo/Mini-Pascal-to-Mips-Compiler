@@ -56,10 +56,6 @@ public class ScannerTest {
 		Token aToken = null;
 
 		// TESTING
-		aToken = scanner.nextToken();
-		System.out.println(aToken);
-		assertEquals(aToken.lexeme, "{ This is the simplest pascal program }");
-		assertEquals(aToken.type, TokenType.COMMENT);
 
 		aToken = scanner.nextToken();
 		System.out.println(aToken);

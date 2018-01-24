@@ -167,9 +167,7 @@ public class Token {
 			set = TokenType.POSEXP;
 		} else if (og == 7) {
 			set = TokenType.NEGEXP;
-		} else if (og == 8) {
-			set = TokenType.COMMENT;
-		}
+		} 
 
 		return set;
 	}
