@@ -10,6 +10,9 @@ import scanner.*;
 public class TestParser {
 
 	public static void main(String[] args) throws IOException{
+		
+		
+		
 		System.out.println("hello");
 		String pasc = "{ This is the simplest pascal program } program foo; begin end .";
 		StringReader sr = new StringReader(pasc);
@@ -18,6 +21,12 @@ public class TestParser {
 		Token aToken = null;
 
 		// TESTING
+		aToken = scanner.nextToken();
+		System.out.println(aToken);
+		
+		aToken = scanner.nextToken();
+		System.out.println(aToken);
+		
 		aToken = scanner.nextToken();
 		System.out.println(aToken);
 

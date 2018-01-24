@@ -595,7 +595,7 @@ public class Scanner {
             }
           case 17: break;
           case 9: 
-            { return( new Token( yytext(), 8));
+            { /* Ignore Comments */
             }
           case 18: break;
           default:

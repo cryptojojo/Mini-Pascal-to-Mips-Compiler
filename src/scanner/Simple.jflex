@@ -73,7 +73,7 @@ comment =   [{] [^*] ~ [}]
 			}	
 
 {comment}	{
-			 return( new Token( yytext(), 8));
+			 /* Ignore Comments */ 
 }
 	
 	
