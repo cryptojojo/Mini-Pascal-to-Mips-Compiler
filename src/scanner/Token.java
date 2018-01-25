@@ -167,9 +167,16 @@ public class Token {
 			set = TokenType.POSEXP;
 		} else if (og == 7) {
 			set = TokenType.NEGEXP;
-		} 
+		}
 
 		return set;
+	}
+
+	public String getLexeme() {
+		return this.lexeme;
+	}
+	public TokenType getType() {
+		return this.type;
 	}
 
 	/**
@@ -189,8 +196,6 @@ public class Token {
 
 		this.type = setType(input, ogType);
 	};
-	
-
 
 	/**
 	 * Prints the token
@@ -204,4 +209,5 @@ public class Token {
 	public String toString() {
 		return "Token: " + this.type + ", " + this.lexeme;
 	}
+
 }
