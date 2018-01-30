@@ -46,10 +46,22 @@ public class Parser {
 	// Production rule functions
 
 	public void program() {
+		match(TokenType.PROGRAM);
+		match(TokenType.ID);
+		match(TokenType.SEMI);
+		declarations();
+		subprogram_declarations();
+		compound_statement();
+		match(TokenType.PERIOD);
 
 	}
 
 	private void indentifier_list() {
+		match(TokenType.ID);
+		if (this.lookahead.getType() == TokenType.COMMA) {
+			match(TokenType.COMMA);
+			indentifier_list();
+		}
 
 	}
 
