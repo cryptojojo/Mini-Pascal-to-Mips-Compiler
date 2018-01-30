@@ -18,7 +18,7 @@ public class TestParser {
 		Scanner scanner = new Scanner(sr);
 		Token aToken = null;
 
-		// TESTING
+		
 		aToken = scanner.nextToken();
 		System.out.println(aToken);
 		
