@@ -122,7 +122,15 @@ public class Parser {
 	}
 
 	private void parameter_list() {
-
+		identifier_list();
+		match(TokenType.COLON);
+		type();
+		if (this.lookahead.getType() == TokenType.SEMI) {
+			match(TokenType.SEMI);
+			parameter_list();
+		} else {
+			// lambda option (first option: no semicolon or parameter_list call)
+		}
 	}
 
 	private void compound_statement() {
@@ -151,6 +159,14 @@ public class Parser {
 	}
 
 	private void variable() {
+		match(TokenType.ID);
+		if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
+			match(TokenType.LEFTBRACKET);
+			expression_list();
+			match(TokenType.RIGHTBRACKET);
+		} else {
+			// lambda option (just ID)
+		}
 
 	}
 
@@ -191,23 +207,41 @@ public class Parser {
 
 	public void factor() {
 
-		switch (lookahead.getType()) {
-		case LEFTPAR:
-			match(TokenType.LEFTPAR);
-			exp();
-			match(TokenType.RIGHTPAR);
-			break;
-		case NUMBER:
-			match(TokenType.NUMBER);
-			break;
-		default:
-			error("Factor potato");
-			break;
+		if (this.lookahead.getType() == TokenType.ID) {
+			match(TokenType.ID);
+			if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
+
+			} else if (this.lookahead.getType() == TokenType.LEFTPAR) {
+				match(TokenType.LEFTPAR);
+				expression();
+			} else {
+				// lambda option (Just ID)
+			}
 		}
+
+		else if (this.lookahead.getType() == TokenType.NUMBER) {
+			match(TokenType.NUMBER);
+		}
+
+		else if (this.lookahead.getType() == TokenType.LEFTPAR) {
+			match(TokenType.LEFTPAR);
+			expression();
+			match(TokenType.RIGHTPAR);
+		}
+
+		else if (this.lookahead.getType() == TokenType.NOT) {
+			match(TokenType.NOT);
+			factor();
+		}
+
 	}
 
 	private void sign() {
-
+		if (this.lookahead.getType() == TokenType.PLUS) {
+			match(TokenType.PLUS);
+		} else if (this.lookahead.getType() == TokenType.MINUS) {
+			match(TokenType.MINUS);
+		}
 	}
 
 	// Methods
@@ -225,6 +259,14 @@ public class Parser {
 		} else {
 			// lambda option
 		}
+	}
+
+	private boolean isAddop(Token token) {
+		boolean answer = false;
+		if (token.getType() == TokenType.PLUS || token.getType() == TokenType.MINUS) {
+			answer = true;
+		}
+		return answer;
 	}
 
 	public void addop() {
