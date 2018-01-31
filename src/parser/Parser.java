@@ -136,7 +136,7 @@ public class Parser {
 			match(TokenType.PROCEDURE);
 			match(TokenType.ID);
 			arguments();
-		}else {
+		} else {
 			error("Subprogram_head");
 		}
 
@@ -161,7 +161,7 @@ public class Parser {
 			match(TokenType.SEMI);
 			parameter_list();
 		} else {
-			// lambda option (first option: no semicolon or parameter_list call)
+			error("parameter_list");
 		}
 	}
 
@@ -173,7 +173,13 @@ public class Parser {
 	}
 
 	private void optional_statements() {
-
+		if (this.lookahead.getType() == TokenType.ID || (this.lookahead.getType() == TokenType.BEGIN)
+				|| (this.lookahead.getType() == TokenType.IF) || (this.lookahead.getType() == TokenType.WHILE)
+				|| (this.lookahead.getType() == TokenType.READ) || (this.lookahead.getType() == TokenType.WRITE)) {
+			statement_list();
+		} else {
+			// lambda option
+		}
 	}
 
 	private void statement_list() {
