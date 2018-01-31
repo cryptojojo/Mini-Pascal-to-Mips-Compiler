@@ -137,7 +137,13 @@ public class Parser {
 	}
 
 	private void statement_list() {
-
+		if (this.lookahead.getType() == TokenType.SEMI) {
+			statement();
+			match(TokenType.SEMI);
+			statement_list();
+		} else {
+			statement();
+		}
 	}
 
 	private void statement() {
