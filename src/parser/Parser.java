@@ -61,6 +61,8 @@ public class Parser {
 		if (this.lookahead.getType() == TokenType.COMMA) {
 			match(TokenType.COMMA);
 			indentifier_list();
+		} else {
+			// lambda option
 		}
 
 	}
@@ -74,6 +76,13 @@ public class Parser {
 	}
 
 	private void standard_type() {
+		if (this.lookahead.getType() == TokenType.INTEGER) {
+			match(TokenType.INTEGER);
+		} else if (this.lookahead.getType() == TokenType.REAL)
+			match(TokenType.REAL);
+		else {
+			error("standard_type");
+		}
 
 	}
 
@@ -90,6 +99,13 @@ public class Parser {
 	}
 
 	private void arguments() {
+		if (this.lookahead.getType() == TokenType.LEFTPAR) {
+			match(TokenType.LEFTPAR);
+			parameter_list();
+			match(TokenType.LEFTPAR);
+		} else {
+			// lambda option
+		}
 
 	}
 
@@ -199,8 +215,6 @@ public class Parser {
 			error("Addop");
 		}
 	}
-
-	
 
 	private boolean isMulop(Token token) {
 		boolean answer = false;
