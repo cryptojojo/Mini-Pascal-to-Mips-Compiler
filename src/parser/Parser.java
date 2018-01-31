@@ -101,8 +101,10 @@ public class Parser {
 	}
 
 	private void subprogram_declaration() {
-	
-
+		subprogram_head();
+		declarations();
+		subprogram_declarations();
+		compound_statement();
 	}
 
 	private void subprogram_head() {
