@@ -56,11 +56,11 @@ public class Parser {
 
 	}
 
-	private void indentifier_list() {
+	private void identifier_list() {
 		match(TokenType.ID);
 		if (this.lookahead.getType() == TokenType.COMMA) {
 			match(TokenType.COMMA);
-			indentifier_list();
+			identifier_list();
 		} else {
 			// lambda option
 		}
@@ -68,7 +68,17 @@ public class Parser {
 	}
 
 	private void declarations() {
-
+		if (this.lookahead.getType() == TokenType.VAR) {
+			match(TokenType.VAR);
+			identifier_list();
+			match(TokenType.COLON);
+			type();
+			match(TokenType.SEMI);
+			declarations();
+		}
+		else {
+			// lambda option
+		}
 	}
 
 	private void type() {
@@ -91,6 +101,7 @@ public class Parser {
 	}
 
 	private void subprogram_declaration() {
+	
 
 	}
 
