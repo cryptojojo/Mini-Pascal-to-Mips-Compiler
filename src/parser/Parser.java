@@ -81,6 +81,17 @@ public class Parser {
 	}
 
 	private void type() {
+		if (this.lookahead.getType() == TokenType.ARRAY) {
+			match(TokenType.ARRAY);
+			match(TokenType.LEFTBRACKET);
+			match(TokenType.NUMBER);
+			match(TokenType.COLON);
+			match(TokenType.NUMBER);
+			match(TokenType.OF);
+			standard_type();
+		} else {
+			standard_type();
+		}
 
 	}
 
@@ -210,26 +221,24 @@ public class Parser {
 		if (this.lookahead.getType() == TokenType.ID) {
 			match(TokenType.ID);
 			if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
+				match(TokenType.LEFTBRACKET);
+				expression();
+				match(TokenType.RIGHTBRACKET);
 
 			} else if (this.lookahead.getType() == TokenType.LEFTPAR) {
 				match(TokenType.LEFTPAR);
-				expression();
+				expression_list();
+				match(TokenType.RIGHTPAR);
 			} else {
 				// lambda option (Just ID)
 			}
-		}
-
-		else if (this.lookahead.getType() == TokenType.NUMBER) {
+		} else if (this.lookahead.getType() == TokenType.NUMBER) {
 			match(TokenType.NUMBER);
-		}
-
-		else if (this.lookahead.getType() == TokenType.LEFTPAR) {
+		} else if (this.lookahead.getType() == TokenType.LEFTPAR) {
 			match(TokenType.LEFTPAR);
 			expression();
 			match(TokenType.RIGHTPAR);
-		}
-
-		else if (this.lookahead.getType() == TokenType.NOT) {
+		} else if (this.lookahead.getType() == TokenType.NOT) {
 			match(TokenType.NOT);
 			factor();
 		}
