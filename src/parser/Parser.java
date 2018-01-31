@@ -62,7 +62,7 @@ public class Parser {
 			match(TokenType.COMMA);
 			identifier_list();
 		} else {
-			// lambda option
+			error("identifier_list");
 		}
 
 	}
@@ -107,7 +107,13 @@ public class Parser {
 	}
 
 	private void subprogram_declarations() {
-
+		if (this.lookahead.getType() == (TokenType.FUNCTION) || this.lookahead.getType() == (TokenType.PROCEDURE)) {
+			subprogram_declaration();
+			match(TokenType.SEMI);
+			subprogram_declaration();
+		} else {
+			// lambda option
+		}
 	}
 
 	private void subprogram_declaration() {
@@ -118,6 +124,21 @@ public class Parser {
 	}
 
 	private void subprogram_head() {
+
+		if (this.lookahead.getType() == TokenType.FUNCTION) {
+			match(TokenType.FUNCTION);
+			match(TokenType.ID);
+			arguments();
+			match(TokenType.COLON);
+			standard_type();
+			match(TokenType.SEMI);
+		} else if (this.lookahead.getType() == TokenType.PROCEDURE) {
+			match(TokenType.PROCEDURE);
+			match(TokenType.ID);
+			arguments();
+		}else {
+			error("Subprogram_head");
+		}
 
 	}
 
@@ -186,7 +207,13 @@ public class Parser {
 	}
 
 	private void expression_list() {
-
+		if (this.lookahead.getType() == TokenType.COMMA) {
+			expression();
+			match(TokenType.COMMA);
+			expression_list();
+		} else {
+			expression();
+		}
 	}
 
 	private void expression() {
@@ -269,6 +296,8 @@ public class Parser {
 			// lambda option
 		}
 	}
+
+	// CHNAGE THESE GREATLY AND ADD ISRELOP AND RELOP
 
 	private boolean isAddop(Token token) {
 		boolean answer = false;
