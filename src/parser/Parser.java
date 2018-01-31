@@ -75,8 +75,7 @@ public class Parser {
 			type();
 			match(TokenType.SEMI);
 			declarations();
-		}
-		else {
+		} else {
 			// lambda option
 		}
 	}
@@ -127,6 +126,9 @@ public class Parser {
 	}
 
 	private void compound_statement() {
+		match(TokenType.BEGIN);
+		optional_statements();
+		match(TokenType.END);
 
 	}
 
@@ -177,7 +179,7 @@ public class Parser {
 			factor();
 			term_part();
 		} else {
-			// do nothing option
+			// lambda option
 		}
 	}
 
