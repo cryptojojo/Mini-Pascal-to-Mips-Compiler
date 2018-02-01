@@ -233,10 +233,6 @@ public class Parser {
 	}
 
 	private void simple_expression() {
-
-	}
-
-	private void simple_part() {
 		if (this.lookahead.getType() == TokenType.PLUS || this.lookahead.getType() == TokenType.MINUS) {
 			sign();
 			term();
@@ -245,6 +241,10 @@ public class Parser {
 			term();
 			simple_part();
 		}
+	}
+
+	private void simple_part() {
+
 	}
 
 	public void term() {
