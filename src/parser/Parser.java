@@ -211,9 +211,16 @@ public class Parser {
 			expression();
 			match(TokenType.DO);
 			statement();
-		} else {
-			// read();
-			// write();
+		} else if (this.lookahead.getType() == TokenType.READ) {
+			match(TokenType.READ);
+			match(TokenType.LEFTPAR);
+			match(TokenType.ID);
+			match(TokenType.RIGHTPAR);
+		} else if (this.lookahead.getType() == TokenType.WRITE) {
+			match(TokenType.WRITE);
+			match(TokenType.LEFTPAR);
+			expression();
+			match(TokenType.RIGHTPAR);
 		}
 	}
 
@@ -229,9 +236,9 @@ public class Parser {
 
 	}
 
-	private void procedure_statement() {
-		// Ignoring for now
-	}
+	// private void procedure_statement() {
+	// Ignoring for now
+	// }
 
 	private void expression_list() {
 		expression();
@@ -340,6 +347,10 @@ public class Parser {
 		return answer;
 	}
 
+	/**
+	 * 
+	 */
+
 	public void relop() {
 		if (lookahead.getType() == TokenType.EQUAL) {
 			match(TokenType.EQUAL);
@@ -358,6 +369,11 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * 
+	 * @param token
+	 * @return
+	 */
 	private boolean isAddop(Token token) {
 		boolean answer = false;
 		if (token.getType() == TokenType.PLUS || token.getType() == TokenType.MINUS
