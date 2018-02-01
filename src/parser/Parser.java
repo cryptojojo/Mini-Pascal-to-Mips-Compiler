@@ -110,7 +110,7 @@ public class Parser {
 		if (this.lookahead.getType() == (TokenType.FUNCTION) || this.lookahead.getType() == (TokenType.PROCEDURE)) {
 			subprogram_declaration();
 			match(TokenType.SEMI);
-			subprogram_declaration();
+			subprogram_declarations();
 		} else {
 			// lambda option
 		}
@@ -213,12 +213,12 @@ public class Parser {
 	}
 
 	private void expression_list() {
+		expression();
 		if (this.lookahead.getType() == TokenType.COMMA) {
-			expression();
 			match(TokenType.COMMA);
 			expression_list();
 		} else {
-			expression();
+			// just the expression option
 		}
 	}
 
@@ -286,28 +286,40 @@ public class Parser {
 		}
 	}
 
-	// Methods
+	// RELOP, ADDOP, MULOP, ASSIGNOP
 
-	public void exp() {
-		term();
-		exp_prime();
+	private boolean isRelop(Token token) {
+		boolean answer = false;
+		if (token.getType() == TokenType.EQUAL || token.getType() == TokenType.NOTEQUAL
+				|| token.getType() == TokenType.LESSTHAN || token.getType() == TokenType.LESSTHANEQ
+				|| token.getType() == TokenType.GREATERTHANEQ || token.getType() == TokenType.GREATERTHAN) {
+			answer = true;
+		}
+		return answer;
 	}
 
-	public void exp_prime() {
-		if (lookahead.getType() == TokenType.PLUS || lookahead.getType() == TokenType.MINUS) {
-			addop();
-			term();
-			exp_prime();
+	public void relop() {
+		if (lookahead.getType() == TokenType.EQUAL) {
+			match(TokenType.EQUAL);
+		} else if (lookahead.getType() == TokenType.NOTEQUAL) {
+			match(TokenType.NOTEQUAL);
+		} else if (lookahead.getType() == TokenType.LESSTHAN) {
+			match(TokenType.LESSTHAN);
+		} else if (lookahead.getType() == TokenType.LESSTHANEQ) {
+			match(TokenType.LESSTHANEQ);
+		} else if (lookahead.getType() == TokenType.GREATERTHANEQ) {
+			match(TokenType.GREATERTHANEQ);
+		} else if (lookahead.getType() == TokenType.GREATERTHAN) {
+			match(TokenType.GREATERTHAN);
 		} else {
-			// lambda option
+			error("Relop");
 		}
 	}
 
-	// CHNAGE THESE GREATLY AND ADD ISRELOP AND RELOP
-
 	private boolean isAddop(Token token) {
 		boolean answer = false;
-		if (token.getType() == TokenType.PLUS || token.getType() == TokenType.MINUS) {
+		if (token.getType() == TokenType.PLUS || token.getType() == TokenType.MINUS
+				|| token.getType() == TokenType.OR) {
 			answer = true;
 		}
 		return answer;
@@ -318,6 +330,8 @@ public class Parser {
 			match(TokenType.PLUS);
 		} else if (lookahead.getType() == TokenType.MINUS) {
 			match(TokenType.MINUS);
+		} else if (lookahead.getType() == TokenType.OR) {
+			match(TokenType.OR);
 		} else {
 			error("Addop");
 		}
@@ -325,7 +339,9 @@ public class Parser {
 
 	private boolean isMulop(Token token) {
 		boolean answer = false;
-		if (token.getType() == TokenType.MULTIPLY || token.getType() == TokenType.DIVIDE) {
+		if (token.getType() == TokenType.MULTIPLY || token.getType() == TokenType.DIVIDE
+				|| token.getType() == TokenType.DIV || token.getType() == TokenType.MOD
+				|| token.getType() == TokenType.AND) {
 			answer = true;
 		}
 		return answer;
@@ -336,8 +352,32 @@ public class Parser {
 			match(TokenType.MULTIPLY);
 		} else if (lookahead.getType() == TokenType.DIVIDE) {
 			match(TokenType.DIVIDE);
+		} else if (lookahead.getType() == TokenType.DIV) {
+			match(TokenType.DIV);
+		} else if (lookahead.getType() == TokenType.MOD) {
+			match(TokenType.MOD);
+		} else if (lookahead.getType() == TokenType.AND) {
+			match(TokenType.AND);
 		} else {
 			error("Mulop");
+		}
+	}
+
+	private boolean isAssignop(Token token) {
+		boolean answer = false;
+		if (token.getType() == TokenType.PLUS || token.getType() == TokenType.MINUS) {
+			answer = true;
+		}
+		return answer;
+	}
+
+	public void assignop() {
+		if (lookahead.getType() == TokenType.PLUS) {
+			match(TokenType.PLUS);
+		} else if (lookahead.getType() == TokenType.MINUS) {
+			match(TokenType.MINUS);
+		} else {
+			error("Addop");
 		}
 	}
 
