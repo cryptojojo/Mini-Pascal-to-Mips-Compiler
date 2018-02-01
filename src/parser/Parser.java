@@ -224,7 +224,7 @@ public class Parser {
 
 	private void expression() {
 		simple_expression();
-		if (isRelop(this.lookahead)) {
+		if (isRelop(lookahead)) {
 			relop(); // consumes the relop
 			simple_expression();
 		} else {
@@ -244,7 +244,13 @@ public class Parser {
 	}
 
 	private void simple_part() {
-
+		if (isAddop(lookahead)) {
+			addop();
+			term();
+			simple_part();
+		} else {
+			// lambda option
+		}
 	}
 
 	public void term() {
