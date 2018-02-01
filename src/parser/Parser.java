@@ -178,7 +178,7 @@ public class Parser {
 				|| (this.lookahead.getType() == TokenType.READ) || (this.lookahead.getType() == TokenType.WRITE)) {
 			statement_list();
 		} else {
-			// lambda opœtion
+			// lambda option
 		}
 	}
 
@@ -193,9 +193,20 @@ public class Parser {
 	}
 
 	private void statement() {
-
+		if (this.lookahead.getType() == TokenType.ID) {
+			variable();
+			match()
+		}
 	}
 
+	
+	
+	
+	
+	
+
+	
+	
 	private void variable() {
 		match(TokenType.ID);
 		if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
@@ -384,21 +395,6 @@ public class Parser {
 		}
 	}
 
-	private boolean isAssignop(Token token) {
-		boolean answer = false;
-		if (token.getType() == TokenType.ASSIGN) {
-			answer = true;
-		}
-		return answer;
-	}
-
-	public void assignop() {
-		if (lookahead.getType() == TokenType.ASSIGN) {
-			match(TokenType.ASSIGN);
-		} else {
-			error("Assignop");
-		}
-	}
 
 	/**
 	 * Matches the expected token
