@@ -365,7 +365,7 @@ public class Parser {
 
 	private boolean isAssignop(Token token) {
 		boolean answer = false;
-		if (token.getType() == TokenType.PLUS || token.getType() == TokenType.MINUS) {
+		if (token.getType() == TokenType.ASSIGN) {
 			answer = true;
 		}
 		return answer;
@@ -374,10 +374,8 @@ public class Parser {
 	public void assignop() {
 		if (lookahead.getType() == TokenType.PLUS) {
 			match(TokenType.PLUS);
-		} else if (lookahead.getType() == TokenType.MINUS) {
-			match(TokenType.MINUS);
 		} else {
-			error("Addop");
+			error("Assignop");
 		}
 	}
 
