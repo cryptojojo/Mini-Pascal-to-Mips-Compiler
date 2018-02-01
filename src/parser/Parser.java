@@ -62,7 +62,7 @@ public class Parser {
 			match(TokenType.COMMA);
 			identifier_list();
 		} else {
-			error("identifier_list");
+			error("in the indetifier_list function");
 		}
 
 	}
@@ -101,7 +101,7 @@ public class Parser {
 		} else if (this.lookahead.getType() == TokenType.REAL)
 			match(TokenType.REAL);
 		else {
-			error("standard_type");
+			error("in the standard_type function");
 		}
 
 	}
@@ -137,7 +137,7 @@ public class Parser {
 			match(TokenType.ID);
 			arguments();
 		} else {
-			error("Subprogram_head");
+			error("in the subprogram_head function");
 		}
 
 	}
@@ -161,7 +161,7 @@ public class Parser {
 			match(TokenType.SEMI);
 			parameter_list();
 		} else {
-			error("parameter_list");
+			error("in the parameter_list function");
 		}
 	}
 
@@ -203,7 +203,7 @@ public class Parser {
 			expression_list();
 			match(TokenType.RIGHTBRACKET);
 		} else {
-			// lambda option (just ID)
+			// just the id option
 		}
 
 	}
@@ -276,7 +276,6 @@ public class Parser {
 				match(TokenType.LEFTBRACKET);
 				expression();
 				match(TokenType.RIGHTBRACKET);
-
 			} else if (this.lookahead.getType() == TokenType.LEFTPAR) {
 				match(TokenType.LEFTPAR);
 				expression_list();
@@ -293,8 +292,9 @@ public class Parser {
 		} else if (this.lookahead.getType() == TokenType.NOT) {
 			match(TokenType.NOT);
 			factor();
+		} else {
+			error("in factor function");
 		}
-
 	}
 
 	private void sign() {
@@ -302,6 +302,8 @@ public class Parser {
 			match(TokenType.PLUS);
 		} else if (this.lookahead.getType() == TokenType.MINUS) {
 			match(TokenType.MINUS);
+		} else {
+			error("in sign function");
 		}
 	}
 
@@ -428,7 +430,7 @@ public class Parser {
 	 * 
 	 */
 	public void error(String message) {
-		System.out.println("Error" + message);
+		System.out.println("Error " + message);
 		// System.exit( 1);
 	}
 }
