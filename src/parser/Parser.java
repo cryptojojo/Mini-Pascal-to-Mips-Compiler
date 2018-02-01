@@ -195,18 +195,28 @@ public class Parser {
 	private void statement() {
 		if (this.lookahead.getType() == TokenType.ID) {
 			variable();
-			match()
+			match(TokenType.ASSIGN);
+			expression();
+		} else if (this.lookahead.getType() == TokenType.BEGIN) {
+			compound_statement();
+		} else if (this.lookahead.getType() == TokenType.IF) {
+			match(TokenType.IF);
+			expression();
+			match(TokenType.THEN);
+			statement();
+			match(TokenType.ELSE);
+			statement();
+		} else if (this.lookahead.getType() == TokenType.WHILE) {
+			match(TokenType.WHILE);
+			expression();
+			match(TokenType.DO);
+			statement();
+		} else {
+			// read();
+			// write();
 		}
 	}
 
-	
-	
-	
-	
-	
-
-	
-	
 	private void variable() {
 		match(TokenType.ID);
 		if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
@@ -394,7 +404,6 @@ public class Parser {
 			error("Mulop");
 		}
 	}
-
 
 	/**
 	 * Matches the expected token
