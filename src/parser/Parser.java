@@ -178,17 +178,17 @@ public class Parser {
 				|| (this.lookahead.getType() == TokenType.READ) || (this.lookahead.getType() == TokenType.WRITE)) {
 			statement_list();
 		} else {
-			// lambda option
+			// lambda opœtion
 		}
 	}
 
 	private void statement_list() {
+		statement();
 		if (this.lookahead.getType() == TokenType.SEMI) {
-			statement();
 			match(TokenType.SEMI);
 			statement_list();
 		} else {
-			statement();
+			// just the statement option
 		}
 	}
 
