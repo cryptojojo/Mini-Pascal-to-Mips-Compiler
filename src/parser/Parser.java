@@ -223,7 +223,13 @@ public class Parser {
 	}
 
 	private void expression() {
-
+		simple_expression();
+		if (isRelop(this.lookahead)) {
+			relop(); // consumes the relop
+			simple_expression();
+		} else {
+			// just the simple expression option
+		}
 	}
 
 	private void simple_expression() {
@@ -231,7 +237,14 @@ public class Parser {
 	}
 
 	private void simple_part() {
-
+		if (this.lookahead.getType() == TokenType.PLUS || this.lookahead.getType() == TokenType.MINUS) {
+			sign();
+			term();
+			simple_part();
+		} else {
+			term();
+			simple_part();
+		}
 	}
 
 	public void term() {
@@ -372,8 +385,8 @@ public class Parser {
 	}
 
 	public void assignop() {
-		if (lookahead.getType() == TokenType.PLUS) {
-			match(TokenType.PLUS);
+		if (lookahead.getType() == TokenType.ASSIGN) {
+			match(TokenType.ASSIGN);
 		} else {
 			error("Assignop");
 		}
