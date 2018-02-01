@@ -88,6 +88,12 @@ public class Token {
 			case "while":
 				set = TokenType.WHILE;
 				break;
+			case "read":
+				set = TokenType.READ;
+				break;
+			case "write":
+				set = TokenType.WRITE;
+				break;
 
 			default:
 				set = TokenType.ID;
@@ -175,6 +181,7 @@ public class Token {
 	public String getLexeme() {
 		return this.lexeme;
 	}
+
 	public TokenType getType() {
 		return this.type;
 	}
