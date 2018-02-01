@@ -17,8 +17,18 @@ public class ParserTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
+	public void testProgram() {
+		Parser p = new Parser("test/program_test.txt", true);
+		boolean allTrue = true;
+		try {
+			p.program();
+		} catch (Exception e) {
+			e.printStackTrace();
+			allTrue = false;
+			System.out.println("Youre dead");
+		}
+
+		assertTrue(allTrue);
+}
 
 }

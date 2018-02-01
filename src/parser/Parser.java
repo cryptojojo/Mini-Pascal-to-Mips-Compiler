@@ -25,7 +25,7 @@ public class Parser {
 		if (isFilename) {
 			FileInputStream fis = null;
 			try {
-				fis = new FileInputStream("test/in.txt");
+				fis = new FileInputStream(text);
 			} catch (FileNotFoundException ex) {
 				error("No file");
 			}
@@ -428,12 +428,12 @@ public class Parser {
 	 *            The expected token type
 	 */
 	public void match(TokenType expected) {
-		System.out.println("match( " + expected + ")");
+		System.out.println("match (" + expected + ")");
 		if (this.lookahead.getType() == expected) {
 			try {
 				this.lookahead = scanner.nextToken();
 				if (this.lookahead == null) {
-					this.lookahead = new Token("End of File", null);
+					this.lookahead = new Token("End of File", -1);
 				}
 			} catch (IOException ex) {
 				error("Scanner exception");
@@ -450,8 +450,10 @@ public class Parser {
 	 *            to be printed
 	 * 
 	 */
-	public void error(String message) {
+	public void error(String message) throws RuntimeException {
 		System.out.println("Error " + message);
-		// System.exit( 1);
+		//System.exit( 1);
+		throw new java.lang.RuntimeException("AHHHHHHH");
 	}
+	
 }
