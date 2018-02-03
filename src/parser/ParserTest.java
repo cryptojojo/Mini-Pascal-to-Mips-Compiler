@@ -20,8 +20,8 @@ public class ParserTest {
 	public void testProgram() {
 		boolean allTrue = true;
 
-		Parser pPass = new Parser("test/parser/program_test_pass.txt", true);
-		Parser pFail = new Parser("test/parser/program_test_fail.txt", true);
+		Parser pPass = new Parser("test/parser/program_test_pass.pas", true);
+		Parser pFail = new Parser("test/parser/program_test_fail.pas", true);
 
 		// should pass
 		try {
@@ -50,8 +50,8 @@ public class ParserTest {
 	public void testDeclaration() {
 		boolean allTrue = true;
 
-		Parser pPass = new Parser("test/parser/declaration_test_pass.txt", true);
-		Parser pFail = new Parser("test/parser/declaration_test_fail.txt", true);
+		Parser pPass = new Parser("test/parser/declaration_test_pass.pas", true);
+		Parser pFail = new Parser("test/parser/declaration_test_fail.pas", true);
 
 		// should pass
 		try {
@@ -78,8 +78,8 @@ public class ParserTest {
 	public void testSubprogramDeclarations() {
 		boolean allTrue = true;
 
-		Parser pPass = new Parser("test/parser/subprogramdeclarations_test_pass.txt", true);
-		Parser pFail = new Parser("test/parser/subprogramdeclarations_test_fail.txt", true);
+		Parser pPass = new Parser("test/parser/subprogramdeclarations_test_pass.pas", true);
+		Parser pFail = new Parser("test/parser/subprogramdeclarations_test_fail.pas", true);
 
 		// should pass
 		try {
@@ -102,14 +102,14 @@ public class ParserTest {
 		System.out.println();
 		assertTrue(allTrue);
 
-	} 
+	}
 
 	@Test
 	public void testStatement() {
 		boolean allTrue = true;
 
-		Parser pPass = new Parser("test/parser/statement_test_pass.txt", true);
-		Parser pFail = new Parser("test/parser/statement_test_fail.txt", true);
+		Parser pPass = new Parser("test/parser/statement_test_pass.pas", true);
+		Parser pFail = new Parser("test/parser/statement_test_fail.pas", true);
 
 		// should pass
 		try {
@@ -137,8 +137,8 @@ public class ParserTest {
 	public void testSimpleExpression() {
 		boolean allTrue = true;
 
-		Parser pPass = new Parser("test/parser/simpleexpression_test_pass.txt", true);
-		Parser pFail = new Parser("test/parser/simpleexpression_test_fail.txt", true);
+		Parser pPass = new Parser("test/parser/simpleexpression_test_pass.pas", true);
+		Parser pFail = new Parser("test/parser/simpleexpression_test_fail.pas", true);
 
 		// should pass
 		try {
@@ -166,8 +166,8 @@ public class ParserTest {
 	public void testFactor() {
 		boolean allTrue = true;
 
-		Parser pPass = new Parser("test/parser/factor_test_pass.txt", true);
-		Parser pFail = new Parser("test/parser/factor_test_fail.txt", true);
+		Parser pPass = new Parser("test/parser/factor_test_pass.pas", true);
+		Parser pFail = new Parser("test/parser/factor_test_fail.pas", true);
 
 		// should pass
 		try {
