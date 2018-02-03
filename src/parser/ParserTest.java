@@ -8,14 +8,26 @@ import org.junit.Test;
 
 public class ParserTest {
 
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 	}
 
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * Program test - for part confirms that it accepts pascal code that should pass
+	 * and the second part confirms that it rejects pascal code that shouldn't pass
+	 */
 	@Test
 	public void testProgram() {
 		boolean allTrue = true;
@@ -46,6 +58,11 @@ public class ParserTest {
 
 	}
 
+	/**
+	 * Declaration test - for part confirms that it accepts pascal code that should
+	 * pass and the second part confirms that it rejects pascal code that shouldn't
+	 * pass
+	 */
 	@Test
 	public void testDeclaration() {
 		boolean allTrue = true;
@@ -74,6 +91,11 @@ public class ParserTest {
 		assertTrue(allTrue);
 	}
 
+	/**
+	 * Subprogram Declarations test - for part confirms that it accepts pascal code
+	 * that should pass and the second part confirms that it rejects pascal code
+	 * that shouldn't pass
+	 */
 	@Test
 	public void testSubprogramDeclarations() {
 		boolean allTrue = true;
@@ -104,6 +126,11 @@ public class ParserTest {
 
 	}
 
+	/**
+	 * Statement test - for part confirms that it accepts pascal code that should
+	 * pass and the second part confirms that it rejects pascal code that shouldn't
+	 * pass
+	 */
 	@Test
 	public void testStatement() {
 		boolean allTrue = true;
@@ -133,6 +160,11 @@ public class ParserTest {
 		assertTrue(allTrue);
 	}
 
+	/**
+	 * Simple expression test - for part confirms that it accepts pascal code that
+	 * should pass and the second part confirms that it rejects pascal code that
+	 * shouldn't pass
+	 */
 	@Test
 	public void testSimpleExpression() {
 		boolean allTrue = true;
@@ -162,6 +194,10 @@ public class ParserTest {
 		assertTrue(allTrue);
 	}
 
+	/**
+	 * Factor test - for part confirms that it accepts pascal code that should pass
+	 * and the second part confirms that it rejects pascal code that shouldn't pass
+	 */
 	@Test
 	public void testFactor() {
 		boolean allTrue = true;
