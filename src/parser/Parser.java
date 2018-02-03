@@ -136,6 +136,7 @@ public class Parser {
 			match(TokenType.PROCEDURE);
 			match(TokenType.ID);
 			arguments();
+			match(TokenType.SEMI);
 		} else {
 			error("in the subprogram_head function");
 		}
@@ -146,7 +147,7 @@ public class Parser {
 		if (this.lookahead.getType() == TokenType.LEFTPAR) {
 			match(TokenType.LEFTPAR);
 			parameter_list();
-			match(TokenType.LEFTPAR);
+			match(TokenType.RIGHTPAR);
 		} else {
 			// lambda option
 		}
@@ -161,7 +162,7 @@ public class Parser {
 			match(TokenType.SEMI);
 			parameter_list();
 		} else {
-			error("in the parameter_list function");
+			// just thhe first option
 		}
 	}
 

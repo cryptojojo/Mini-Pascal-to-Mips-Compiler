@@ -75,11 +75,11 @@ public class ParserTest {
 	}
 
 	@Test
-	public void testSubprogramDeclaration() {
+	public void testSubprogramDeclarations() {
 		boolean allTrue = true;
 
-		Parser pPass = new Parser("test/parser/subprogramdeclaration_test_pass.txt", true);
-		Parser pFail = new Parser("test/parser/subprogramdeclaration_test_fail.txt", true);
+		Parser pPass = new Parser("test/parser/subprogramdeclarations_test_pass.txt", true);
+		Parser pFail = new Parser("test/parser/subprogramdeclarations_test_fail.txt", true);
 
 		// should pass
 		try {
