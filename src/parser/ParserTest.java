@@ -18,17 +18,25 @@ public class ParserTest {
 
 	@Test
 	public void testProgram() {
-		Parser p = new Parser("test/program_test.txt", true);
 		boolean allTrue = true;
+		
+		Parser p = new Parser("test/program_test.txt", true);
+		
 		try {
 			p.program();
+			System.out.println("Program part 1 pass");
 		} catch (Exception e) {
-			e.printStackTrace();
 			allTrue = false;
-			System.out.println("Youre dead");
+			System.out.println("Program part 1 fail");
 		}
 
+		
+		
+		
 		assertTrue(allTrue);
 }
+	
+	
+	
 
 }
