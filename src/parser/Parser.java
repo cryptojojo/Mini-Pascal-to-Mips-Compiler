@@ -62,7 +62,7 @@ public class Parser {
 			match(TokenType.COMMA);
 			identifier_list();
 		} else {
-			error("in the indetifier_list function");
+			// just the id option
 		}
 
 	}

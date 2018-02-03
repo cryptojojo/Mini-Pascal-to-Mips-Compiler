@@ -1,1 +1,1 @@
-var varName, anotherVarName: integer; 
+var varName, anotherVarname: integer; 

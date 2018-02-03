@@ -55,7 +55,7 @@ public class ParserTest {
 
 		// should pass
 		try {
-			pPass.program();
+			pPass.declarations();
 			System.out.println("Declaration part 1 pass");
 		} catch (Exception e) {
 			allTrue = false;
@@ -64,7 +64,7 @@ public class ParserTest {
 
 		// should catch
 		try {
-			pFail.program();
+			pFail.declarations();
 			System.out.println("Declaration part 2 fail");
 			allTrue = false;
 		} catch (Exception e) {
@@ -78,12 +78,12 @@ public class ParserTest {
 	public void testSubprogramDeclaration() {
 		boolean allTrue = true;
 
-		Parser pPass = new Parser("test/parser/program_test_pass.txt", true);
-		Parser pFail = new Parser("test/parser/program_test_fail.txt", true);
+		Parser pPass = new Parser("test/parser/subprogramdeclaration_test_pass.txt", true);
+		Parser pFail = new Parser("test/parser/subprogramdeclaration_test_fail.txt", true);
 
 		// should pass
 		try {
-			pPass.program();
+			pPass.subprogram_declaration();
 			System.out.println("Subprogram Declaration part 1 pass");
 		} catch (Exception e) {
 			allTrue = false;
@@ -92,7 +92,7 @@ public class ParserTest {
 
 		// should catch
 		try {
-			pFail.program();
+			pFail.subprogram_declaration();
 			System.out.println("Subprogram Declaration part 2 fail");
 			allTrue = false;
 		} catch (Exception e) {
@@ -102,7 +102,7 @@ public class ParserTest {
 		System.out.println();
 		assertTrue(allTrue);
 
-	}
+	} 
 
 	@Test
 	public void testStatement() {
@@ -113,7 +113,7 @@ public class ParserTest {
 
 		// should pass
 		try {
-			pPass.program();
+			pPass.statement();
 			System.out.println("Statement part 1 pass");
 		} catch (Exception e) {
 			allTrue = false;
@@ -122,7 +122,7 @@ public class ParserTest {
 
 		// should catch
 		try {
-			pFail.program();
+			pFail.statement();
 			System.out.println("Statement part 2 fail");
 			allTrue = false;
 		} catch (Exception e) {
@@ -142,7 +142,7 @@ public class ParserTest {
 
 		// should pass
 		try {
-			pPass.program();
+			pPass.simple_expression();
 			System.out.println("Simple Expression part 1 pass");
 		} catch (Exception e) {
 			allTrue = false;
@@ -151,7 +151,7 @@ public class ParserTest {
 
 		// should catch
 		try {
-			pFail.program();
+			pFail.simple_expression();
 			System.out.println("Simple Expression part 2 fail");
 			allTrue = false;
 		} catch (Exception e) {
@@ -166,12 +166,12 @@ public class ParserTest {
 	public void testFactor() {
 		boolean allTrue = true;
 
-		Parser pPass = new Parser("test/parser/program_test_pass.txt", true);
-		Parser pFail = new Parser("test/parser/program_test_fail.txt", true);
+		Parser pPass = new Parser("test/parser/factor_test_pass.txt", true);
+		Parser pFail = new Parser("test/parser/factor_test_fail.txt", true);
 
 		// should pass
 		try {
-			pPass.program();
+			pPass.factor();
 			System.out.println("Factor part 1 pass");
 		} catch (Exception e) {
 			allTrue = false;
@@ -180,7 +180,7 @@ public class ParserTest {
 
 		// should catch
 		try {
-			pFail.program();
+			pFail.factor();
 			System.out.println("Factor part 2 fail");
 			allTrue = false;
 		} catch (Exception e) {
