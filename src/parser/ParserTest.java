@@ -137,8 +137,8 @@ public class ParserTest {
 	public void testSimpleExpression() {
 		boolean allTrue = true;
 
-		Parser pPass = new Parser("test/parser/program_test_pass.txt", true);
-		Parser pFail = new Parser("test/parser/program_test_fail.txt", true);
+		Parser pPass = new Parser("test/parser/simpleexpression_test_pass.txt", true);
+		Parser pFail = new Parser("test/parser/simpleexpression_test_fail.txt", true);
 
 		// should pass
 		try {
