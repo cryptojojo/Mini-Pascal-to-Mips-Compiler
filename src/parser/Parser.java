@@ -195,7 +195,7 @@ public class Parser {
 	public void statement() {
 		if (this.lookahead.getType() == TokenType.ID) {
 			variable();
-			match(TokenType.ASSIGN);
+			assignop();
 			expression();
 		} else if (this.lookahead.getType() == TokenType.BEGIN) {
 			compound_statement();
@@ -418,6 +418,15 @@ public class Parser {
 			match(TokenType.AND);
 		} else {
 			error("Mulop");
+		}
+	}
+	
+	public void assignop() {
+		if (lookahead.getType() == TokenType.COLON) {
+			match(TokenType.COLON);
+			match(TokenType.EQUAL);
+		} else {
+			error("in assignop");
 		}
 	}
 

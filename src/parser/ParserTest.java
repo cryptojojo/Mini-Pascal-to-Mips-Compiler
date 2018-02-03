@@ -108,8 +108,8 @@ public class ParserTest {
 	public void testStatement() {
 		boolean allTrue = true;
 
-		Parser pPass = new Parser("test/parser/program_test_pass.txt", true);
-		Parser pFail = new Parser("test/parser/program_test_fail.txt", true);
+		Parser pPass = new Parser("test/parser/statement_test_pass.txt", true);
+		Parser pFail = new Parser("test/parser/statement_test_fail.txt", true);
 
 		// should pass
 		try {
