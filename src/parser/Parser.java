@@ -428,7 +428,7 @@ public class Parser {
 	 *            The expected token type
 	 */
 	public void match(TokenType expected) {
-		System.out.println("match (" + expected + ")");
+		//System.out.println("match (" + expected + ")");
 		if (this.lookahead.getType() == expected) {
 			try {
 				this.lookahead = scanner.nextToken();
@@ -453,7 +453,7 @@ public class Parser {
 	public void error(String message) throws RuntimeException {
 		System.out.println("Error " + message);
 		//System.exit( 1);
-		throw new java.lang.RuntimeException("AHHHHHHH");
+		throw new java.lang.RuntimeException("Runtime Error");
 	}
 	
 }
