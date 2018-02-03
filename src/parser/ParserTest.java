@@ -19,24 +19,29 @@ public class ParserTest {
 	@Test
 	public void testProgram() {
 		boolean allTrue = true;
-		
-		Parser p = new Parser("test/program_test.txt", true);
-		
+
+		Parser pPass = new Parser("test/parser/program_test_pass.txt", true);
+		Parser pFail = new Parser("test/parser/program_test_fail.txt", true);
+
+		// should run
 		try {
-			p.program();
+			pPass.program();
 			System.out.println("Program part 1 pass");
 		} catch (Exception e) {
 			allTrue = false;
 			System.out.println("Program part 1 fail");
 		}
 
-		
-		
-		
+		// shouldn't run
+		try {
+			pFail.program();
+			System.out.println("Program part 2 fail");
+			allTrue = false;
+		} catch (Exception e) {
+			System.out.println("Program part 2 pass");
+		}
+
 		assertTrue(allTrue);
-}
-	
-	
-	
+	}
 
 }
