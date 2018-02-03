@@ -56,7 +56,7 @@ public class Parser {
 
 	}
 
-	private void identifier_list() {
+	public void identifier_list() {
 		match(TokenType.ID);
 		if (this.lookahead.getType() == TokenType.COMMA) {
 			match(TokenType.COMMA);
@@ -67,7 +67,7 @@ public class Parser {
 
 	}
 
-	private void declarations() {
+	public void declarations() {
 		if (this.lookahead.getType() == TokenType.VAR) {
 			match(TokenType.VAR);
 			identifier_list();
@@ -80,7 +80,7 @@ public class Parser {
 		}
 	}
 
-	private void type() {
+	public void type() {
 		if (this.lookahead.getType() == TokenType.ARRAY) {
 			match(TokenType.ARRAY);
 			match(TokenType.LEFTBRACKET);
@@ -95,7 +95,7 @@ public class Parser {
 
 	}
 
-	private void standard_type() {
+	public void standard_type() {
 		if (this.lookahead.getType() == TokenType.INTEGER) {
 			match(TokenType.INTEGER);
 		} else if (this.lookahead.getType() == TokenType.REAL)
@@ -106,7 +106,7 @@ public class Parser {
 
 	}
 
-	private void subprogram_declarations() {
+	public void subprogram_declarations() {
 		if (this.lookahead.getType() == (TokenType.FUNCTION) || this.lookahead.getType() == (TokenType.PROCEDURE)) {
 			subprogram_declaration();
 			match(TokenType.SEMI);
@@ -116,14 +116,14 @@ public class Parser {
 		}
 	}
 
-	private void subprogram_declaration() {
+	public void subprogram_declaration() {
 		subprogram_head();
 		declarations();
 		subprogram_declarations();
 		compound_statement();
 	}
 
-	private void subprogram_head() {
+	public void subprogram_head() {
 
 		if (this.lookahead.getType() == TokenType.FUNCTION) {
 			match(TokenType.FUNCTION);
@@ -142,7 +142,7 @@ public class Parser {
 
 	}
 
-	private void arguments() {
+	public void arguments() {
 		if (this.lookahead.getType() == TokenType.LEFTPAR) {
 			match(TokenType.LEFTPAR);
 			parameter_list();
@@ -153,7 +153,7 @@ public class Parser {
 
 	}
 
-	private void parameter_list() {
+	public void parameter_list() {
 		identifier_list();
 		match(TokenType.COLON);
 		type();
@@ -165,14 +165,14 @@ public class Parser {
 		}
 	}
 
-	private void compound_statement() {
+	public void compound_statement() {
 		match(TokenType.BEGIN);
 		optional_statements();
 		match(TokenType.END);
 
 	}
 
-	private void optional_statements() {
+	public void optional_statements() {
 		if (this.lookahead.getType() == TokenType.ID || (this.lookahead.getType() == TokenType.BEGIN)
 				|| (this.lookahead.getType() == TokenType.IF) || (this.lookahead.getType() == TokenType.WHILE)
 				|| (this.lookahead.getType() == TokenType.READ) || (this.lookahead.getType() == TokenType.WRITE)) {
@@ -182,7 +182,7 @@ public class Parser {
 		}
 	}
 
-	private void statement_list() {
+	public void statement_list() {
 		statement();
 		if (this.lookahead.getType() == TokenType.SEMI) {
 			match(TokenType.SEMI);
@@ -192,7 +192,7 @@ public class Parser {
 		}
 	}
 
-	private void statement() {
+	public void statement() {
 		if (this.lookahead.getType() == TokenType.ID) {
 			variable();
 			match(TokenType.ASSIGN);
@@ -224,7 +224,7 @@ public class Parser {
 		}
 	}
 
-	private void variable() {
+	public void variable() {
 		match(TokenType.ID);
 		if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
 			match(TokenType.LEFTBRACKET);
@@ -240,7 +240,7 @@ public class Parser {
 	// Ignoring for now
 	// }
 
-	private void expression_list() {
+	public void expression_list() {
 		expression();
 		if (this.lookahead.getType() == TokenType.COMMA) {
 			match(TokenType.COMMA);
@@ -250,7 +250,7 @@ public class Parser {
 		}
 	}
 
-	private void expression() {
+	public void expression() {
 		simple_expression();
 		if (isRelop(lookahead)) {
 			relop(); // consumes the relop
@@ -260,7 +260,7 @@ public class Parser {
 		}
 	}
 
-	private void simple_expression() {
+	public void simple_expression() {
 		if (this.lookahead.getType() == TokenType.PLUS || this.lookahead.getType() == TokenType.MINUS) {
 			sign();
 			term();
@@ -271,7 +271,7 @@ public class Parser {
 		}
 	}
 
-	private void simple_part() {
+	public void simple_part() {
 		if (isAddop(lookahead)) {
 			addop();
 			term();
@@ -325,7 +325,7 @@ public class Parser {
 		}
 	}
 
-	private void sign() {
+	public void sign() {
 		if (this.lookahead.getType() == TokenType.PLUS) {
 			match(TokenType.PLUS);
 		} else if (this.lookahead.getType() == TokenType.MINUS) {
@@ -337,7 +337,7 @@ public class Parser {
 
 	// RELOP, ADDOP, MULOP, ASSIGNOP
 
-	private boolean isRelop(Token token) {
+	public boolean isRelop(Token token) {
 		boolean answer = false;
 		if (token.getType() == TokenType.EQUAL || token.getType() == TokenType.NOTEQUAL
 				|| token.getType() == TokenType.LESSTHAN || token.getType() == TokenType.LESSTHANEQ
@@ -374,7 +374,7 @@ public class Parser {
 	 * @param token
 	 * @return
 	 */
-	private boolean isAddop(Token token) {
+	public boolean isAddop(Token token) {
 		boolean answer = false;
 		if (token.getType() == TokenType.PLUS || token.getType() == TokenType.MINUS
 				|| token.getType() == TokenType.OR) {
@@ -395,7 +395,7 @@ public class Parser {
 		}
 	}
 
-	private boolean isMulop(Token token) {
+	public boolean isMulop(Token token) {
 		boolean answer = false;
 		if (token.getType() == TokenType.MULTIPLY || token.getType() == TokenType.DIVIDE
 				|| token.getType() == TokenType.DIV || token.getType() == TokenType.MOD
