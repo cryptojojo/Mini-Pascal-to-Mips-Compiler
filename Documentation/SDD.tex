@@ -62,7 +62,16 @@ Illegal symbols and sequences not accepted by our simple pascal compiler will ha
 
 \subsection{Parser}
 
-Not written
+The parser takes the tokens from the scanner and verifies whether it is correctly formatted Pascal code. It is also the Parser’s job to create a syntax tree which has the correct, legal order of tokens, and provide feedback if an error does occur.
+
+This project is made of 1 Java/Class files:
+
+\begin{itemize}
+
+\item
+\textbf{Parser}: The parser class takes the series of tokens created by the scanner and used functions for each production rule to either accept the Pascal code or reject it. If an error results it will also spot the location and reason for the error and end a message to the console informing the coder of the error.
+
+\end{itemize}
 
 \subsection{Semantic Analysis}
 
