@@ -36,6 +36,61 @@ public class SymbolTable {
 		this.add(name, SymbolType.ARRAYTYPE);
 	}
 
+	public Boolean isProgramName(String name) {
+		Boolean check;
+		if (table.containsKey(name)) {
+			check = true;
+		} else {
+			check = false;
+		}
+
+		return check;
+	}
+
+	public Boolean isVariableName(String name) {
+		Boolean check;
+		if (table.containsKey(name)) {
+			check = true;
+		} else {
+			check = false;
+		}
+
+		return check;
+	}
+
+	public Boolean isFunctionName(String name) {
+		Boolean check;
+		if (table.containsKey(name)) {
+			check = true;
+		} else {
+			check = false;
+		}
+
+		return check;
+	}
+
+	public Boolean isProcedureName(String name) {
+		Boolean check;
+		if (table.containsKey(name)) {
+			check = true;
+		} else {
+			check = false;
+		}
+		return check;
+	}
+
+	public Boolean isArrayName(String name) {
+		Boolean check;
+		if (table.containsKey(name)) {
+			check = true;
+		} else {
+			check = false;
+		}
+
+		return check;
+
+	}
+
 	private class symData {
 		public String name;
 		public SymbolType kind;
