@@ -5,11 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import parser.SymbolTable;
 
 public class SymbolTableTest {
 
 	SymbolTable table = new SymbolTable();
-	
+
 	@Before
 	public void setUp() throws Exception {
 		this.table = new SymbolTable();
@@ -20,8 +21,11 @@ public class SymbolTableTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void addTest() {
+		table.add("variable1", SymbolType.VARIABLETYPE);
+
+		assertTrue(table.isVariableName("variable1"));
+
 	}
 
 }
