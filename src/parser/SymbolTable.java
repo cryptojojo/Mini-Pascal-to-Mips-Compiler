@@ -37,7 +37,7 @@ public class SymbolTable {
 
 	public Boolean isProgramName(String name) {
 		Boolean check;
-		
+
 		if (table.containsKey(name) && table.get(name) == SymbolType.PROGRAMTYPE) {
 			check = true;
 		} else {
@@ -49,7 +49,7 @@ public class SymbolTable {
 
 	public Boolean isVariableName(String name) {
 		Boolean check;
-		if (table.containsKey(name)) {
+		if (table.containsKey(name) && table.get(name) == SymbolType.VARIABLETYPE) {
 			check = true;
 		} else {
 			check = false;
@@ -60,7 +60,7 @@ public class SymbolTable {
 
 	public Boolean isFunctionName(String name) {
 		Boolean check;
-		if (table.containsKey(name)) {
+		if (table.containsKey(name) && table.get(name) == SymbolType.FUNCTIONTYPE) {
 			check = true;
 		} else {
 			check = false;
@@ -71,7 +71,7 @@ public class SymbolTable {
 
 	public Boolean isProcedureName(String name) {
 		Boolean check;
-		if (table.containsKey(name)) {
+		if (table.containsKey(name) && table.get(name) == SymbolType.PROCEDURETYPE) {
 			check = true;
 		} else {
 			check = false;
@@ -81,7 +81,7 @@ public class SymbolTable {
 
 	public Boolean isArrayName(String name) {
 		Boolean check;
-		if (table.containsKey(name)) {
+		if (table.containsKey(name) && table.get(name) == SymbolType.ARRAYTYPE) {
 			check = true;
 		} else {
 			check = false;
