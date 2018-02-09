@@ -2,17 +2,15 @@ package parser;
 
 import static org.junit.Assert.*;
 
-import java.security.KeyStore.Entry;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.Arrays;
-import java.util.HashMap;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import parser.SymbolTable;
+
+/**
+ * @author Joseph Miller <miller12 @ augsburg.edu>
+ * @version JDK/JRE 1.8.0_141
+ */
 
 public class SymbolTableTest {
 
