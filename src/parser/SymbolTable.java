@@ -1,19 +1,18 @@
 package parser;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class SymbolTable {
-	private HashMap<String, symData> table;
+	private HashMap<String, SymbolType> table;
 
 	public SymbolTable() {
 		table = new HashMap<>();
 	}
 
 	public void add(String name, SymbolType type) {
-		symData data = new symData();
-		data.name = name;
-		data.kind = type;
-		this.table.put(name, data);
+
+		this.table.put(name, type);
 	}
 
 	public void addProgramName(String name) {
@@ -38,7 +37,8 @@ public class SymbolTable {
 
 	public Boolean isProgramName(String name) {
 		Boolean check;
-		if (table.containsKey(name)) {
+		
+		if (table.containsKey(name) && table.get(name) == SymbolType.PROGRAMTYPE) {
 			check = true;
 		} else {
 			check = false;
@@ -91,12 +91,9 @@ public class SymbolTable {
 
 	}
 
-	private class symData {
-		public String name;
-		public SymbolType kind;
+	public void printOut() {
+		System.out.println(Arrays.asList(table));
 
-		public symData() {
-		};
 	}
 
 }

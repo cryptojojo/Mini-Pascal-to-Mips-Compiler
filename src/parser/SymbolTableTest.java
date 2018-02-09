@@ -2,6 +2,13 @@ package parser;
 
 import static org.junit.Assert.*;
 
+import java.security.KeyStore.Entry;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.Arrays;
+import java.util.HashMap;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,9 +29,19 @@ public class SymbolTableTest {
 
 	@Test
 	public void addTest() {
-		table.add("variable1", SymbolType.VARIABLETYPE);
+		table.add("programName", SymbolType.PROGRAMTYPE);
+		table.add("variableName", SymbolType.VARIABLETYPE);
+		table.add("functionName", SymbolType.FUNCTIONTYPE);
+		table.add("procedureName", SymbolType.PROCEDURETYPE);
+		table.add("arrayName", SymbolType.ARRAYTYPE);
 
-		assertTrue(table.isVariableName("variable1"));
+		assertTrue(table.isProgramName("programName"));
+		assertTrue(table.isVariableName("variableName"));
+		assertTrue(table.isFunctionName("functionName"));
+		assertTrue(table.isProcedureName("procedureName"));
+		assertTrue(table.isArrayName("arrayName"));
+
+		table.printOut();
 
 	}
 
