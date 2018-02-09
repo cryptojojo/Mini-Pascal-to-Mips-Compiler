@@ -175,7 +175,13 @@ public class SymbolTable {
 	 * prints the symbol table to console
 	 */
 	public void printOut() {
-		System.out.println(Arrays.asList(table));
+
+		for (String name : table.keySet()) {
+
+			String key = name.toString();
+			String value = table.get(name).toString();
+			System.out.println("Symbol name:  " + key + " --> Symbol Type:  " + value);
+		}
 
 	}
 
