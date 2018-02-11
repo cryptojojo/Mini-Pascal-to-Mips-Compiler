@@ -64,12 +64,17 @@ Illegal symbols and sequences not accepted by our simple pascal compiler will ha
 
 The parser takes the tokens from the scanner and verifies whether it is correctly formatted Pascal code. It is also the Parser’s job to create a syntax tree which has the correct, legal order of tokens, and provide feedback if an error does occur.
 
-This project is made of 1 Java/Class files:
+This project is made of 3 Java/Class files, only one of which (Parser) relates explicitly to the parser:
 
 \begin{itemize}
 
 \item
 \textbf{Parser}: The parser class takes the series of tokens created by the scanner and used functions for each production rule to either accept the Pascal code or reject it. If an error results it will also spot the location and reason for the error and end a message to the console informing the coder of the error.
+
+\item
+\textbf{SymbolTable}: The symbol table is independent of the parser but is put in the parser package since the parser using it most and it’s not a large enough part of the compiler to be given its own package. The symbol table is used to take in all identifiers used in the code and associate them with the types of identifier (or symbol) they are. Other parts of the compilers will need to reference the symbol table.
+
+\textbf{SymbolType}: This is an enum file for SymbolTable and has no relation to the parser itself. The five types of identifiers are: PROGRAMTYPE, VARIABLETYPE, FUNCTIONTYPE, PROCEDURETYPE, and ARRAYTYPE
 
 \end{itemize}
 
