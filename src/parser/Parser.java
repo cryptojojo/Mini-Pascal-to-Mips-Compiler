@@ -92,7 +92,9 @@ public class Parser {
 	 */
 	public void declarations() {
 		if (this.lookahead.getType() == TokenType.VAR) {
+			String lexi = this.lookahead.getLexeme();
 			match(TokenType.VAR);
+			table.addVariableName(lexi);
 			identifier_list();
 			match(TokenType.COLON);
 			type();
