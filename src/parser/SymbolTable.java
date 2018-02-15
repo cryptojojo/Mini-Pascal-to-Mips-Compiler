@@ -170,6 +170,11 @@ public class SymbolTable {
 
 	}
 
+	public HashMap<String, SymbolType> getTable()
+	{
+		return table;
+	}
+
 	/**
 	 * prints the symbol table to console
 	 */
