@@ -172,14 +172,18 @@ public class Parser {
 
 		if (this.lookahead.getType() == TokenType.FUNCTION) {
 			match(TokenType.FUNCTION);
+			String lexi = this.lookahead.getLexeme();
 			match(TokenType.ID);
+			this.table.addFunctionName(lexi);
 			arguments();
 			match(TokenType.COLON);
 			standard_type();
 			match(TokenType.SEMI);
 		} else if (this.lookahead.getType() == TokenType.PROCEDURE) {
 			match(TokenType.PROCEDURE);
+			String lexi = this.lookahead.getLexeme();
 			match(TokenType.ID);
+			this.table.addProgramName(lexi);
 			arguments();
 			match(TokenType.SEMI);
 		} else {
