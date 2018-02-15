@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import scanner.Scanner;
-import scanner.Token;
-import scanner.TokenType;
+import scanner.*;
+import parser.*;
+
 
 /**
  * @author Joseph Miller <miller12 @ augsburg.edu>
@@ -15,6 +15,8 @@ import scanner.TokenType;
  */
 
 public class Parser {
+	
+	private SymbolTable table;
 
 	// Instance Variables
 	private Token lookahead;
@@ -58,7 +60,9 @@ public class Parser {
 	 */
 	public void program() {
 		match(TokenType.PROGRAM);
+		String lexi = this.lookahead.getLexeme();
 		match(TokenType.ID);
+		this.table.addProgramName(lexi);
 		match(TokenType.SEMI);
 		declarations();
 		subprogram_declarations();
