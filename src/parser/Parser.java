@@ -63,7 +63,7 @@ public class Parser {
 		match(TokenType.PROGRAM);
 		lexi = this.lookahead.getLexeme();
 		match(TokenType.ID);
-		// symTab.addProgramName("lexi");
+		symTab.addProgramName(lexi);
 		match(TokenType.SEMI);
 		declarations();
 		subprogram_declarations();
@@ -81,7 +81,7 @@ public class Parser {
 	public void identifier_list() {
 		lexi = this.lookahead.getLexeme();
 		match(TokenType.ID);
-		// symTab.addVariableName(lexi);
+		symTab.addVariableName(lexi);
 		System.out.println(lexi);
 		if (this.lookahead.getType() == TokenType.COMMA) {
 			match(TokenType.COMMA);
@@ -176,18 +176,18 @@ public class Parser {
 
 		if (this.lookahead.getType() == TokenType.FUNCTION) {
 			match(TokenType.FUNCTION);
-			// String lexi = this.lookahead.getLexeme();
+			String lexi = this.lookahead.getLexeme();
 			match(TokenType.ID);
-			// this.table.addFunctionName(lexi);
+			this.symTab.addFunctionName(lexi);
 			arguments();
 			match(TokenType.COLON);
 			standard_type();
 			match(TokenType.SEMI);
 		} else if (this.lookahead.getType() == TokenType.PROCEDURE) {
 			match(TokenType.PROCEDURE);
-			// String lexi = this.lookahead.getLexeme();
+			String lexi = this.lookahead.getLexeme();
 			match(TokenType.ID);
-			// this.table.addProgramName(lexi);
+			this.symTab.addProgramName(lexi);
 			arguments();
 			match(TokenType.SEMI);
 		} else {
