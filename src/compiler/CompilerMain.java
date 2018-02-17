@@ -15,11 +15,11 @@ public class CompilerMain {
 
 	public static void main(String[] args) {
 
-		// taking in the argument which should be a filename in thhis case
+		// taking in the argument which should be a filename in this case
 		filename = args[0];
 		parse = new Parser(filename, true);
 
-		// prints "passed" if it is a Pascal program and "failed if it isnt"
+		// prints "passed" if it is a Pascal program and "failed if it isn't"
 		if (parse.program()) {
 			System.out.println("Passed \n");
 		}else {
