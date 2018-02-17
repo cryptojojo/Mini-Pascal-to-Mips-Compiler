@@ -4,16 +4,11 @@ Var
 
 Begin {no semicolon}
 
-12686E20938
-12686E+20938
-12686E-20938
-
-234.32
 	Write('Input number1123:'); 
-	Readln(Num1);
-	Writeln('Input number 2:');
-	Readln(Num2);
+	Read(Num1);
+	Write('Input number 2:');
+	Read(Num2);
 	Sum := Num1 + Num2; {addition} 
-	Writeln(Sum);
+	Write(Sum);
 	Readln;
 End.

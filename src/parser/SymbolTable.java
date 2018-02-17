@@ -7,13 +7,14 @@ import java.util.HashMap;
  * @version JDK/JRE 1.8.0_141
  */
 public class SymbolTable {
-	private HashMap<String, SymbolType> table;
+	public HashMap<String, SymbolType> table;
 
 	/**
 	 * constructer for the SymbolTable class
 	 */
 	public SymbolTable() {
 		table = new HashMap<>();
+		
 	}
 
 	/**
@@ -26,7 +27,7 @@ public class SymbolTable {
 	 */
 	public void add(String name, SymbolType type) {
 
-		this.table.put(name, type);
+		table.put(name, type);
 	}
 
 	/**

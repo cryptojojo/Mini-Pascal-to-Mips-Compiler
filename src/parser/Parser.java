@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import scanner.*;
-import parser.*;
-
 
 /**
  * @author Joseph Miller <miller12 @ augsburg.edu>
@@ -15,12 +13,13 @@ import parser.*;
  */
 
 public class Parser {
-	
-	private SymbolTable table;
+
+	SymbolTable symTab = new SymbolTable();
 
 	// Instance Variables
 	private Token lookahead;
 	private Scanner scanner;
+	String lexi = "";
 
 	/**
 	 * Constructor function for the parser facet of the compiler
@@ -57,17 +56,21 @@ public class Parser {
 
 	/**
 	 * program production rule, function to verify if the code in correct pascal
+	 * 
+	 * @return
 	 */
-	public void program() {
+	public boolean program() {
 		match(TokenType.PROGRAM);
-		String lexi = this.lookahead.getLexeme();
+		lexi = this.lookahead.getLexeme();
 		match(TokenType.ID);
-		this.table.addProgramName(lexi);
+		// symTab.addProgramName("lexi");
 		match(TokenType.SEMI);
 		declarations();
 		subprogram_declarations();
 		compound_statement();
 		match(TokenType.PERIOD);
+
+		return true; // if it makes it this far, it is a pascal program
 
 	}
 
@@ -76,7 +79,10 @@ public class Parser {
 	 * inputs
 	 */
 	public void identifier_list() {
+		lexi = this.lookahead.getLexeme();
 		match(TokenType.ID);
+		// symTab.addVariableName(lexi);
+		System.out.println(lexi);
 		if (this.lookahead.getType() == TokenType.COMMA) {
 			match(TokenType.COMMA);
 			identifier_list();
@@ -92,9 +98,7 @@ public class Parser {
 	 */
 	public void declarations() {
 		if (this.lookahead.getType() == TokenType.VAR) {
-			String lexi = this.lookahead.getLexeme();
 			match(TokenType.VAR);
-			table.addVariableName(lexi);
 			identifier_list();
 			match(TokenType.COLON);
 			type();
@@ -172,18 +176,18 @@ public class Parser {
 
 		if (this.lookahead.getType() == TokenType.FUNCTION) {
 			match(TokenType.FUNCTION);
-			String lexi = this.lookahead.getLexeme();
+			// String lexi = this.lookahead.getLexeme();
 			match(TokenType.ID);
-			this.table.addFunctionName(lexi);
+			// this.table.addFunctionName(lexi);
 			arguments();
 			match(TokenType.COLON);
 			standard_type();
 			match(TokenType.SEMI);
 		} else if (this.lookahead.getType() == TokenType.PROCEDURE) {
 			match(TokenType.PROCEDURE);
-			String lexi = this.lookahead.getLexeme();
+			// String lexi = this.lookahead.getLexeme();
 			match(TokenType.ID);
-			this.table.addProgramName(lexi);
+			// this.table.addProgramName(lexi);
 			arguments();
 			match(TokenType.SEMI);
 		} else {
@@ -579,6 +583,10 @@ public class Parser {
 		} else {
 			error("Match of " + expected + " found " + this.lookahead.getType() + " instead.");
 		}
+	}
+	
+	public void printSymbolTable() {
+		symTab.printOut();
 	}
 
 	/**
