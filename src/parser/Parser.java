@@ -313,7 +313,7 @@ public class Parser {
 		match(TokenType.ID);
 		if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
 			match(TokenType.LEFTBRACKET);
-			expression_list();
+			expression();
 			match(TokenType.RIGHTBRACKET);
 		} else {
 			// just the id option
@@ -322,7 +322,14 @@ public class Parser {
 	}
 
 	private void procedure_statement() {
-
+		match(TokenType.ID);
+		if (this.lookahead.getType() == TokenType.LEFTCURL) {
+			match(TokenType.LEFTCURL);
+			expression_list();
+			match(TokenType.RIGHTBRACKET);
+		} else {
+			// just the id option
+		}
 	}
 
 	/**
