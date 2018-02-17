@@ -82,7 +82,6 @@ public class Parser {
 		lexi = this.lookahead.getLexeme();
 		match(TokenType.ID);
 		symTab.addVariableName(lexi);
-		System.out.println(lexi);
 		if (this.lookahead.getType() == TokenType.COMMA) {
 			match(TokenType.COMMA);
 			identifier_list();
@@ -270,9 +269,15 @@ public class Parser {
 	 */
 	public void statement() {
 		if (this.lookahead.getType() == TokenType.ID) {
-			variable();
-			assignop();
-			expression();
+			if (symTab.isVariableName(this.lookahead.getLexeme())) {
+				variable();
+				assignop();
+				expression();
+			} else if (symTab.isProcedureName(this.lookahead.getLexeme())) {
+				procedure_statement();
+			} else {
+				error("in statement function");
+			}
 		} else if (this.lookahead.getType() == TokenType.BEGIN) {
 			compound_statement();
 		} else if (this.lookahead.getType() == TokenType.IF) {
@@ -316,9 +321,9 @@ public class Parser {
 
 	}
 
-	// private void procedure_statement() {
-	// Ignoring for now
-	// }
+	private void procedure_statement() {
+
+	}
 
 	/**
 	 * expression_list production rule for expressions or a series of expressions
@@ -584,7 +589,7 @@ public class Parser {
 			error("Match of " + expected + " found " + this.lookahead.getType() + " instead.");
 		}
 	}
-	
+
 	public void printSymbolTable() {
 		symTab.printOut();
 	}
