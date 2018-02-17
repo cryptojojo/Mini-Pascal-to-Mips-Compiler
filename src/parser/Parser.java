@@ -306,8 +306,8 @@ public class Parser {
 	}
 
 	/**
-	 * variable production rule for an ID or an ID with an expression after it
-	 * surrounded by brackets
+	 * variable production rule for a variable ID or a variable ID with an
+	 * expression after it surrounded by brackets
 	 */
 	public void variable() {
 		match(TokenType.ID);
@@ -316,11 +316,15 @@ public class Parser {
 			expression();
 			match(TokenType.RIGHTBRACKET);
 		} else {
-			// just the id option
+			// just the variable id option
 		}
 
 	}
 
+	/**
+	 * procedure_statement production rule for a procedure ID or a production ID
+	 * with an expression after it surrounded by parenthesis
+	 */
 	private void procedure_statement() {
 		match(TokenType.ID);
 		if (this.lookahead.getType() == TokenType.LEFTCURL) {
@@ -328,7 +332,7 @@ public class Parser {
 			expression_list();
 			match(TokenType.RIGHTBRACKET);
 		} else {
-			// just the id option
+			// just the procedure id option
 		}
 	}
 
