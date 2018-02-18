@@ -601,9 +601,10 @@ public class Parser {
 		}
 	}
 
-	public void printSymbolTable() {
-		symTab.printOut();
+	public String printSymbolTable() {
+		return symTab.printOut();
 	}
+
 
 	/**
 	 * Error message printing

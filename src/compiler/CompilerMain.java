@@ -1,5 +1,8 @@
 package compiler;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 import parser.*;
 
 /**
@@ -22,13 +25,15 @@ public class CompilerMain {
 		// prints "passed" if it is a Pascal program and "failed if it isn't"
 		if (parse.program()) {
 			System.out.println("Passed \n");
-		}else {
+		} else {
 			System.out.println("Failed \n");
 		}
 
 		// prints the symbol table
 		System.out.println("Symbol Table:");
 		parse.printSymbolTable();
+
+		System.out.println(parse.printSymbolTable());
 
 	}
 

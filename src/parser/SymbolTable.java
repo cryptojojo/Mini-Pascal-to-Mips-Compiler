@@ -1,6 +1,9 @@
 package parser;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
+
+import java.io.PrintWriter;
 
 /**
  * @author Joseph Miller <miller12 @ augsburg.edu>
@@ -182,15 +185,19 @@ public class SymbolTable {
 
 	/**
 	 * prints the symbol table to console
+	 * 
+	 * @throws FileNotFoundException
 	 */
-	public void printOut() {
+	public String printOut() {
 
+		String symTableString = "";
 		for (String name : table.keySet()) {
 
 			String key = name.toString();
 			String value = table.get(name).toString();
-			System.out.println("  " + value + ": " + key);
+			symTableString += "\n  " + value + ": " + key ;
 		}
+		return symTableString;
 
 	}
 
