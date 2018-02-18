@@ -190,12 +190,12 @@ public class SymbolTable {
 	 */
 	public String printOut() {
 
-		String symTableString = "";
+		String symTableString = "Symbol Table:";
 		for (String name : table.keySet()) {
 
 			String key = name.toString();
 			String value = table.get(name).toString();
-			symTableString += "\n  " + value + ": " + key ;
+			symTableString += "\r\n  " + value + ": " + key ;
 		}
 		return symTableString;
 

@@ -1,0 +1,5 @@
+Symbol Table:
+  VARIABLETYPE: Num2
+  VARIABLETYPE: Sum
+  PROGRAMTYPE: Lesson
+  VARIABLETYPE: Num1

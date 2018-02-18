@@ -2,6 +2,7 @@ package compiler;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 import parser.*;
 
@@ -29,11 +30,19 @@ public class CompilerMain {
 			System.out.println("Failed \n");
 		}
 
-		// prints the symbol table
-		System.out.println("Symbol Table:");
-		parse.printSymbolTable();
-
+		// prints the symbol table to the console
 		System.out.println(parse.printSymbolTable());
+
+		// prints the symbol table to a text file called SymbolTableOut.txt
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter("SymbolTableOut.txt");
+			writer.println(parse.printSymbolTable());
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
