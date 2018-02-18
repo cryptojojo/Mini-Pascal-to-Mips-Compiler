@@ -601,10 +601,14 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Gets the symbol table as a string from SymbolTable
+	 * 
+	 * @return the symbol table as a string
+	 */
 	public String printSymbolTable() {
 		return symTab.printOut();
 	}
-
 
 	/**
 	 * Error message printing
