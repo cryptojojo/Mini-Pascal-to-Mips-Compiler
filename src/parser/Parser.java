@@ -617,6 +617,11 @@ public class Parser {
 	 *            to be printed
 	 * 
 	 */
+	
+	public void addToTable(String lexeme, SymbolType type) {
+		symTab.add(lexeme, type);
+	}
+	
 	public void error(String message) throws RuntimeException {
 		System.out.println("Error " + message);
 		// System.exit( 1);

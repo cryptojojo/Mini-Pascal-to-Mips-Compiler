@@ -1,9 +1,6 @@
 package parser;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
-
-import java.io.PrintWriter;
 
 /**
  * @author Joseph Miller <miller12 @ augsburg.edu>
@@ -195,7 +192,7 @@ public class SymbolTable {
 
 			String key = name.toString();
 			String value = table.get(name).toString();
-			symTableString += "\r\n  " + value + ": " + key ;
+			symTableString += "\r\n  " + value + ": " + key;
 		}
 		return symTableString;
 

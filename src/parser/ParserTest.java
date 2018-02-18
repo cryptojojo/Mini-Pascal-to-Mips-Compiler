@@ -135,9 +135,13 @@ public class ParserTest {
 	public void testStatement() {
 		boolean allTrue = true;
 
+		
+		
 		Parser pPass = new Parser("test/parser/statement_test_pass.pas", true);
 		Parser pFail = new Parser("test/parser/statement_test_fail.pas", true);
 
+		pPass.addToTable("someVar", SymbolType.VARIABLETYPE);
+		
 		// should pass
 		try {
 			pPass.statement();
