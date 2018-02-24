@@ -4,8 +4,12 @@ public class SubProgramNode extends SyntaxTreeNode {
 
 	@Override
 	public String indentedToString(int level) {
-		// TODO Auto-generated method stub
-		return null;
+		String answer = this.indentation(level);
+
+		answer = this.indentation(level);
+		answer += "SubProgramDeclarations\n";
+
+		return answer;
 	}
 
 }
