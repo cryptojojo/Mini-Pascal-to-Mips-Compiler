@@ -60,18 +60,20 @@ public class Parser {
 	 * 
 	 * @return
 	 */
-	public boolean program() {
+	public ProgramNode program() {
 		match(TokenType.PROGRAM);
 		lexi = this.lookahead.getLexeme();
+		String progName = lexi;
 		match(TokenType.ID);
 		symTab.addProgramName(lexi);
 		match(TokenType.SEMI);
-		declarations();
-		subprogram_declarations();
-		compound_statement();
+		DeclarationsNode declarations = declarations();
+		SubProgramDeclarationsNode subProgramDeclarations = subprogram_declarations();
+		CompoundStatementNode compoundStatement = compound_statement();
 		match(TokenType.PERIOD);
 
-		return true; // if it makes it this far, it is a pascal program
+		ProgramNode progNode = new ProgramNode(progName, declarations, subProgramDeclarations, compoundStatement);
+		return progNode; // if it makes it this far, it is a pascal program
 
 	}
 
@@ -618,11 +620,11 @@ public class Parser {
 	 *            to be printed
 	 * 
 	 */
-	
+
 	public void addToTable(String lexeme, SymbolType type) {
 		symTab.add(lexeme, type);
 	}
-	
+
 	public void error(String message) throws RuntimeException {
 		System.out.println("Error " + message);
 		// System.exit( 1);
