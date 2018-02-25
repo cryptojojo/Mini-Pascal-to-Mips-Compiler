@@ -108,14 +108,16 @@ public class Parser {
 	 */
 	public DeclarationsNode declarations() {
 		if (this.lookahead.getType() == TokenType.VAR) {
-			VariableNode varNode = new VariableNode(this.lookahead.getLexeme());
 			match(TokenType.VAR);
-			decNode.addVariable(varNode);
-			identifier_list();
+			ArrayList<String> identList = identifier_list();
+
+			for (String ident : identList) {
+				decNode.addVariable(new VariableNode(ident));
+			}
+
 			match(TokenType.COLON);
 			type();
 			match(TokenType.SEMI);
-
 			declarations();
 		} else {
 			// lambda option
