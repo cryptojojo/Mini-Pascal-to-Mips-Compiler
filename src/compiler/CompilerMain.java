@@ -22,13 +22,16 @@ public class CompilerMain {
 		filename = args[0];
 		parse = new Parser(filename, true);
 
-		// prints "passed" if it is a Pascal program and "failed if it isn't"
+		/** prints "passed" if it is a Pascal program and "failed if it isn't"
 		if (parse.program()) {
 			System.out.println("Passed \n");
 		} else {
 			System.out.println("Failed \n");
 		}
+		 */
 
+		parse.program();
+		
 		// prints the symbol table to the console
 		System.out.println(parse.printSymbolTable());
 
