@@ -98,7 +98,7 @@ public class Parser {
 	 * declarations production rule for declaring a variable to its type, or a
 	 * series of variables to their type
 	 */
-	public void declarations() {
+	public DeclarationsNode declarations() {
 		if (this.lookahead.getType() == TokenType.VAR) {
 			match(TokenType.VAR);
 			identifier_list();
@@ -109,6 +109,8 @@ public class Parser {
 		} else {
 			// lambda option
 		}
+		DeclarationsNode decNnode = new DeclarationsNode();
+		return decNnode;
 	}
 
 	/**
@@ -150,7 +152,7 @@ public class Parser {
 	 * subprogram_declaration or a series of subprogram_declarations seperated by
 	 * commas
 	 */
-	public void subprogram_declarations() {
+	public SubProgramDeclarationsNode subprogram_declarations() {
 		if (this.lookahead.getType() == (TokenType.FUNCTION) || this.lookahead.getType() == (TokenType.PROCEDURE)) {
 			subprogram_declaration();
 			match(TokenType.SEMI);
@@ -158,6 +160,8 @@ public class Parser {
 		} else {
 			// lambda option
 		}
+		SubProgramDeclarationsNode subProDecNode = new SubProgramDeclarationsNode();
+		return subProDecNode;
 	}
 
 	/**
@@ -232,11 +236,12 @@ public class Parser {
 	 * compound_statement production rule for verifying the main code, starting with
 	 * begin and ending with end
 	 */
-	public void compound_statement() {
+	public CompoundStatementNode compound_statement() {
 		match(TokenType.BEGIN);
 		optional_statements();
 		match(TokenType.END);
-
+		CompoundStatementNode comStatNode = new CompoundStatementNode();
+		return comStatNode;
 	}
 
 	/**

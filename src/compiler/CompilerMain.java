@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 import parser.*;
+import syntaxtree.*;
 
 /**
  * @author Joseph Miller <miller12 @ augsburg.edu>
@@ -30,7 +31,8 @@ public class CompilerMain {
 		}
 		 */
 
-		parse.program();
+		String out = parse.program().indentedToString(0);
+		System.out.print(out);
 		
 		// prints the symbol table to the console
 		System.out.println(parse.printSymbolTable());
