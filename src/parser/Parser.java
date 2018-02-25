@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.util.ArrayList;
+
 import scanner.*;
 import syntaxtree.*;
 
@@ -21,6 +23,9 @@ public class Parser {
 	private Token lookahead;
 	private Scanner scanner;
 	String lexi = "";
+	// has to declare here so IDs can be added be added recursively
+	ArrayList<String> idList = new ArrayList<>();
+	DeclarationsNode decNode = new DeclarationsNode();
 
 	/**
 	 * Constructor function for the parser facet of the compiler
@@ -81,16 +86,19 @@ public class Parser {
 	 * identidier_list production rule for variable input or series of variable
 	 * inputs
 	 */
-	public void identifier_list() {
+	public ArrayList<String> identifier_list() {
 		lexi = this.lookahead.getLexeme();
+		String name = lexi;
 		match(TokenType.ID);
 		symTab.addVariableName(lexi);
+		idList.add(name);
 		if (this.lookahead.getType() == TokenType.COMMA) {
 			match(TokenType.COMMA);
 			identifier_list();
 		} else {
 			// just the id option
 		}
+		return idList;
 
 	}
 
@@ -100,17 +108,20 @@ public class Parser {
 	 */
 	public DeclarationsNode declarations() {
 		if (this.lookahead.getType() == TokenType.VAR) {
+			VariableNode varNode = new VariableNode(this.lookahead.getLexeme());
 			match(TokenType.VAR);
+			decNode.addVariable(varNode);
 			identifier_list();
 			match(TokenType.COLON);
 			type();
 			match(TokenType.SEMI);
+
 			declarations();
 		} else {
 			// lambda option
 		}
-		DeclarationsNode decNnode = new DeclarationsNode();
-		return decNnode;
+
+		return decNode;
 	}
 
 	/**
