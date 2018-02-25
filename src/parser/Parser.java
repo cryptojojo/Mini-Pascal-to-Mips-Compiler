@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import scanner.*;
+import syntaxtree.*;
 
 /**
  * @author Joseph Miller <miller12 @ augsburg.edu>
