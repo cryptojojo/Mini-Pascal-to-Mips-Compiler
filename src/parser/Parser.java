@@ -29,6 +29,7 @@ public class Parser {
 	SubProgramDeclarationsNode subProDecsNode = new SubProgramDeclarationsNode();
 	ArrayList<String> paramList = new ArrayList<String>();
 	CompoundStatementNode comStat = new CompoundStatementNode();
+	ArrayList<StatementNode> statNodeList = new ArrayList<StatementNode>();
 
 	/**
 	 * Constructor function for the parser facet of the compiler
@@ -253,12 +254,12 @@ public class Parser {
 	 * types or a series of parameters separated by semicolons
 	 */
 	public ArrayList<String> parameter_list() {
-		identifier_list();
+		ArrayList<String> idList = identifier_list();
 		match(TokenType.COLON);
 		type();
 		if (this.lookahead.getType() == TokenType.SEMI) {
 			match(TokenType.SEMI);
-			parameter_list();
+			idList.addAll(parameter_list());
 		} else {
 			// just the first option
 		}
@@ -281,30 +282,32 @@ public class Parser {
 	 * optional_statements production rule for statement_list or lambda
 	 */
 	public CompoundStatementNode optional_statements() {
+		CompoundStatementNode compStatNode = new CompoundStatementNode();
 		if (this.lookahead.getType() == TokenType.ID || (this.lookahead.getType() == TokenType.BEGIN)
 				|| (this.lookahead.getType() == TokenType.IF) || (this.lookahead.getType() == TokenType.WHILE)
 				|| (this.lookahead.getType() == TokenType.READ) || (this.lookahead.getType() == TokenType.WRITE)) {
-			return statement_list();
+			compStatNode.addAllStateNodes(statement_list());
+
 		} else {
 			// lambda option
 		}
-		return new CompoundStatementNode(); // not sure what to put here
+		return compStatNode; // not sure what to put here
 	}
 
 	/**
 	 * statement_list production rule for statements or a series of statements
 	 * separated by semicolons
 	 */
-	public CompoundStatementNode statement_list() {
+	public ArrayList<StatementNode> statement_list() {
 
 		comStat.addStatement(statement());
 		if (this.lookahead.getType() == TokenType.SEMI) {
 			match(TokenType.SEMI);
-			statement_list();
+			statNodeList.addAll(statement_list());
 		} else {
 			// just the statement option
 		}
-		return comStat;
+		return statNodeList;
 	}
 
 	/**
