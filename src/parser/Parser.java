@@ -28,6 +28,7 @@ public class Parser {
 	DeclarationsNode decNode = new DeclarationsNode();
 	SubProgramDeclarationsNode subProDecsNode = new SubProgramDeclarationsNode();
 	ArrayList<String> paramList = new ArrayList<String>();
+	CompoundStatementNode comStat = new CompoundStatementNode();
 
 	/**
 	 * Constructor function for the parser facet of the compiler
@@ -272,45 +273,48 @@ public class Parser {
 	 * begin and ending with end
 	 */
 	public CompoundStatementNode compound_statement() {
-		match(TokenType.BEGIN);
-		optional_statements();
-		match(TokenType.END);
 		CompoundStatementNode comStatNode = new CompoundStatementNode();
+		match(TokenType.BEGIN);
+		comStatNode = optional_statements();
+		match(TokenType.END);
 		return comStatNode;
 	}
 
 	/**
 	 * optional_statements production rule for statement_list or lambda
 	 */
-	public void optional_statements() {
+	public CompoundStatementNode optional_statements() {
 		if (this.lookahead.getType() == TokenType.ID || (this.lookahead.getType() == TokenType.BEGIN)
 				|| (this.lookahead.getType() == TokenType.IF) || (this.lookahead.getType() == TokenType.WHILE)
 				|| (this.lookahead.getType() == TokenType.READ) || (this.lookahead.getType() == TokenType.WRITE)) {
-			statement_list();
+			return statement_list();
 		} else {
 			// lambda option
 		}
+		return new CompoundStatementNode(); // not sure what to put here
 	}
 
 	/**
 	 * statement_list production rule for statements or a series of statements
 	 * separated by semicolons
 	 */
-	public void statement_list() {
-		statement();
+	public CompoundStatementNode statement_list() {
+
+		comStat.addStatement(statement());
 		if (this.lookahead.getType() == TokenType.SEMI) {
 			match(TokenType.SEMI);
 			statement_list();
 		} else {
 			// just the statement option
 		}
+		return comStat;
 	}
 
 	/**
 	 * statement production rule that creates all possible statements in the Pascal
 	 * code
 	 */
-	public void statement() {
+	public StatementNode statement() {
 		if (this.lookahead.getType() == TokenType.ID) {
 			if (symTab.isVariableName(this.lookahead.getLexeme())) {
 				variable();
@@ -346,6 +350,7 @@ public class Parser {
 			expression();
 			match(TokenType.RIGHTPAR);
 		}
+		return ;
 	}
 
 	/**
