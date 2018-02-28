@@ -27,6 +27,7 @@ public class Parser {
 	ArrayList<String> idList = new ArrayList<>();
 	DeclarationsNode decNode = new DeclarationsNode();
 	SubProgramDeclarationsNode subProDecsNode = new SubProgramDeclarationsNode();
+	ArrayList<String> paramList = new ArrayList<String>();
 
 	/**
 	 * Constructor function for the parser facet of the compiler
@@ -236,22 +237,24 @@ public class Parser {
 	/**
 	 * arguments production rule for taking in parameters inside of parenthesis
 	 */
-	public void arguments() {
+	public ArrayList<String> arguments() {
+		ArrayList<String> args = new ArrayList<String>();
 		if (this.lookahead.getType() == TokenType.LEFTPAR) {
 			match(TokenType.LEFTPAR);
-			parameter_list();
+			args = parameter_list();
 			match(TokenType.RIGHTPAR);
 		} else {
 			// lambda option
 		}
 
+		return args;
 	}
 
 	/**
 	 * parameter_list production rule for taking in an ID and it's corresponding
 	 * types or a series of parameters separated by semicolons
 	 */
-	public void parameter_list() {
+	public ArrayList<String> parameter_list() {
 		identifier_list();
 		match(TokenType.COLON);
 		type();
@@ -261,6 +264,7 @@ public class Parser {
 		} else {
 			// just the first option
 		}
+		return paramList;
 	}
 
 	/**
