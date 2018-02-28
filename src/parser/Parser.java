@@ -350,14 +350,14 @@ public class Parser {
 			expression();
 			match(TokenType.RIGHTPAR);
 		}
-		return ;
+		return null;
 	}
 
 	/**
 	 * variable production rule for a variable ID or a variable ID with an
 	 * expression after it surrounded by brackets
 	 */
-	public void variable() {
+	public VariableNode variable() {
 		match(TokenType.ID);
 		if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
 			match(TokenType.LEFTBRACKET);
@@ -366,6 +366,7 @@ public class Parser {
 		} else {
 			// just the variable id option
 		}
+		return null;
 
 	}
 
@@ -498,14 +499,19 @@ public class Parser {
 	/**
 	 * sign production rule for a plus or minus
 	 */
-	public void sign() {
+	public TokenType sign() {
+		TokenType tokenOut;
 		if (this.lookahead.getType() == TokenType.PLUS) {
+			tokenOut = TokenType.PLUS;
 			match(TokenType.PLUS);
 		} else if (this.lookahead.getType() == TokenType.MINUS) {
+			tokenOut = TokenType.MINUS;
 			match(TokenType.MINUS);
 		} else {
+			tokenOut = TokenType.ERROR;
 			error("in sign function");
 		}
+		return tokenOut;
 	}
 
 	// RELOP, ADDOP, MULOP, ASSIGNOP
