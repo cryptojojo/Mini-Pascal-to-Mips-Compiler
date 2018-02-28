@@ -434,22 +434,28 @@ public class Parser {
 	/**
 	 * simple_part production rule for an addop and then a term and simple_part
 	 */
-	public void simple_part() {
+	public ExpressionNode simple_part(ExpressionNode pos) {
 		if (isAddop(lookahead)) {
+			OperationNode oper = new OperationNode(lookahead.getType());
 			addop();
-			term();
-			simple_part();
+			ExpressionNode right = term();
+			oper.setLeft(pos);
+			oper.setRight(simple_part(right));
+			return oper;
 		} else {
+			return pos;
 			// lambda option
 		}
 	}
 
 	/**
 	 * term production rule for a factor then a term_part
+	 * 
+	 * @return
 	 */
-	public void term() {
-		factor();
-		term_part();
+	public ExpressionNode term() {
+		ExpressionNode left = factor();
+		return term_part(left);
 	}
 
 	/**
