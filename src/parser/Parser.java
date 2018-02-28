@@ -133,7 +133,8 @@ public class Parser {
 	 * type production rule - can be just standard_type or can also be an array of
 	 * standard_type
 	 */
-	public void type() {
+	public TokenType type() {
+		TokenType tType;
 		if (this.lookahead.getType() == TokenType.ARRAY) {
 			match(TokenType.ARRAY);
 			match(TokenType.LEFTBRACKET);
@@ -141,10 +142,11 @@ public class Parser {
 			match(TokenType.COLON);
 			match(TokenType.NUMBER);
 			match(TokenType.OF);
-			standard_type();
+			tType = standard_type();
 		} else {
-			standard_type();
+			tType = standard_type();
 		}
+		return tType;
 
 	}
 
