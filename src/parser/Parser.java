@@ -149,20 +149,22 @@ public class Parser {
 	 * standard_type production rule for taking in a number, either an integer or a
 	 * real
 	 */
-	public void standard_type() {
+	public TokenType standard_type() {
 		if (this.lookahead.getType() == TokenType.INTEGER) {
 			match(TokenType.INTEGER);
-		} else if (this.lookahead.getType() == TokenType.REAL)
+			return TokenType.INTEGER;
+		} else if (this.lookahead.getType() == TokenType.REAL) {
 			match(TokenType.REAL);
-		else {
+			return TokenType.REAL;
+		} else {
 			error("in the standard_type function");
+			return TokenType.ERROR;
 		}
-
 	}
 
 	/**
 	 * subprogram_declarations production rule for taking in a
-	 * subprogram_declaration or a series of subprogram_declarations seperated by
+	 * subprogram_declaration or a series of subprogram_declarations separated by
 	 * commas
 	 */
 	public SubProgramDeclarationsNode subprogram_declarations() {
