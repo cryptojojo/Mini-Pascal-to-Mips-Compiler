@@ -1,7 +1,8 @@
 Program Lesson;
+      
 
-Var       
-    Num1, Num2, Sum : Integer;
+Var
+	joe, hello, var3 : integer;
 
 Begin
 

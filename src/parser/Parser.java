@@ -406,8 +406,11 @@ public class Parser {
 	 * @return
 	 */
 	public ExpressionNode expression() {
-		simple_expression();
+		ExpressionNode left;
+		left = simple_expression();
 		if (isRelop(lookahead)) {
+			OperationNode oper = new OperationNode(lookahead.getType());
+
 			relop(); // consumes the relop
 			simple_expression();
 		} else {
@@ -420,15 +423,17 @@ public class Parser {
 	 * simple_expression for either a term and a simple_part or a sign and then a
 	 * term and a simmple_part
 	 */
-	public void simple_expression() {
+	public ExpressionNode simple_expression() {
+		ExpressionNode exp;
 		if (this.lookahead.getType() == TokenType.PLUS || this.lookahead.getType() == TokenType.MINUS) {
 			sign();
-			term();
-			simple_part();
+			exp = term();
+			simple_part(exp);
 		} else {
-			term();
-			simple_part();
+			exp = term();
+			simple_part(exp);
 		}
+		return exp;
 	}
 
 	/**
@@ -481,32 +486,41 @@ public class Parser {
 	 * expression or a 'NOT' factor
 	 */
 	public ExpressionNode factor() {
+		ExpressionNode exper = null;
 		if (this.lookahead.getType() == TokenType.ID) {
+			String id = lookahead.getLexeme();
 			match(TokenType.ID);
 			if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
 				match(TokenType.LEFTBRACKET);
 				expression();
 				match(TokenType.RIGHTBRACKET);
+				return exper; // no arrays - returns null
 			} else if (this.lookahead.getType() == TokenType.LEFTPAR) {
 				match(TokenType.LEFTPAR);
 				expression_list();
 				match(TokenType.RIGHTPAR);
+				return exper; // no functions - returns null
 			} else {
-				// lambda option (Just ID)
+				VariableNode varNode = new VariableNode(id);
+				return varNode;
 			}
 		} else if (this.lookahead.getType() == TokenType.NUMBER) {
+			String num = lookahead.getLexeme();
+			ValueNode valNode = new ValueNode(num);
 			match(TokenType.NUMBER);
+			return valNode;
+
 		} else if (this.lookahead.getType() == TokenType.LEFTPAR) {
 			match(TokenType.LEFTPAR);
-			expression();
+			exper = expression();
 			match(TokenType.RIGHTPAR);
 		} else if (this.lookahead.getType() == TokenType.NOT) {
 			match(TokenType.NOT);
-			factor();
+			exper = factor();
 		} else {
 			error("in factor function");
 		}
-
+		return exper;
 	}
 
 	/**
