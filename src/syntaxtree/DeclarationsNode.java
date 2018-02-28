@@ -23,7 +23,9 @@ public class DeclarationsNode extends SyntaxTreeNode {
 	}
 
 	public void addDeclarations(DeclarationsNode dec) {
-		vars.addAll(dec.vars);
+		for (int i = 0; i <= dec.vars.size(); i++)
+			vars.add(dec.vars.get(i));
+
 	}
 
 	/**
