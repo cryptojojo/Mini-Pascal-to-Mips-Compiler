@@ -172,7 +172,7 @@ public class Parser {
 		if (this.lookahead.getType() == (TokenType.FUNCTION) || this.lookahead.getType() == (TokenType.PROCEDURE)) {
 			subprogram_declaration();
 			match(TokenType.SEMI);
-			subProDecsNode.addSubProgramDeclaration(subprogram_declaration();
+			subProDecsNode.addSubProgramDeclaration(subprogram_declaration());
 			subprogram_declarations();
 		} else {
 			// lambda option
@@ -186,17 +186,20 @@ public class Parser {
 	 * production rules in order to get a proper order
 	 */
 	public SubProgramNode subprogram_declaration() {
-		
-		subprogram_head();
-		declarations();
-		subprogram_declarations();
-		compound_statement();
+
+		SubProgramHeadNode head = subprogram_head();
+		DeclarationsNode vars = declarations();
+		CompoundStatementNode main = compound_statement();
+		SubProgramDeclarationsNode functions = subprogram_declarations();
+
+		return new SubProgramNode(head, vars, main, functions);
+
 	}
 
 	/**
 	 * subprogram_head production rule for creating a function or a procedure
 	 */
-	public void subprogram_head() {
+	public SubProgramHeadNode subprogram_head() {
 
 		if (this.lookahead.getType() == TokenType.FUNCTION) {
 			match(TokenType.FUNCTION);
@@ -217,6 +220,12 @@ public class Parser {
 		} else {
 			error("in the subprogram_head function");
 		}
+
+		ArrayList<String> some = new ArrayList<String>();
+		some.add("Not sure");
+
+		SubProgramHeadNode subProgHeadNode = new SubProgramHeadNode("not sure", some);
+		return subProgHeadNode;
 
 	}
 
