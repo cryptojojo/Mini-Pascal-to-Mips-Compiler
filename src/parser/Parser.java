@@ -26,6 +26,7 @@ public class Parser {
 	// has to declare here so IDs can be added be added recursively
 	ArrayList<String> idList = new ArrayList<>();
 	DeclarationsNode decNode = new DeclarationsNode();
+	SubProgramDeclarationsNode subProDecNode = new SubProgramDeclarationsNode();
 
 	/**
 	 * Constructor function for the parser facet of the compiler
@@ -171,11 +172,12 @@ public class Parser {
 		if (this.lookahead.getType() == (TokenType.FUNCTION) || this.lookahead.getType() == (TokenType.PROCEDURE)) {
 			subprogram_declaration();
 			match(TokenType.SEMI);
+			subProDecNode.addSubProgramDeclaration(subprogram_declaration();
 			subprogram_declarations();
 		} else {
 			// lambda option
 		}
-		SubProgramDeclarationsNode subProDecNode = new SubProgramDeclarationsNode();
+
 		return subProDecNode;
 	}
 
