@@ -186,7 +186,7 @@ public class Parser {
 	 * production rules in order to get a proper order
 	 */
 	public SubProgramNode subprogram_declaration() {
-		SubProgramNode subProNode = new SubProgramNode();
+		
 		subprogram_head();
 		declarations();
 		subprogram_declarations();

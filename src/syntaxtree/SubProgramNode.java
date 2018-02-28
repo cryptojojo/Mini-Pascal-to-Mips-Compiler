@@ -15,7 +15,15 @@ public abstract class SubProgramNode extends SyntaxTreeNode {
 		this.variables = variables;
 		this.main = main;
 		this.functions = functions;
+	}
 
+	@Override
+	public String indentedToString(int level) {
+		String answer = this.indentation(level);
+		answer += variables.indentedToString(level + 1);
+		answer += functions.indentedToString(level + 1);
+		answer += main.indentedToString(level + 1);
+		return answer;
 	}
 
 }
