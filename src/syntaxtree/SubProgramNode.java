@@ -6,4 +6,16 @@ package syntaxtree;
  */
 public abstract class SubProgramNode extends SyntaxTreeNode {
 
+	private DeclarationsNode variables;
+	private CompoundStatementNode main;
+	private SubProgramDeclarationsNode functions;
+
+	public SubProgramNode(DeclarationsNode variables, SubProgramDeclarationsNode functions,
+			CompoundStatementNode main) {
+		this.variables = variables;
+		this.main = main;
+		this.functions = functions;
+
+	}
+
 }
