@@ -19,7 +19,7 @@ public class SubProgramHeadNode extends SyntaxTreeNode {
 		answer += "Function name: " + name + '\n';
 
 		for (int i = 0; i <= args.length; i++)
-			answer += args[i].indentedToString(level + 1);
+			answer += args[i] + '\n';
 
 		return answer;
 

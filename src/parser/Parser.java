@@ -402,8 +402,10 @@ public class Parser {
 	/**
 	 * expression production rule for a simple expression or a simple_expression
 	 * compared to another simple_expression with a relop
+	 * 
+	 * @return
 	 */
-	public void expression() {
+	public ExpressionNode expression() {
 		simple_expression();
 		if (isRelop(lookahead)) {
 			relop(); // consumes the relop
@@ -411,6 +413,7 @@ public class Parser {
 		} else {
 			// just the simple expression option
 		}
+		return null;
 	}
 
 	/**
@@ -452,13 +455,17 @@ public class Parser {
 	/**
 	 * term_part production rule for a mulop and then a factor and term_part
 	 */
-	public void term_part() {
+	public ExpressionNode term_part(ExpressionNode pos) {
 		if (isMulop(lookahead)) {
+			OperationNode oper = new OperationNode(lookahead.getType());
 			mulop();
-			factor();
-			term_part();
+			ExpressionNode right = factor();
+			oper.setLeft(pos);
+			oper.setRight(term_part(right));
+			return oper;
 		} else {
 			// lambda option
+			return pos;
 		}
 	}
 
@@ -467,8 +474,7 @@ public class Parser {
 	 * brackets or an expression_list surrounded by parenthesis or a num, a single
 	 * expression or a 'NOT' factor
 	 */
-	public void factor() {
-
+	public ExpressionNode factor() {
 		if (this.lookahead.getType() == TokenType.ID) {
 			match(TokenType.ID);
 			if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
@@ -494,6 +500,7 @@ public class Parser {
 		} else {
 			error("in factor function");
 		}
+
 	}
 
 	/**
