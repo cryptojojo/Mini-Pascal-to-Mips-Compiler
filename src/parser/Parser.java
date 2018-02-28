@@ -200,13 +200,16 @@ public class Parser {
 	 * subprogram_head production rule for creating a function or a procedure
 	 */
 	public SubProgramHeadNode subprogram_head() {
+		String name = null;
+		ArrayList<String> args = new ArrayList<String>();
 
 		if (this.lookahead.getType() == TokenType.FUNCTION) {
 			match(TokenType.FUNCTION);
 			String lexi = this.lookahead.getLexeme();
 			match(TokenType.ID);
+			name = lexi;
 			this.symTab.addFunctionName(lexi);
-			arguments();
+			args = arguments();
 			match(TokenType.COLON);
 			standard_type();
 			match(TokenType.SEMI);
@@ -214,8 +217,9 @@ public class Parser {
 			match(TokenType.PROCEDURE);
 			String lexi = this.lookahead.getLexeme();
 			match(TokenType.ID);
+			name = lexi;
 			this.symTab.addProgramName(lexi);
-			arguments();
+			args = arguments();
 			match(TokenType.SEMI);
 		} else {
 			error("in the subprogram_head function");
@@ -224,7 +228,7 @@ public class Parser {
 		ArrayList<String> some = new ArrayList<String>();
 		some.add("Not sure");
 
-		SubProgramHeadNode subProgHeadNode = new SubProgramHeadNode("not sure", some);
+		SubProgramHeadNode subProgHeadNode = new SubProgramHeadNode(name, args);
 		return subProgHeadNode;
 
 	}
