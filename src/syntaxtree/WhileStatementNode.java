@@ -15,7 +15,13 @@ public class WhileStatementNode extends StatementNode {
 		this.doW = doW;
 	}
 
+	public ExpressionNode getTest() {
+        return test;
+    }
 	
+	public StatementNode getDo() {
+        return doW;
+    }
 	
 	
 	@Override
