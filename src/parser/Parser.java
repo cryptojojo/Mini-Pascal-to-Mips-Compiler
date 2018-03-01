@@ -1,7 +1,5 @@
 package parser;
 
-
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -352,24 +350,16 @@ public class Parser {
 	 * variable production rule for a variable ID or a variable ID with an
 	 * expression after it surrounded by brackets
 	 */
-	private VariableNode variable() {
-		String varName = lookahead.getLexeme();
-		if (!symTab.isVariableName(varName))
-			error(varName + " has not been declared");
-		if (!symTab.isArrayName(varName)) {
-			VariableNode var = new VariableNode(varName);
-			match(TokenType.ID);
-			return var;
-		} else {
-			ArrayNode arrVar = new ArrayNode(varName);
-			match(TokenType.ID);
-			if (lookahead.getType() == TokenType.LEFTBRACKET) {
-				match(TokenType.LEFTBRACKET);
-				arrVar.setExpNode(expression());
-				match(TokenType.RIGHTBRACKET);
-			}
-			return arrVar;
+	public VariableNode variable() {
+		VariableNode var = new VariableNode(lookahead.getLexeme());
+		match(TokenType.ID);
+		if (lookahead.getType() == TokenType.LEFTBRACKET) {
+			match(TokenType.LEFTBRACKET);
+			expression();
+			match(TokenType.RIGHTBRACKET);
 		}
+		// else lambda case
+		return var;
 	}
 
 	/**
@@ -377,19 +367,17 @@ public class Parser {
 	 * with an expression after it surrounded by parenthesis
 	 */
 	public ProcedureNode procedure_statement() {
-		ArrayList<ExpressionNode> expList = null;
-		ProcedureNode psNode = new ProcedureNode(lookahead.getLexeme());
+		ProcedureNode psNode = new ProcedureNode();
+		String procName = lookahead.getLexeme();
+		psNode.setVariable(new VariableNode(procName));
 		match(TokenType.ID);
-		if (this.lookahead.getType() == TokenType.LEFTCURL) {
-			match(TokenType.LEFTCURL);
-			expList = expression_list();
-			match(TokenType.RIGHTBRACKET);
-		} else {
-			// just the procedure id option
+		if (lookahead.getType() == TokenType.LEFTPAR) {
+			match(TokenType.LEFTPAR);
+			psNode.addAllExpressions(expression_list());
+			match(TokenType.RIGHTPAR);
 		}
-		psNode.addAllExpressions(expList);
+		symTab.addProcedureName(procName);
 		return psNode;
-
 	}
 
 	/**

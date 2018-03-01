@@ -4,38 +4,41 @@ import java.util.ArrayList;
 
 public class ProcedureNode extends StatementNode {
 
-	private String name;
-	private ArrayList<ExpressionNode> args = new ArrayList<>();
+	private VariableNode variable = null;
+	private ArrayList<ExpressionNode> expNode = new ArrayList();
 
-	public ProcedureNode(String name) {
-		this.name = name;
+	public void addExpNode(ExpressionNode input) {
+		expNode.add(input);
 	}
 
 	public void addAllExpressions(ArrayList<ExpressionNode> input) {
-		args.addAll(input);
+		expNode.addAll(input);
 	}
 
-	public void addArg(ExpressionNode exp) {
-		args.add(exp);
+	public void setVariable(VariableNode input) {
+		this.variable = input;
 	}
 
-	public String getName() {
-		return this.name;
+	public void setExpNode(ArrayList<ExpressionNode> input) {
+		this.expNode = input;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public ArrayList<ExpressionNode> getExpNode() {
+		return expNode;
+	}
+
+	public VariableNode getVariable() {
+		return this.variable;
 	}
 
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);
 		answer += "Procedure: ";
-		answer += this.name + "\n";
-		for (ExpressionNode exp : args) {
+		answer += this.variable + "\n";
+		for (ExpressionNode exp : expNode) {
 			answer += exp.indentedToString(level + 1);
 		}
-		return answer.toString();
+		return answer;
 	}
-
 }
