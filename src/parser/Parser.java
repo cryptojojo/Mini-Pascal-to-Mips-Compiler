@@ -342,14 +342,12 @@ public class Parser {
 			ifStatNode.setElseStatement(statement());
 			return ifStatNode;
 		} else if (this.lookahead.getType() == TokenType.WHILE) {
-			
-			// THIS IS WHERE I LEFT OFF
-			
-			
+			WhileStatementNode whileStatNode = new WhileStatementNode();
 			match(TokenType.WHILE);
-			expression();
+			whileStatNode.setTest(expression());
 			match(TokenType.DO);
-			statement();
+			whileStatNode.setDoStatement(statement());
+			return whileStatNode;
 		} else if (this.lookahead.getType() == TokenType.READ) {
 			match(TokenType.READ);
 			match(TokenType.LEFTPAR);
