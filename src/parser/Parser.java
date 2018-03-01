@@ -1,6 +1,6 @@
 package parser;
 
-import static scanner.Type.SEMI;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -312,55 +312,40 @@ public class Parser {
 	 * code
 	 */
 	public StatementNode statement() {
-		StatementNode statNode = null;
-		if (this.lookahead.getType() == TokenType.ID) {
-			if (symTab.isVariableName(this.lookahead.getLexeme())) {
-				AssignmentStatementNode assignStat = new AssignmentStatementNode();
-				VariableNode var = variable();
-				assignStat.setLvalue(var);
-				assignop();
-				ExpressionNode exp = expression();
-				assignStat.setExpression(exp);
-				return assignStat;
-			} else if (symTab.isProcedureName(this.lookahead.getLexeme())) {
+		StatementNode state = null;
+		if (lookahead.getType() == TokenType.ID) {
+			if (symTab.isVariableName(lookahead.getLexeme()) || symTab.isArrayName((lookahead.getLexeme()))) {
+				AssignmentStatementNode assign = new AssignmentStatementNode();
+				assign.setLvalue(variable());
+				match(TokenType.ASSIGN);
+				assign.setExpression(expression());
+				return assign;
+			} else if (symTab.isProcedureName(lookahead.getLexeme())) {
 				return procedure_statement();
-			} else {
-				error("in statement function");
-			}
-		} else if (this.lookahead.getType() == TokenType.BEGIN) {
-			statNode = compound_statement();
-		} else if (this.lookahead.getType() == TokenType.IF) {
-			IfStatementNode ifStatNode = new IfStatementNode();
+			} else
+				error("Name not found in symbol table.");
+		} else if (lookahead.getType() == TokenType.BEGIN)
+			state = compound_statement();
+		else if (lookahead.getType() == TokenType.IF) {
+			IfStatementNode ifState = new IfStatementNode();
 			match(TokenType.IF);
-			ifStatNode.setTest(expression());
+			ifState.setTest(expression());
 			match(TokenType.THEN);
-			ifStatNode.setThenStatement(statement());
+			ifState.setThenStatement(statement());
 			match(TokenType.ELSE);
-			ifStatNode.setElseStatement(statement());
-			return ifStatNode;
-		} else if (this.lookahead.getType() == TokenType.WHILE) {
-			WhileStatementNode whileStatNode = new WhileStatementNode();
+			ifState.setElseStatement(statement());
+			return ifState;
+		} else if (lookahead.getType() == TokenType.WHILE) {
+			WhileStatementNode whileState = new WhileStatementNode();
 			match(TokenType.WHILE);
-			whileStatNode.setTest(expression());
+			whileState.setTest(expression());
 			match(TokenType.DO);
-			whileStatNode.setDoStatement(statement());
-			return whileStatNode;
-		} else if (this.lookahead.getType() == TokenType.READ) {
-			match(TokenType.READ);
-			match(TokenType.LEFTPAR);
-			String id = lookahead.getLexeme();
-			match(TokenType.ID);
-			match(TokenType.RIGHTPAR);
-			VariableNode varNode = new VariableNode(id);
-			return new ReadNode(varNode);
-		} else if (this.lookahead.getType() == TokenType.WRITE) {
-			match(TokenType.WRITE);
-			match(TokenType.LEFTPAR);
-			WriteNode writeNode = new WriteNode(expression());
-			match(TokenType.RIGHTPAR);
-			return writeNode;
+			whileState.setDoStatement(statement());
+			return whileState;
+		} else {
+			error(" in statement function ");
 		}
-		return statNode;
+		return state;
 	}
 
 	/**
