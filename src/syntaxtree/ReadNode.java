@@ -14,8 +14,10 @@ public class ReadNode extends StatementNode {
 
 	@Override
 	public String indentedToString(int level) {
-		// TODO Auto-generated method stub
-		return null;
+		String answer = this.indentation(level);
+		answer += "Read \n ";
+		answer += name.indentedToString(level + 1);
+		return answer;
 	}
 
 }
