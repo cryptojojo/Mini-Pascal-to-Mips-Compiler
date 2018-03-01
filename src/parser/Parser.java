@@ -342,6 +342,10 @@ public class Parser {
 			ifStatNode.setElseStatement(statement());
 			return ifStatNode;
 		} else if (this.lookahead.getType() == TokenType.WHILE) {
+			
+			// THIS IS WHERE I LEFT OFF
+			
+			
 			match(TokenType.WHILE);
 			expression();
 			match(TokenType.DO);
