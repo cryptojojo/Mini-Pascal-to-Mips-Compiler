@@ -1,14 +1,5 @@
 package parser;
 
-import static scanner.Type.ARRAY;
-import static scanner.Type.COLON;
-import static scanner.Type.INTEGER;
-import static scanner.Type.LBRACE;
-import static scanner.Type.NUMBER;
-import static scanner.Type.OF;
-import static scanner.Type.RBRACE;
-import static scanner.Type.REAL;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -34,7 +25,6 @@ public class Parser {
 	String lexi = "";
 	// has to declare here so IDs can be added be added recursively
 
-	SubProgramDeclarationsNode subProDecsNode = new SubProgramDeclarationsNode();
 	ArrayList<String> paramList = new ArrayList<String>();
 	CompoundStatementNode comStat = new CompoundStatementNode();
 	ArrayList<StatementNode> statNodeList = new ArrayList<StatementNode>();
@@ -190,15 +180,14 @@ public class Parser {
 	 * commas
 	 */
 	public SubProgramDeclarationsNode subprogram_declarations() {
-		if (this.lookahead.getType() == (TokenType.FUNCTION) || this.lookahead.getType() == (TokenType.PROCEDURE)) {
-			subProDecsNode.addSubProgramDeclaration(subprogram_declaration());
+		SubProgramDeclarationsNode subPorgDecNode = new SubProgramDeclarationsNode();
+		if (lookahead.getType() == TokenType.FUNCTION || lookahead.getType() == TokenType.PROCEDURE) {
+			subPorgDecNode.addSubProgramDeclaration(subprogram_declaration());
 			match(TokenType.SEMI);
-			subprogram_declaration();
-		} else {
-			// lambda option
+			subPorgDecNode.addall(subprogram_declarations().getProcs());
 		}
-
-		return subProDecsNode;
+		// else lambda case
+		return subPorgDecNode;
 	}
 
 	/**
@@ -206,47 +195,38 @@ public class Parser {
 	 * production rules in order to get a proper order
 	 */
 	public SubProgramNode subprogram_declaration() {
-
-		SubProgramHeadNode head = subprogram_head();
-		DeclarationsNode vars = declarations();
-		CompoundStatementNode main = compound_statement();
-		SubProgramDeclarationsNode functions = subprogram_declarations();
-
-		return new SubProgramNode(head, vars, main, functions);
-
+		SubProgramNode subProgNode = subprogram_head();
+		subProgNode.setVariables(declarations());
+		subProgNode.setFunctions(subprogram_declarations());
+		subProgNode.setMain(compound_statement());
+		return subProgNode;
 	}
 
 	/**
 	 * subprogram_head production rule for creating a function or a procedure
 	 */
-	public SubProgramHeadNode subprogram_head() {
-		String name = null;
-		ArrayList<String> args = new ArrayList<String>();
-
-		if (this.lookahead.getType() == TokenType.FUNCTION) {
+	public SubProgramNode subprogram_head() {
+		SubProgramNode spNode = null;
+		if (lookahead.getType() == TokenType.FUNCTION) {
 			match(TokenType.FUNCTION);
-			String lexi = this.lookahead.getLexeme();
+			String functName = lookahead.getLexeme();
+			spNode = new SubProgramNode(functName);
 			match(TokenType.ID);
-			name = lexi;
-			this.symTab.addFunctionName(lexi);
-			args = arguments();
+			arguments();
 			match(TokenType.COLON);
-			standard_type();
+			symTab.addFunctionName(functName);
 			match(TokenType.SEMI);
-		} else if (this.lookahead.getType() == TokenType.PROCEDURE) {
+		} else if (lookahead.getType() == TokenType.PROCEDURE) {
 			match(TokenType.PROCEDURE);
-			String lexi = this.lookahead.getLexeme();
+			String procName = lookahead.getLexeme();
+			spNode = new SubProgramNode(procName);
 			match(TokenType.ID);
-			name = lexi;
-			this.symTab.addProgramName(lexi);
-			args = arguments();
+			arguments();
+			symTab.addProcedureName(procName);
 			match(TokenType.SEMI);
-		} else {
-			error("in the subprogram_head function");
-		}
-
-		return new SubProgramHeadNode(name, args);
-
+		} else
+			error("subprogram_head");
+		return spNode;
 	}
 
 	/**

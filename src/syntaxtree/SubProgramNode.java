@@ -4,29 +4,47 @@ package syntaxtree;
  * @author Joseph Miller <miller12 @ augsburg.edu>
  * @version JDK/JRE 1.8.0_141
  */
-public class SubProgramNode extends SyntaxTreeNode {
-
-	private SubProgramHeadNode head;
+public class SubProgramNode extends SubProgramDeclarationsNode {
+	private String name;
 	private DeclarationsNode variables;
-	private CompoundStatementNode main;
 	private SubProgramDeclarationsNode functions;
+	private CompoundStatementNode main;
 
-	public SubProgramNode(SubProgramHeadNode head, DeclarationsNode variables, CompoundStatementNode main,
-			SubProgramDeclarationsNode functions) {
-		this.head = head;
+	public SubProgramNode(String aName) {
+		this.name = aName;
+	}
+
+	public DeclarationsNode getVariables() {
+		return variables;
+	}
+
+	public void setVariables(DeclarationsNode variables) {
 		this.variables = variables;
-		this.main = main;
+	}
+
+	public SubProgramDeclarationsNode getFunctions() {
+		return functions;
+	}
+
+	public void setFunctions(SubProgramDeclarationsNode functions) {
 		this.functions = functions;
+	}
+
+	public CompoundStatementNode getMain() {
+		return main;
+	}
+
+	public void setMain(CompoundStatementNode main) {
+		this.main = main;
 	}
 
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);
-		answer += head.indentedToString(level + 1);
+		answer += "SubProgram: " + name + "\n";
 		answer += variables.indentedToString(level + 1);
 		answer += functions.indentedToString(level + 1);
 		answer += main.indentedToString(level + 1);
 		return answer;
 	}
-
 }
