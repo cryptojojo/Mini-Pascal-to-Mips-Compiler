@@ -520,10 +520,12 @@ public class Parser {
 			String id = lookahead.getLexeme();
 			match(TokenType.ID);
 			if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
+				ArrayNode arrNode = new ArrayNode(id);
 				match(TokenType.LEFTBRACKET);
-				expression();
+				ExpressionNode exp = expression();
+				arrNode.setExpNode(exp);
 				match(TokenType.RIGHTBRACKET);
-				return exper; // no arrays - returns null
+				return arrNode;
 			} else if (this.lookahead.getType() == TokenType.LEFTPAR) {
 				match(TokenType.LEFTPAR);
 				expression_list();
