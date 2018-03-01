@@ -315,6 +315,7 @@ public class Parser {
 	 * code
 	 */
 	public StatementNode statement() {
+		StatementNode statNode;
 		if (this.lookahead.getType() == TokenType.ID) {
 			if (symTab.isVariableName(this.lookahead.getLexeme())) {
 				AssignmentStatementNode assignStat = new AssignmentStatementNode();
@@ -330,14 +331,16 @@ public class Parser {
 				error("in statement function");
 			}
 		} else if (this.lookahead.getType() == TokenType.BEGIN) {
-			compound_statement();
+			statNode = compound_statement();
 		} else if (this.lookahead.getType() == TokenType.IF) {
+			IfStatementNode ifStatNode = new IfStatementNode();
 			match(TokenType.IF);
-			expression();
+			ifStatNode.setTest(expression());
 			match(TokenType.THEN);
-			statement();
+			ifStatNode.setThenStatement(statement());
 			match(TokenType.ELSE);
-			statement();
+			ifStatNode.setElseStatement(statement());
+			return ifStatNode;
 		} else if (this.lookahead.getType() == TokenType.WHILE) {
 			match(TokenType.WHILE);
 			expression();
