@@ -317,11 +317,15 @@ public class Parser {
 	public StatementNode statement() {
 		if (this.lookahead.getType() == TokenType.ID) {
 			if (symTab.isVariableName(this.lookahead.getLexeme())) {
-				variable();
+				AssignmentStatementNode assignStat = new AssignmentStatementNode();
+				VariableNode var = variable();
+				assignStat.setLvalue(var);
 				assignop();
-				expression();
+				ExpressionNode exp = expression();
+				assignStat.setExpression(exp);
+				return assignStat;
 			} else if (symTab.isProcedureName(this.lookahead.getLexeme())) {
-				procedure_statement();
+				return procedure_statement();
 			} else {
 				error("in statement function");
 			}
