@@ -1,11 +1,6 @@
-Program Lesson;
-      
+program foo;
+var fee, fi, fo, fum: integer;
+begin
 
-Var
-	joe, hello, var3 : integer;
-
-Begin
-
-
-
-End.
+end
+.

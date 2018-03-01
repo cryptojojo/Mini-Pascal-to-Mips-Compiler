@@ -115,12 +115,12 @@ public class Parser {
 			match(TokenType.VAR);
 			ArrayList<String> identList = identifier_list();
 
-			for (String ident : identList) {
-				decNode.addVariable(new VariableNode(ident));
-			}
-
 			match(TokenType.COLON);
-			type();
+			TokenType t = type();
+
+			for (String ident : identList) {
+				decNode.addVariable(new VariableNode(ident, t));
+			}
 			match(TokenType.SEMI);
 			declarations();
 		} else {
