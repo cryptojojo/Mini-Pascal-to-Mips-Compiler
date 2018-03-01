@@ -1,5 +1,12 @@
 package parser;
 
+import static scanner.Type.ID;
+import static scanner.Type.LPAREN;
+import static scanner.Type.MINUS;
+import static scanner.Type.NOT;
+import static scanner.Type.NUMBER;
+import static scanner.Type.PLUS;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -402,18 +409,12 @@ public class Parser {
 	 */
 	public ExpressionNode expression() {
 		ExpressionNode left = simple_expression();
-		TokenType leftType = left.getType();
 		if (isRelop(lookahead)) {
-			OperationNode operNode = new OperationNode(lookahead.getType());
-			if (leftType.equals(TokenType.REAL)) {
-				operNode.setType(TokenType.REAL);
-			} else {
-				operNode.setType(TokenType.INTEGER);
-			}
-			operNode.setLeft(left);
+			OperationNode opNode = new OperationNode(lookahead.getType());
+			opNode.setLeft(left);
 			match(lookahead.getType());
-			operNode.setRight(simple_expression());
-			return operNode;
+			opNode.setRight(simple_expression());
+			return opNode;
 		}
 		return left;
 	}
@@ -423,16 +424,19 @@ public class Parser {
 	 * term and a simmple_part
 	 */
 	public ExpressionNode simple_expression() {
-		ExpressionNode exp;
-		if (this.lookahead.getType() == TokenType.PLUS || this.lookahead.getType() == TokenType.MINUS) {
-			sign();
-			exp = term();
-			simple_part(exp);
-		} else {
-			exp = term();
-			simple_part(exp);
-		}
-		return exp;
+		ExpressionNode expNode = null;
+		if (lookahead.getType() == TokenType.ID || lookahead.getType() == TokenType.NUMBER
+				|| lookahead.getType() == TokenType.LEFTPAR || lookahead.getType() == TokenType.NOT) {
+			expNode = term();
+			expNode = simple_part(expNode);
+		} else if (lookahead.getType() == TokenType.PLUS || lookahead.getType() == TokenType.MINUS) {
+			SignNode signNode = sign();
+			expNode = term();
+			signNode.setExpression(simple_part(expNode));
+			return signNode;
+		} else
+			error("simple_expression");
+		return expNode;
 	}
 
 	/**
@@ -527,19 +531,17 @@ public class Parser {
 	/**
 	 * sign production rule for a plus or minus
 	 */
-	public TokenType sign() {
-		TokenType tokenOut;
-		if (this.lookahead.getType() == TokenType.PLUS) {
-			tokenOut = TokenType.PLUS;
+	public SignNode sign() {
+		SignNode uoNode = null;
+		if (lookahead.getType() == TokenType.PLUS) {
+			uoNode = new SignNode(TokenType.PLUS);
 			match(TokenType.PLUS);
-		} else if (this.lookahead.getType() == TokenType.MINUS) {
-			tokenOut = TokenType.MINUS;
+		} else if (lookahead.getType() == TokenType.MINUS) {
+			uoNode = new SignNode(TokenType.MINUS);
 			match(TokenType.MINUS);
-		} else {
-			tokenOut = TokenType.ERROR;
-			error("in sign function");
-		}
-		return tokenOut;
+		} else
+			error("sign");
+		return uoNode;
 	}
 
 	// RELOP, ADDOP, MULOP, ASSIGNOP
