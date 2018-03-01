@@ -380,12 +380,10 @@ public class Parser {
 			error(varName + " has not been declared");
 		if (!symTab.isArrayName(varName)) {
 			VariableNode var = new VariableNode(varName);
-			var.setType(symTab.getType(varName));
 			match(TokenType.ID);
 			return var;
 		} else {
 			ArrayNode arrVar = new ArrayNode(varName);
-			arrVar.setType(symTab.getType(varName));
 			match(TokenType.ID);
 			if (lookahead.getType() == TokenType.LEFTBRACKET) {
 				match(TokenType.LEFTBRACKET);
