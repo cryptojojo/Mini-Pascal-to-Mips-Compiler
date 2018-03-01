@@ -24,7 +24,6 @@ public class Parser {
 	private Scanner scanner;
 	String lexi = "";
 	// has to declare here so IDs can be added be added recursively
-	ArrayList<String> idList = new ArrayList<>();
 	DeclarationsNode decNode = new DeclarationsNode();
 	SubProgramDeclarationsNode subProDecsNode = new SubProgramDeclarationsNode();
 	ArrayList<String> paramList = new ArrayList<String>();
@@ -95,6 +94,7 @@ public class Parser {
 	 * inputs
 	 */
 	public ArrayList<String> identifier_list() {
+		ArrayList<String> idList = new ArrayList<>();
 		lexi = this.lookahead.getLexeme();
 		String name = lexi;
 		match(TokenType.ID);
@@ -102,7 +102,7 @@ public class Parser {
 		idList.add(name);
 		if (this.lookahead.getType() == TokenType.COMMA) {
 			match(TokenType.COMMA);
-			identifier_list();
+			idList.addAll(identifier_list());
 		} else {
 			// just the id option
 		}
