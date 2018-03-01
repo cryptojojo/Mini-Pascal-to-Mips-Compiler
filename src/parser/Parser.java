@@ -348,6 +348,7 @@ public class Parser {
 			ifState.setThenStatement(statement());
 			match(TokenType.ELSE);
 			ifState.setElseStatement(statement());
+
 			return ifState;
 		} else if (lookahead.getType() == TokenType.WHILE) {
 			WhileStatementNode whileState = new WhileStatementNode();
