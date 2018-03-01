@@ -1,5 +1,14 @@
 package parser;
 
+import static scanner.Type.ARRAY;
+import static scanner.Type.COLON;
+import static scanner.Type.INTEGER;
+import static scanner.Type.LBRACE;
+import static scanner.Type.NUMBER;
+import static scanner.Type.OF;
+import static scanner.Type.RBRACE;
+import static scanner.Type.REAL;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,7 +33,7 @@ public class Parser {
 	private Scanner scanner;
 	String lexi = "";
 	// has to declare here so IDs can be added be added recursively
-	DeclarationsNode decNode = new DeclarationsNode();
+
 	SubProgramDeclarationsNode subProDecsNode = new SubProgramDeclarationsNode();
 	ArrayList<String> paramList = new ArrayList<String>();
 	CompoundStatementNode comStat = new CompoundStatementNode();
@@ -115,18 +124,18 @@ public class Parser {
 	 * series of variables to their type
 	 */
 	public DeclarationsNode declarations() {
+		DeclarationsNode decNode = new DeclarationsNode();
 		if (this.lookahead.getType() == TokenType.VAR) {
 			match(TokenType.VAR);
 			ArrayList<String> identList = identifier_list();
 
-			for (String ident : identList) {
-				decNode.addVariable(new VariableNode(ident));
-			}
-
 			match(TokenType.COLON);
-			type();
+			TokenType t = type(identList);
+			for (String ident : identList) {
+				decNode.addVariable(new VariableNode(ident, t));
+			}
 			match(TokenType.SEMI);
-			declarations();
+			decNode.addDeclarations(declarations());
 		} else {
 			// lambda option
 		}
@@ -138,21 +147,24 @@ public class Parser {
 	 * type production rule - can be just standard_type or can also be an array of
 	 * standard_type
 	 */
-	public TokenType type() {
-		TokenType tType;
-		if (this.lookahead.getType() == TokenType.ARRAY) {
+	public TokenType type(ArrayList<String> idList) {
+		TokenType t = null;
+		if (lookahead.getType() == TokenType.ARRAY) {
 			match(TokenType.ARRAY);
 			match(TokenType.LEFTBRACKET);
 			match(TokenType.NUMBER);
 			match(TokenType.COLON);
 			match(TokenType.NUMBER);
+			match(TokenType.RIGHTBRACKET);
 			match(TokenType.OF);
-			tType = standard_type();
-		} else {
-			tType = standard_type();
-		}
-		return tType;
+			t = standard_type();
 
+		} else if (lookahead.getType() == TokenType.INTEGER || lookahead.getType() == TokenType.REAL) {
+			t = standard_type();
+
+		} else
+			error("type");
+		return t;
 	}
 
 	/**
