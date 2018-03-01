@@ -1,12 +1,5 @@
 package parser;
 
-import static scanner.Type.ID;
-import static scanner.Type.LPAREN;
-import static scanner.Type.MINUS;
-import static scanner.Type.NOT;
-import static scanner.Type.NUMBER;
-import static scanner.Type.PLUS;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -149,9 +142,19 @@ public class Parser {
 		if (lookahead.getType() == TokenType.ARRAY) {
 			match(TokenType.ARRAY);
 			match(TokenType.LEFTBRACKET);
-			match(TokenType.NUMBER);
+
+			if (lookahead.getType() == TokenType.INTEGER)
+				match(TokenType.INTEGER);
+			if (lookahead.getType() == TokenType.REAL)
+				match(TokenType.REAL);
+
 			match(TokenType.COLON);
-			match(TokenType.NUMBER);
+
+			if (lookahead.getType() == TokenType.INTEGER)
+				match(TokenType.INTEGER);
+			if (lookahead.getType() == TokenType.REAL)
+				match(TokenType.REAL);
+
 			match(TokenType.RIGHTBRACKET);
 			match(TokenType.OF);
 			t = standard_type();
@@ -303,7 +306,13 @@ public class Parser {
 	 */
 	public ArrayList<StatementNode> statement_list() {
 		ArrayList<StatementNode> statNodeList = new ArrayList();
-		statNodeList.add(statement());
+
+		StatementNode statNode = statement();
+
+		if (statNode != null) {
+			statNodeList.add(statNode);
+		}
+
 		if (lookahead.getType() == TokenType.SEMI) {
 			match(TokenType.SEMI);
 			statNodeList.addAll(statement_list());
@@ -322,7 +331,7 @@ public class Parser {
 			if (symTab.isVariableName(lookahead.getLexeme()) || symTab.isArrayName((lookahead.getLexeme()))) {
 				AssignmentStatementNode assign = new AssignmentStatementNode();
 				assign.setLvalue(variable());
-				match(TokenType.ASSIGN);
+				assignop();
 				assign.setExpression(expression());
 				return assign;
 			} else if (symTab.isProcedureName(lookahead.getLexeme())) {
@@ -348,7 +357,7 @@ public class Parser {
 			whileState.setDoStatement(statement());
 			return whileState;
 		} else {
-			error(" in statement function ");
+			// nothing
 		}
 		return state;
 	}
@@ -425,35 +434,37 @@ public class Parser {
 	 */
 	public ExpressionNode simple_expression() {
 		ExpressionNode expNode = null;
-		if (lookahead.getType() == TokenType.ID || lookahead.getType() == TokenType.NUMBER
-				|| lookahead.getType() == TokenType.LEFTPAR || lookahead.getType() == TokenType.NOT) {
+		if (lookahead.getType() == TokenType.ID || lookahead.getType() == TokenType.INTEGER
+				|| lookahead.getType() == TokenType.REAL || lookahead.getType() == TokenType.LEFTPAR
+				|| lookahead.getType() == TokenType.NOT) {
 			expNode = term();
 			expNode = simple_part(expNode);
 		} else if (lookahead.getType() == TokenType.PLUS || lookahead.getType() == TokenType.MINUS) {
-			SignNode signNode = sign();
+			SignNode uoNode = sign();
 			expNode = term();
-			signNode.setExpression(simple_part(expNode));
-			return signNode;
+			uoNode.setExpression(simple_part(expNode));
+			return uoNode;
 		} else
-			error("simple_expression");
+			error(" in simple_expression");
+
 		return expNode;
 	}
 
 	/**
 	 * simple_part production rule for an addop and then a term and simple_part
 	 */
-	public ExpressionNode simple_part(ExpressionNode pos) {
+	public ExpressionNode simple_part(ExpressionNode left) {
+
 		if (isAddop(lookahead)) {
-			OperationNode oper = new OperationNode(lookahead.getType());
-			addop();
+			OperationNode operNode = new OperationNode(lookahead.getType());
+			match(lookahead.getType());
 			ExpressionNode right = term();
-			oper.setLeft(pos);
-			oper.setRight(simple_part(right));
-			return oper;
-		} else {
-			return pos;
-			// lambda option
+			operNode.setLeft(left);
+			operNode.setRight(right);
+			return simple_part(operNode);
 		}
+		// else lambda case
+		return left;
 	}
 
 	/**
@@ -469,18 +480,17 @@ public class Parser {
 	/**
 	 * term_part production rule for a mulop and then a factor and term_part
 	 */
-	public ExpressionNode term_part(ExpressionNode pos) {
+	public ExpressionNode term_part(ExpressionNode posLeft) {
 		if (isMulop(lookahead)) {
-			OperationNode oper = new OperationNode(lookahead.getType());
-			mulop();
+			OperationNode operNode = new OperationNode(lookahead.getType());
+			match(lookahead.getType());
 			ExpressionNode right = factor();
-			oper.setLeft(pos);
-			oper.setRight(term_part(right));
-			return oper;
-		} else {
-			// lambda option
-			return pos;
+			operNode.setLeft(posLeft);
+			operNode.setRight(term_part(right));
+			return operNode;
 		}
+		// else lambda case
+		return posLeft;
 	}
 
 	/**
@@ -490,41 +500,45 @@ public class Parser {
 	 */
 	public ExpressionNode factor() {
 		ExpressionNode exper = null;
-		if (this.lookahead.getType() == TokenType.ID) {
-			String id = lookahead.getLexeme();
+		if (lookahead.getType() == TokenType.ID) {
+			String name = lookahead.getLexeme();
 			match(TokenType.ID);
-			if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
-				ArrayNode arrNode = new ArrayNode(id);
+			if (lookahead.getType() == TokenType.LEFTBRACKET) {
+				ArrayNode arrNode = new ArrayNode(name);
 				match(TokenType.LEFTBRACKET);
-				ExpressionNode exp = expression();
-				arrNode.setExpNode(exp);
+				ExpressionNode temp = expression();
+				arrNode.setExpNode(temp);
 				match(TokenType.RIGHTBRACKET);
 				return arrNode;
-			} else if (this.lookahead.getType() == TokenType.LEFTPAR) {
+			} else if (lookahead.getType() == TokenType.LEFTPAR) {
+				FunctionNode funcNode = new FunctionNode(name);
 				match(TokenType.LEFTPAR);
-				expression_list();
+				funcNode.setExpNode(expression_list());
 				match(TokenType.RIGHTPAR);
-				return exper; // no functions - returns null
+				return funcNode;
 			} else {
-				VariableNode varNode = new VariableNode(id);
-				return varNode;
+				return new VariableNode(name);
 			}
-		} else if (this.lookahead.getType() == TokenType.NUMBER) {
-			String num = lookahead.getLexeme();
-			ValueNode valNode = new ValueNode(num);
-			match(TokenType.NUMBER);
-			return valNode;
+		} else if (lookahead.getType() == TokenType.INTEGER || lookahead.getType() == TokenType.REAL) {
+			exper = new ValueNode(lookahead.getLexeme());
 
-		} else if (this.lookahead.getType() == TokenType.LEFTPAR) {
+			if (lookahead.getType() == TokenType.INTEGER) {
+				match(TokenType.INTEGER);
+			} else if (lookahead.getType() == TokenType.REAL) {
+				match(TokenType.REAL);
+			}
+
+		} else if (lookahead.getType() == TokenType.LEFTPAR) {
 			match(TokenType.LEFTPAR);
 			exper = expression();
 			match(TokenType.RIGHTPAR);
-		} else if (this.lookahead.getType() == TokenType.NOT) {
+		} else if (lookahead.getType() == TokenType.NOT) {
+			SignNode uoNode = new SignNode(TokenType.NOT);
 			match(TokenType.NOT);
-			exper = factor();
-		} else {
-			error("in factor function");
-		}
+			uoNode.setExpression(factor());
+			return uoNode;
+		} else
+			error(" in factor");
 		return exper;
 	}
 
