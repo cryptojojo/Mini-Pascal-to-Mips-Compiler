@@ -349,6 +349,9 @@ public class Parser {
 			whileStatNode.setDoStatement(statement());
 			return whileStatNode;
 		} else if (this.lookahead.getType() == TokenType.READ) {
+			
+			// WHERE I LEFT OFF
+			
 			match(TokenType.READ);
 			match(TokenType.LEFTPAR);
 			match(TokenType.ID);
