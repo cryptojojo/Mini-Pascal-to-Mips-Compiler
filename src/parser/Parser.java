@@ -74,6 +74,7 @@ public class Parser {
 		lexi = this.lookahead.getLexeme();
 		String progName = lexi;
 		match(TokenType.ID);
+		ProgramNode progNode = new ProgramNode(progName);
 		symTab.addProgramName(lexi);
 		match(TokenType.SEMI);
 		DeclarationsNode declarations = declarations();
@@ -81,7 +82,10 @@ public class Parser {
 		CompoundStatementNode compoundStatement = compound_statement();
 		match(TokenType.PERIOD);
 
-		ProgramNode progNode = new ProgramNode(progName, declarations, subProgramDeclarations, compoundStatement);
+		progNode.setVariables(declarations);
+		progNode.setMain(compoundStatement);
+		progNode.setFunctions(subProgramDeclarations);
+
 		return progNode; // if it makes it this far, it is a pascal program
 
 	}
@@ -115,12 +119,12 @@ public class Parser {
 			match(TokenType.VAR);
 			ArrayList<String> identList = identifier_list();
 
-			match(TokenType.COLON);
-			TokenType t = type();
-
 			for (String ident : identList) {
-				decNode.addVariable(new VariableNode(ident, t));
+				decNode.addVariable(new VariableNode(ident));
 			}
+
+			match(TokenType.COLON);
+			type();
 			match(TokenType.SEMI);
 			declarations();
 		} else {
