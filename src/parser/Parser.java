@@ -1,9 +1,5 @@
 package parser;
 
-import static scanner.Type.ID;
-import static scanner.Type.LBRACE;
-import static scanner.Type.RBRACE;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -319,7 +315,7 @@ public class Parser {
 	 * code
 	 */
 	public StatementNode statement() {
-		StatementNode statNode;
+		StatementNode statNode = null;
 		if (this.lookahead.getType() == TokenType.ID) {
 			if (symTab.isVariableName(this.lookahead.getLexeme())) {
 				AssignmentStatementNode assignStat = new AssignmentStatementNode();
@@ -398,15 +394,18 @@ public class Parser {
 	 * procedure_statement production rule for a procedure ID or a production ID
 	 * with an expression after it surrounded by parenthesis
 	 */
-	private void procedure_statement() {
+	private ProcedureNode procedure_statement() {
+		ProcedureNode psNode = new ProcedureNode(lookahead.getLexeme());
 		match(TokenType.ID);
 		if (this.lookahead.getType() == TokenType.LEFTCURL) {
+
 			match(TokenType.LEFTCURL);
 			expression_list();
 			match(TokenType.RIGHTBRACKET);
 		} else {
 			// just the procedure id option
 		}
+		return psNode;
 	}
 
 	/**
