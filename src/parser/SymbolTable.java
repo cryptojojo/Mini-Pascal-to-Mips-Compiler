@@ -185,6 +185,13 @@ public class SymbolTable {
 	 * 
 	 * @throws FileNotFoundException
 	 */
+
+	public SymbolType getType(String name) {
+
+		return table.get(name);
+
+	}
+
 	public String printOut() {
 
 		String symTableString = "Symbol Table:";

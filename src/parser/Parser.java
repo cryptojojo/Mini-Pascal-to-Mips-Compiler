@@ -1,5 +1,9 @@
 package parser;
 
+import static scanner.Type.ID;
+import static scanner.Type.LBRACE;
+import static scanner.Type.RBRACE;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -370,17 +374,26 @@ public class Parser {
 	 * variable production rule for a variable ID or a variable ID with an
 	 * expression after it surrounded by brackets
 	 */
-	public VariableNode variable() {
-		match(TokenType.ID);
-		if (this.lookahead.getType() == TokenType.LEFTBRACKET) {
-			match(TokenType.LEFTBRACKET);
-			expression();
-			match(TokenType.RIGHTBRACKET);
+	private VariableNode variable() {
+		String varName = lookahead.getLexeme();
+		if (!symTab.isVariableName(varName))
+			error(varName + " has not been declared");
+		if (!symTab.isArrayName(varName)) {
+			VariableNode var = new VariableNode(varName);
+			var.setType(symTab.getType(varName));
+			match(TokenType.ID);
+			return var;
 		} else {
-			// just the variable id option
+			ArrayNode arrVar = new ArrayNode(varName);
+			arrVar.setType(symTab.getType(varName));
+			match(TokenType.ID);
+			if (lookahead.getType() == TokenType.LEFTBRACKET) {
+				match(TokenType.LEFTBRACKET);
+				arrVar.setExpNode(expression());
+				match(TokenType.RIGHTBRACKET);
+			}
+			return arrVar;
 		}
-		return null;
-
 	}
 
 	/**
