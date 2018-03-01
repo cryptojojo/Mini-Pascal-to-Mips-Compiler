@@ -1,5 +1,7 @@
 package parser;
 
+import static scanner.Type.SEMI;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -252,7 +254,7 @@ public class Parser {
 	public ArrayList<String> parameter_list() {
 		ArrayList<String> idList = identifier_list();
 		match(TokenType.COLON);
-		type();
+		type(idList);
 		if (this.lookahead.getType() == TokenType.SEMI) {
 			match(TokenType.SEMI);
 			idList.addAll(parameter_list());
@@ -295,14 +297,13 @@ public class Parser {
 	 * separated by semicolons
 	 */
 	public ArrayList<StatementNode> statement_list() {
-
-		comStat.addStatement(statement());
-		if (this.lookahead.getType() == TokenType.SEMI) {
+		ArrayList<StatementNode> statNodeList = new ArrayList();
+		statNodeList.add(statement());
+		if (lookahead.getType() == TokenType.SEMI) {
 			match(TokenType.SEMI);
 			statNodeList.addAll(statement_list());
-		} else {
-			// just the statement option
 		}
+		// else lambda case
 		return statNodeList;
 	}
 
