@@ -349,20 +349,21 @@ public class Parser {
 			whileStatNode.setDoStatement(statement());
 			return whileStatNode;
 		} else if (this.lookahead.getType() == TokenType.READ) {
-			
-			// WHERE I LEFT OFF
-			
 			match(TokenType.READ);
 			match(TokenType.LEFTPAR);
+			String id = lookahead.getLexeme();
 			match(TokenType.ID);
 			match(TokenType.RIGHTPAR);
+			VariableNode varNode = new VariableNode(id);
+			return new ReadNode(varNode);
 		} else if (this.lookahead.getType() == TokenType.WRITE) {
 			match(TokenType.WRITE);
 			match(TokenType.LEFTPAR);
-			expression();
+			WriteNode writeNode = new WriteNode(expression());
 			match(TokenType.RIGHTPAR);
+			return writeNode;
 		}
-		return null;
+		return statNode;
 	}
 
 	/**
