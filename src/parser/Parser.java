@@ -394,32 +394,34 @@ public class Parser {
 	 * procedure_statement production rule for a procedure ID or a production ID
 	 * with an expression after it surrounded by parenthesis
 	 */
-	private ProcedureNode procedure_statement() {
+	public ProcedureNode procedure_statement() {
+		ArrayList<ExpressionNode> expList = null;
 		ProcedureNode psNode = new ProcedureNode(lookahead.getLexeme());
 		match(TokenType.ID);
 		if (this.lookahead.getType() == TokenType.LEFTCURL) {
-
 			match(TokenType.LEFTCURL);
-			expression_list();
+			expList = expression_list();
 			match(TokenType.RIGHTBRACKET);
 		} else {
 			// just the procedure id option
 		}
+		psNode.addAllExpressions(expList);
 		return psNode;
+
 	}
 
 	/**
 	 * expression_list production rule for expressions or a series of expressions
 	 * separated by commas
 	 */
-	public void expression_list() {
-		expression();
-		if (this.lookahead.getType() == TokenType.COMMA) {
+	public ArrayList<ExpressionNode> expression_list() {
+		ArrayList<ExpressionNode> exList = new ArrayList<>();
+		exList.add(expression());
+		if (lookahead.getType() == TokenType.COMMA) {
 			match(TokenType.COMMA);
-			expression_list();
-		} else {
-			// just the expression option
+			exList.addAll(expression_list());
 		}
+		return exList;
 	}
 
 	/**
@@ -429,17 +431,21 @@ public class Parser {
 	 * @return
 	 */
 	public ExpressionNode expression() {
-		ExpressionNode left;
-		left = simple_expression();
+		ExpressionNode left = simple_expression();
+		TokenType leftType = left.getType();
 		if (isRelop(lookahead)) {
-			OperationNode oper = new OperationNode(lookahead.getType());
-
-			relop(); // consumes the relop
-			simple_expression();
-		} else {
-			// just the simple expression option
+			OperationNode operNode = new OperationNode(lookahead.getType());
+			if (leftType.equals(TokenType.REAL)) {
+				operNode.setType(TokenType.REAL);
+			} else {
+				operNode.setType(TokenType.INTEGER);
+			}
+			operNode.setLeft(left);
+			match(lookahead.getType());
+			operNode.setRight(simple_expression());
+			return operNode;
 		}
-		return null;
+		return left;
 	}
 
 	/**
