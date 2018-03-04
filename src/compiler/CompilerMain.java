@@ -25,11 +25,6 @@ public class CompilerMain {
 
 		String noExtFileName = filename.substring(0, filename.lastIndexOf('.'));
 
-		/**
-		 * prints "passed" if it is a Pascal program and "failed if it isn't" if
-		 * (parse.program()) { System.out.println("Passed \n"); } else {
-		 * System.out.println("Failed \n"); }
-		 */
 
 		// Creates symbol table and parse tree strings
 		String parseTree = parse.program().indentedToString(0);

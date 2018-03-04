@@ -2,6 +2,9 @@ package parser;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +21,20 @@ public class SyntaxTreeTest {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+
+		// taking in the argument which should be a filename in this case
+		Parser parse = new Parser("program potato; begin end .", false);
+
+		String expectedResult = "Program: potato\n" + "|-- Declarations\n" + "|-- SubProgramDeclarations\n"
+				+ "|-- Compound Statement\n" + "";
+
+		// Creates symbol table and parse tree strings
+		String parseTree = parse.program().indentedToString(0);
+
+		System.out.println(parseTree);
+
+		assertEquals(expectedResult, parseTree);
+
 	}
 
 }
