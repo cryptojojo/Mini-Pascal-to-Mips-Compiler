@@ -1,14 +1,11 @@
 program foo;
-var fee, fi, fo, fum: integer;
+var fee, fi, fo: integer;
 begin
   fee := 4;
   fi := 5;
-  fo := 3 * fee + fi;
-  if fo < 13
-    then
-      fo := 13
-    else
-      fo := 26
-  ;
+  fo := fee * fi;
 end
 .
+
+
+
