@@ -32,7 +32,7 @@ public class Parser {
 	ArrayList<StatementNode> statNodeList = new ArrayList<StatementNode>();
 
 	/**
-	 * Constructor function for the parser facet of the compiler
+	 * Constructor the parser facet of the compiler
 	 * 
 	 * @param text
 	 *            takes in a string - either a string of the code or a file name
@@ -65,7 +65,7 @@ public class Parser {
 	// Production rule functions
 
 	/**
-	 * program production rule, function to verify if the code in correct pascal
+	 * verify if the code in correct pascal
 	 * 
 	 * @return
 	 */
@@ -91,8 +91,7 @@ public class Parser {
 	}
 
 	/**
-	 * identidier_list production rule for variable input or series of variable
-	 * inputs
+	 * variable input or series of variable inputs
 	 */
 	public ArrayList<String> identifier_list() {
 		ArrayList<String> idList = new ArrayList<>();
@@ -112,8 +111,7 @@ public class Parser {
 	}
 
 	/**
-	 * declarations production rule for declaring a variable to its type, or a
-	 * series of variables to their type
+	 * declaring a variable to its type, or a series of variables to their type
 	 */
 	public DeclarationsNode declarations() {
 		DeclarationsNode decNode = new DeclarationsNode();
@@ -136,8 +134,7 @@ public class Parser {
 	}
 
 	/**
-	 * type production rule - can be just standard_type or can also be an array of
-	 * standard_type
+	 * can be just standard_type or can also be an array of standard_type
 	 */
 	public TokenType type(ArrayList<String> idList) {
 		TokenType t = null;
@@ -170,8 +167,7 @@ public class Parser {
 	}
 
 	/**
-	 * standard_type production rule for taking in a number, either an integer or a
-	 * real
+	 * taking in a number, either an integer or a real
 	 */
 	public TokenType standard_type() {
 		if (this.lookahead.getType() == TokenType.INTEGER) {
@@ -187,9 +183,8 @@ public class Parser {
 	}
 
 	/**
-	 * subprogram_declarations production rule for taking in a
-	 * subprogram_declaration or a series of subprogram_declarations separated by
-	 * commas
+	 * taking in a subprogram_declaration or a series of subprogram_declarations
+	 * separated by commas
 	 */
 	public SubProgramDeclarationsNode subprogram_declarations() {
 		SubProgramDeclarationsNode subPorgDecNode = new SubProgramDeclarationsNode();
@@ -203,8 +198,7 @@ public class Parser {
 	}
 
 	/**
-	 * subprogram_declaration production rule for calling a series of other
-	 * production rules in order to get a proper order
+	 * calling a series of other production rules in order to get a proper order
 	 */
 	public SubProgramNode subprogram_declaration() {
 		SubProgramNode subProgNode = subprogram_head();
@@ -215,7 +209,7 @@ public class Parser {
 	}
 
 	/**
-	 * subprogram_head production rule for creating a function or a procedure
+	 * creating a function or a procedure
 	 */
 	public SubProgramNode subprogram_head() {
 		SubProgramNode spNode = null;
@@ -242,7 +236,7 @@ public class Parser {
 	}
 
 	/**
-	 * arguments production rule for taking in parameters inside of parenthesis
+	 * takes in parameters inside of parenthesis
 	 */
 	public ArrayList<String> arguments() {
 		ArrayList<String> args = new ArrayList<String>();
@@ -258,8 +252,8 @@ public class Parser {
 	}
 
 	/**
-	 * parameter_list production rule for taking in an ID and it's corresponding
-	 * types or a series of parameters separated by semicolons
+	 * takes in an ID and it's corresponding types or a series of parameters
+	 * separated by semicolons
 	 */
 	public ArrayList<String> parameter_list() {
 		ArrayList<String> idList = identifier_list();
@@ -275,8 +269,7 @@ public class Parser {
 	}
 
 	/**
-	 * compound_statement production rule for verifying the main code, starting with
-	 * begin and ending with end
+	 * verifying the main code, starting with begin and ending with end
 	 */
 	public CompoundStatementNode compound_statement() {
 		CompoundStatementNode comStatNode = new CompoundStatementNode();
@@ -287,7 +280,7 @@ public class Parser {
 	}
 
 	/**
-	 * optional_statements production rule for statement_list or lambda
+	 * for statement_list or nothing (lamda)
 	 */
 	public CompoundStatementNode optional_statements() {
 		CompoundStatementNode compStatNode = new CompoundStatementNode();
@@ -303,8 +296,7 @@ public class Parser {
 	}
 
 	/**
-	 * statement_list production rule for statements or a series of statements
-	 * separated by semicolons
+	 * statements or a series of statements separated by semicolons
 	 */
 	public ArrayList<StatementNode> statement_list() {
 		ArrayList<StatementNode> statNodeList = new ArrayList();
@@ -324,8 +316,7 @@ public class Parser {
 	}
 
 	/**
-	 * statement production rule that creates all possible statements in the Pascal
-	 * code
+	 * creates all possible statements in the Pascal code
 	 */
 	public StatementNode statement() {
 		StatementNode state = null;
@@ -366,8 +357,8 @@ public class Parser {
 	}
 
 	/**
-	 * variable production rule for a variable ID or a variable ID with an
-	 * expression after it surrounded by brackets
+	 * a variable ID or a variable ID with an expression after it surrounded by
+	 * brackets
 	 */
 	public VariableNode variable() {
 		VariableNode var = new VariableNode(lookahead.getLexeme());
@@ -382,8 +373,8 @@ public class Parser {
 	}
 
 	/**
-	 * procedure_statement production rule for a procedure ID or a production ID
-	 * with an expression after it surrounded by parenthesis
+	 * a procedure ID or a production ID with an expression after it surrounded by
+	 * parenthesis
 	 */
 	public ProcedureNode procedure_statement() {
 		ProcedureNode psNode = new ProcedureNode();
@@ -400,8 +391,7 @@ public class Parser {
 	}
 
 	/**
-	 * expression_list production rule for expressions or a series of expressions
-	 * separated by commas
+	 * expressions or a series of expressions separated by commas
 	 */
 	public ArrayList<ExpressionNode> expression_list() {
 		ArrayList<ExpressionNode> exList = new ArrayList<>();
@@ -414,8 +404,8 @@ public class Parser {
 	}
 
 	/**
-	 * expression production rule for a simple expression or a simple_expression
-	 * compared to another simple_expression with a relop
+	 * simple expression or a simple_expression compared to another
+	 * simple_expression with a relop
 	 * 
 	 * @return
 	 */
@@ -432,8 +422,7 @@ public class Parser {
 	}
 
 	/**
-	 * simple_expression for either a term and a simple_part or a sign and then a
-	 * term and a simmple_part
+	 * either a term and a simple_part or a sign and then a term and a simmple_part
 	 */
 	public ExpressionNode simple_expression() {
 		ExpressionNode expNode = null;
@@ -454,7 +443,7 @@ public class Parser {
 	}
 
 	/**
-	 * simple_part production rule for an addop and then a term and simple_part
+	 * an addop and then a term and simple_part
 	 */
 	public ExpressionNode simple_part(ExpressionNode left) {
 
@@ -471,7 +460,7 @@ public class Parser {
 	}
 
 	/**
-	 * term production rule for a factor then a term_part
+	 * a factor then a term_part
 	 * 
 	 * @return
 	 */
@@ -481,7 +470,7 @@ public class Parser {
 	}
 
 	/**
-	 * term_part production rule for a mulop and then a factor and term_part
+	 * a mulop and then a factor and term_part
 	 */
 	public ExpressionNode term_part(ExpressionNode posLeft) {
 		if (isMulop(lookahead)) {
@@ -497,9 +486,9 @@ public class Parser {
 	}
 
 	/**
-	 * factor production rule for an ID, or an ID with an expression surrounding by
-	 * brackets or an expression_list surrounded by parenthesis or a num, a single
-	 * expression or a 'NOT' factor
+	 * an ID, or an ID with an expression surrounding by brackets or an
+	 * expression_list surrounded by parenthesis or a number, a single expression or
+	 * a 'NOT' factor
 	 */
 	public ExpressionNode factor() {
 		ExpressionNode exper = null;
@@ -546,7 +535,7 @@ public class Parser {
 	}
 
 	/**
-	 * sign production rule for a plus or minus
+	 * a plus or minus
 	 */
 	public SignNode sign() {
 		SignNode uoNode = null;
@@ -564,7 +553,7 @@ public class Parser {
 	// RELOP, ADDOP, MULOP, ASSIGNOP
 
 	/**
-	 * For determining whether or not the token is a relative operator
+	 * whether or not the token is a relative operator
 	 * 
 	 * @param token
 	 *            the token to be determined
@@ -581,7 +570,7 @@ public class Parser {
 	}
 
 	/**
-	 * For matching the relop and recognizing the token
+	 * matching the relop and recognizing the token
 	 */
 	public void relop() {
 		if (lookahead.getType() == TokenType.EQUAL) {
@@ -602,11 +591,11 @@ public class Parser {
 	}
 
 	/**
-	 * For determining whether or not the token is an addop
+	 * determining whether or not the token is an addop
 	 * 
 	 * @param token
 	 *            the token to be determined
-	 * @return answer whether or not the token is a relop
+	 * @return whether or not the token is a relop
 	 */
 	public boolean isAddop(Token token) {
 		boolean answer = false;
@@ -618,7 +607,7 @@ public class Parser {
 	}
 
 	/**
-	 * For matching the addop and recognizing the token
+	 * matching the addop and recognizing the token
 	 */
 	public void addop() {
 		if (lookahead.getType() == TokenType.PLUS) {
@@ -633,11 +622,11 @@ public class Parser {
 	}
 
 	/**
-	 * For determining whether or not the token is a mulop
+	 * determining whether or not the token is a mulop
 	 * 
 	 * @param token
 	 *            the token to be determined
-	 * @return answer whether or not the token is a mulop
+	 * @return whether or not the token is a mulop
 	 */
 	public boolean isMulop(Token token) {
 		boolean answer = false;
@@ -650,7 +639,7 @@ public class Parser {
 	}
 
 	/**
-	 * For matching the mulop and recognizing the token
+	 * matching the mulop and recognizing the token
 	 */
 	public void mulop() {
 		if (lookahead.getType() == TokenType.MULTIPLY) {
@@ -669,7 +658,7 @@ public class Parser {
 	}
 
 	/**
-	 * For recognizing the assign operator
+	 * recognizing the assign operator
 	 */
 	public void assignop() {
 		if (lookahead.getType() == TokenType.COLON) {
@@ -683,8 +672,8 @@ public class Parser {
 	/**
 	 * Matches the expected token
 	 * 
-	 * @param expected
-	 *            The expected token type
+	 * @param The
+	 *            expected token type
 	 */
 	public void match(TokenType expected) {
 		// System.out.println("match (" + expected + ")");
@@ -714,11 +703,10 @@ public class Parser {
 	/**
 	 * Error message printing
 	 * 
-	 * @param message
-	 *            to be printed
+	 * @param to
+	 *            be printed
 	 * 
 	 */
-
 	public void addToTable(String lexeme, SymbolType type) {
 		symTab.add(lexeme, type);
 	}
