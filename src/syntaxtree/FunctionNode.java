@@ -2,6 +2,12 @@ package syntaxtree;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a function
+ * 
+ * @author Joseph Miller <miller12 @ augsburg.edu>
+ * @version JDK/JRE 1.8.0_141
+ */
 public class FunctionNode extends VariableNode {
 
 	private ArrayList<ExpressionNode> expNode;
@@ -37,6 +43,14 @@ public class FunctionNode extends VariableNode {
 		return ("VariableNode: " + super.name + "ExpressionNode: " + expNode);
 	}
 
+	/**
+	 * Creates a String representation of this a function node and its children.
+	 * 
+	 * @param level
+	 *            The tree level at which this node resides.
+	 * @return A String representing this node.
+	 */
+
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);
@@ -49,14 +63,4 @@ public class FunctionNode extends VariableNode {
 		return answer;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		boolean answer = false;
-		if (o instanceof ArrayNode) {
-			ArrayNode other = (ArrayNode) o;
-			if (super.name.equals(other.getName()) && (this.expNode.equals(other.getExpNode())))
-				answer = true;
-		}
-		return answer;
-	}
 }

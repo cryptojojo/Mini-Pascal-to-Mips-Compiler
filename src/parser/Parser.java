@@ -11,10 +11,12 @@ import scanner.*;
 import syntaxtree.*;
 
 /**
+ * class that parses the code and verifies the inputed code is a pascal program,
+ * and also creates the syntax tree from the nodes in the syntaxtree package
+ * 
  * @author Joseph Miller <miller12 @ augsburg.edu>
  * @version JDK/JRE 1.8.0_141
  */
-
 public class Parser {
 
 	SymbolTable symTab = new SymbolTable();

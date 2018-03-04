@@ -2,6 +2,12 @@ package syntaxtree;
 
 import scanner.TokenType;
 
+/**
+ * Represents an single array
+ * 
+ * @author Joseph Miller <miller12 @ augsburg.edu>
+ * @version JDK/JRE 1.8.0_141
+ */
 public class ArrayNode extends VariableNode {
 
 	private ExpressionNode exp;
@@ -28,6 +34,13 @@ public class ArrayNode extends VariableNode {
 		this.exp = input;
 	}
 
+	/**
+	 * Creates a String representation of this array node and its children.
+	 * 
+	 * @param level
+	 *            The tree level at which this node resides.
+	 * @return A String representing this node.
+	 */
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);

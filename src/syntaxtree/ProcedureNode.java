@@ -2,6 +2,12 @@ package syntaxtree;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a procedure
+ * 
+ * @author Joseph Miller <miller12 @ augsburg.edu>
+ * @version JDK/JRE 1.8.0_141
+ */
 public class ProcedureNode extends StatementNode {
 
 	private VariableNode variable = null;
@@ -31,6 +37,13 @@ public class ProcedureNode extends StatementNode {
 		return this.variable;
 	}
 
+	/**
+	 * Creates a String representation of this procedure node and its children.
+	 * 
+	 * @param level
+	 *            The tree level at which this node resides.
+	 * @return A String representing this node.
+	 */
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);

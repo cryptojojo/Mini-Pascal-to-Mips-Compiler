@@ -2,6 +2,12 @@ package syntaxtree;
 
 import scanner.TokenType;
 
+/**
+ * Represents a sign, an expression and an operation
+ * 
+ * @author Joseph Miller <miller12 @ augsburg.edu>
+ * @version JDK/JRE 1.8.0_141
+ */
 public class SignNode extends ExpressionNode {
 
 	private ExpressionNode exp;
@@ -44,6 +50,13 @@ public class SignNode extends ExpressionNode {
 		return oper.toString();
 	}
 
+	/**
+	 * Creates a String representation of this sign node and its children.
+	 * 
+	 * @param level
+	 *            The tree level at which this node resides.
+	 * @return A String representing this node.
+	 */
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);

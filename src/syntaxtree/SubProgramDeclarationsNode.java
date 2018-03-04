@@ -24,6 +24,13 @@ public class SubProgramDeclarationsNode extends SyntaxTreeNode {
 		return subPList;
 	}
 
+	/**
+	 * Creates a String representation of all the sub program declarations
+	 * 
+	 * @param level
+	 *            The tree level at which this node resides.
+	 * @return A String representing this node.
+	 */
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);
 		answer += "SubProgramDeclarations\n";

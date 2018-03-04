@@ -1,6 +1,9 @@
 package syntaxtree;
 
 /**
+ * Represents the subprogram node, contains the name, variable, functions and
+ * respective compund statement
+ * 
  * @author Joseph Miller <miller12 @ augsburg.edu>
  * @version JDK/JRE 1.8.0_141
  */
@@ -38,6 +41,13 @@ public class SubProgramNode extends SubProgramDeclarationsNode {
 		this.main = main;
 	}
 
+	/**
+	 * Creates a String representation of this sub program node and its children.
+	 * 
+	 * @param level
+	 *            The tree level at which this node resides.
+	 * @return A String representing this node.
+	 */
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);
