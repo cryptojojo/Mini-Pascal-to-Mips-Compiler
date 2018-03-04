@@ -23,24 +23,37 @@ public class CompilerMain {
 		filename = args[0];
 		parse = new Parser(filename, true);
 
+		String noExtFileName = filename.substring(0, filename.lastIndexOf('.'));
+
 		/**
 		 * prints "passed" if it is a Pascal program and "failed if it isn't" if
 		 * (parse.program()) { System.out.println("Passed \n"); } else {
 		 * System.out.println("Failed \n"); }
 		 */
 
-		// prints the syntax tree to console
-		System.out.print(parse.program().indentedToString(0));
+		// Creates symbol table and parse tree strings
+		String parseTree = parse.program().indentedToString(0);
+		String symbolTable = parse.printSymbolTable();
 
-		// prints the symbol table to the console
-		System.out.println(parse.printSymbolTable());
-
+		System.out.print(parseTree);
+		System.out.print(symbolTable);
+		
 		// prints the symbol table to a text file called SymbolTableOut.txt
-		PrintWriter writer;
+		PrintWriter symTabWriter;
 		try {
-			writer = new PrintWriter("SymbolTableOut.txt");
-			writer.println(parse.printSymbolTable());
-			writer.close();
+			symTabWriter = new PrintWriter(noExtFileName + ".table");
+			symTabWriter.println(symbolTable);
+			symTabWriter.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		PrintWriter pareseTreeWriter;
+		try {
+			pareseTreeWriter = new PrintWriter(noExtFileName + ".tree");
+			pareseTreeWriter.println(parseTree);
+			pareseTreeWriter.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

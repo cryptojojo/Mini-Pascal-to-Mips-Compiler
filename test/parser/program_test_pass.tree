@@ -1,0 +1,32 @@
+Program: foo
+|-- Declarations
+|-- --- Name: fee
+|-- --- Name: fi
+|-- --- Name: fo
+|-- --- Name: fum
+|-- SubProgramDeclarations
+|-- Compound Statement
+|-- --- Assignment
+|-- --- --- Name: fee
+|-- --- --- Value: 4
+|-- --- Assignment
+|-- --- --- Name: fi
+|-- --- --- Value: 5
+|-- --- Assignment
+|-- --- --- Name: fo
+|-- --- --- Operation: PLUS
+|-- --- --- --- Operation: MULTIPLY
+|-- --- --- --- --- Value: 3
+|-- --- --- --- --- Name: fee
+|-- --- --- --- Name: fi
+|-- --- If
+|-- --- --- Operation: LESSTHAN
+|-- --- --- --- Name: fo
+|-- --- --- --- Value: 13
+|-- --- --- Assignment
+|-- --- --- --- Name: fo
+|-- --- --- --- Value: 13
+|-- --- --- Assignment
+|-- --- --- --- Name: fo
+|-- --- --- --- Value: 26
+
