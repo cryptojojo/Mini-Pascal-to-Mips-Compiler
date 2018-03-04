@@ -1,6 +1,9 @@
 package scanner;
 
 /**
+ * Represents the token read by the scanner, contains a lexeme and the type of
+ * token
+ * 
  * @author Joseph Miller <miller12 @ augsburg.edu>
  * @version JDK/JRE 1.8.0_141
  */

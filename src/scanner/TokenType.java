@@ -1,12 +1,10 @@
 package scanner;
 
 /**
- * @author      Joseph Miller <miller12 @ augsburg.edu>
- * @version     JDK/JRE 1.8.0_141  
- */
-
-/**
  * creates the predefined constants for TokenType
+ * 
+ * @author Joseph Miller <miller12 @ augsburg.edu>
+ * @version JDK/JRE 1.8.0_141
  */
 public enum TokenType {
 	// keywords

@@ -3,6 +3,9 @@ package parser;
 import java.util.HashMap;
 
 /**
+ * the symbol table for putting all identifiers in to check later regarding
+ * their type
+ * 
  * @author Joseph Miller <miller12 @ augsburg.edu>
  * @version JDK/JRE 1.8.0_141
  */
@@ -10,7 +13,7 @@ public class SymbolTable {
 	private HashMap<String, SymbolType> table;
 
 	/**
-	 * constructer for the SymbolTable class
+	 * Constructor for the SymbolTable class
 	 */
 	public SymbolTable() {
 		table = new HashMap<>();
@@ -20,10 +23,10 @@ public class SymbolTable {
 	/**
 	 * adds a symbol name and type to the hashmap
 	 * 
-	 * @param name
-	 *            string for the name of the symbol
-	 * @param type
-	 *            SymbolType for the type of the symbol
+	 * @param string
+	 *            for the name of the symbol
+	 * @param SymbolType
+	 *            for the type of the symbol
 	 */
 	public void add(String name, SymbolType type) {
 
@@ -31,20 +34,20 @@ public class SymbolTable {
 	}
 
 	/**
-	 * function to add the program name
+	 * adds the program name
 	 * 
-	 * @param name
-	 *            the name of the program symbol
+	 * @param the
+	 *            name of the program symbol
 	 */
 	public void addProgramName(String name) {
 		this.add(name, SymbolType.PROGRAMTYPE);
 	}
 
 	/**
-	 * function to add the variable name
+	 * adds the variable name
 	 * 
-	 * @param name
-	 *            the name of the variable symbol
+	 * @param the
+	 *            name of the variable symbol
 	 */
 	public void addVariableName(String name) {
 		this.add(name, SymbolType.VARIABLETYPE);
@@ -53,39 +56,39 @@ public class SymbolTable {
 	/**
 	 * function to add the function name
 	 * 
-	 * @param name
-	 *            the name of the function symbol
+	 * @param the
+	 *            name of the function symbol
 	 */
 	public void addFunctionName(String name) {
 		this.add(name, SymbolType.FUNCTIONTYPE);
 	}
 
 	/**
-	 * function to add the procedure name
+	 * adds the procedure name
 	 * 
-	 * @param name
-	 *            the name of the procedure symbol
+	 * @param the
+	 *            name of the procedure symbol
 	 */
 	public void addProcedureName(String name) {
 		this.add(name, SymbolType.PROCEDURETYPE);
 	}
 
 	/**
-	 * function to add the array name
+	 * adds the array name
 	 * 
-	 * @param name
-	 *            the name of the array symbol
+	 * @param the
+	 *            name of the array symbol
 	 */
 	public void addArrayName(String name) {
 		this.add(name, SymbolType.ARRAYTYPE);
 	}
 
 	/**
-	 * function for determining whether or not the symbol is a program
+	 * determines whether or not the symbol is a program
 	 * 
-	 * @param name
-	 *            the name of the symbol to be determined
-	 * @return boolean whether or not the symbol is a program
+	 * @param the
+	 *            name of the symbol to be determined
+	 * @return whether or not the symbol is a program
 	 */
 	public Boolean isProgramName(String name) {
 		Boolean check;
@@ -100,11 +103,11 @@ public class SymbolTable {
 	}
 
 	/**
-	 * function for determining whether or not the symbol is a variable
+	 * determines whether or not the symbol is a variable
 	 * 
-	 * @param name
-	 *            the name of the symbol to be determined
-	 * @return boolean whether or not the symbol is a variable
+	 * @param the
+	 *            name of the symbol to be determined
+	 * @return whether or not the symbol is a variable
 	 */
 	public Boolean isVariableName(String name) {
 		Boolean check;
@@ -118,11 +121,11 @@ public class SymbolTable {
 	}
 
 	/**
-	 * function for determining whether or not the symbol is a function
+	 * determines whether or not the symbol is a function
 	 * 
-	 * @param name
-	 *            the name of the symbol to be determined
-	 * @return boolean whether or not the symbol is a function
+	 * @param the
+	 *            name of the symbol to be determined
+	 * @return whether or not the symbol is a function
 	 */
 	public Boolean isFunctionName(String name) {
 		Boolean check;
@@ -136,11 +139,11 @@ public class SymbolTable {
 	}
 
 	/**
-	 * function for determining whether or not the symbol is a procedure
+	 * determines whether or not the symbol is a procedure
 	 * 
-	 * @param name
-	 *            the name of the symbol to be determined
-	 * @return boolean whether or not the symbol is a procedure
+	 * @param the
+	 *            name of the symbol to be determined
+	 * @return whether or not the symbol is a procedure
 	 */
 	public Boolean isProcedureName(String name) {
 		Boolean check;
@@ -153,11 +156,11 @@ public class SymbolTable {
 	}
 
 	/**
-	 * function for determining whether or not the symbol is an array
+	 * determines whether or not the symbol is an array
 	 * 
-	 * @param name
-	 *            the name of the symbol to be determined
-	 * @return boolean whether or not the symbol is an array
+	 * @param the
+	 *            name of the symbol to be determined
+	 * @return whether or not the symbol is an array
 	 */
 	public Boolean isArrayName(String name) {
 		Boolean check;
@@ -172,7 +175,7 @@ public class SymbolTable {
 	}
 
 	/**
-	 * for getting the symbol table (hashmap)
+	 * gets the symbol table (hashmap)
 	 * 
 	 * @return the symbol table
 	 */
