@@ -316,7 +316,7 @@ public class Parser {
 	}
 
 	/**
-	 * creates all possible statements in the Pascal code
+	 * creates all possible statements in the Pascal cod
 	 */
 	public StatementNode statement() {
 		StatementNode state = null;

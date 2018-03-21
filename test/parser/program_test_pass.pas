@@ -4,6 +4,9 @@ begin
   fee := 4;
   fi := 5;
   fo := fee * fi;
+
+  write(fo);	
+
 end
 .
 
