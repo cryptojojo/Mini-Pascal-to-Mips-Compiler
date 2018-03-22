@@ -16,4 +16,6 @@ Program: foo
 |-- --- --- Operation: MULTIPLY
 |-- --- --- --- Name: fee
 |-- --- --- --- Name: fi
+|-- --- Write
+|-- --- --- Name: fo
 
