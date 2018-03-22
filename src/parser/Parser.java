@@ -553,16 +553,16 @@ public class Parser {
 	 * a plus or minus
 	 */
 	public SignNode sign() {
-		SignNode uoNode = null;
+		SignNode sig = null;
 		if (lookahead.getType() == TokenType.PLUS) {
-			uoNode = new SignNode(TokenType.PLUS);
+			sig = new SignNode(TokenType.PLUS);
 			match(TokenType.PLUS);
 		} else if (lookahead.getType() == TokenType.MINUS) {
-			uoNode = new SignNode(TokenType.MINUS);
+			sig = new SignNode(TokenType.MINUS);
 			match(TokenType.MINUS);
 		} else
 			error("sign");
-		return uoNode;
+		return sig;
 	}
 
 	// RELOP, ADDOP, MULOP, ASSIGNOP

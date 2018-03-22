@@ -1,0 +1,27 @@
+Program: BitcoinConversion
+|-- Declarations
+|-- --- Name: dollars
+|-- --- Name: yen
+|-- --- Name: bitcoins
+|-- SubProgramDeclarations
+|-- Compound Statement
+|-- --- Assignment
+|-- --- --- Name: dollars
+|-- --- --- Value: 1000000
+|-- --- Assignment
+|-- --- --- Name: yen
+|-- --- --- Operation: MULTIPLY
+|-- --- --- --- Name: dollars
+|-- --- --- --- Value: 102
+|-- --- Assignment
+|-- --- --- Name: bitcoins
+|-- --- --- Operation: DIVIDE
+|-- --- --- --- Name: potato
+|-- --- --- --- Value: 8500
+|-- --- Write
+|-- --- --- Name: dollars
+|-- --- Write
+|-- --- --- Name: yen
+|-- --- Write
+|-- --- --- Name: bitcoins
+

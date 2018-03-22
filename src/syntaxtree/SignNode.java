@@ -60,7 +60,7 @@ public class SignNode extends ExpressionNode {
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);
-		answer += "Unary Operation: " + this.oper + "\n";
+		answer += "Sign Node: " + this.oper + "\n";
 		answer += exp.indentedToString(level + 1);
 		return (answer);
 	}
