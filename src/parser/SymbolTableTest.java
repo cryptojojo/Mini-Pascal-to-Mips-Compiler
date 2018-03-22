@@ -49,7 +49,7 @@ public class SymbolTableTest {
 		assertFalse(table.isProcedureName("programName"));
 		assertFalse(table.isArrayName("procedureName"));
 
-		table.printOut();
+		table.toString();
 	}
 
 	@Test

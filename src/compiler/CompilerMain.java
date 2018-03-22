@@ -28,7 +28,7 @@ public class CompilerMain {
 
 		// Creates symbol table and parse tree strings
 		String parseTree = parse.program().indentedToString(0);
-		String symbolTable = parse.printSymbolTable();
+		String symbolTable = parse.getSymbolTableStr();
 
 		System.out.print(parseTree);
 		System.out.print(symbolTable);

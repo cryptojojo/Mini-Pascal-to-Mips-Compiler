@@ -711,8 +711,8 @@ public class Parser {
 	 * 
 	 * @return the symbol table as a string
 	 */
-	public String printSymbolTable() {
-		return symTab.printOut();
+	public String getSymbolTableStr() {
+		return symTab.toString();
 	}
 
 	/**

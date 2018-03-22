@@ -195,7 +195,7 @@ public class SymbolTable {
 
 	}
 
-	public String printOut() {
+	public String toString() {
 
 		String symTableString = "Symbol Table:";
 		for (String name : table.keySet()) {
