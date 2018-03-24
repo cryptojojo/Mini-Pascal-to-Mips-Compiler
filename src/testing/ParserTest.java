@@ -1,10 +1,13 @@
-package parser;
+package testing;
 
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import parser.Parser;
+import parser.SymbolType;
 
 public class ParserTest {
 

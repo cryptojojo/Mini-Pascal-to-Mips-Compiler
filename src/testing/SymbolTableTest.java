@@ -1,4 +1,4 @@
-package parser;
+package testing;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import parser.SymbolTable;
+import parser.SymbolType;
 
 /**
  * @author Joseph Miller <miller12 @ augsburg.edu>

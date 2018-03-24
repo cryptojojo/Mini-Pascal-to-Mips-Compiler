@@ -1,6 +1,0 @@
-Symbol Table:
-  VARIABLETYPE: fi
-  PROGRAMTYPE: foo
-  VARIABLETYPE: fee
-  VARIABLETYPE: fo
-  VARIABLETYPE: fum

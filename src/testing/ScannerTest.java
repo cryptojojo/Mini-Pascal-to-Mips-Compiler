@@ -1,7 +1,7 @@
 /**
  * 
  */
-package scanner;
+package testing;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +12,10 @@ import java.io.StringReader;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import scanner.Scanner;
+import scanner.Token;
+import scanner.TokenType;
 
 /**
  * @author Joseph Miller <miller12 @ augsburg.edu>

@@ -668,7 +668,7 @@ public class Parser {
 		} else if (lookahead.getType() == TokenType.AND) {
 			match(TokenType.AND);
 		} else {
-			error("Mulop");
+			error(" in mulop");
 		}
 	}
 
@@ -720,7 +720,7 @@ public class Parser {
 	 * 
 	 * @param to
 	 *            be printed
-	 * 
+	 *  
 	 */
 	public void addToTable(String lexeme, SymbolType type) {
 		symTab.add(lexeme, type);
