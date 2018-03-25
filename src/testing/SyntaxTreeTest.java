@@ -32,11 +32,8 @@ public class SyntaxTreeTest {
 		// Regular, valid program test
 		//
 		//
-
-		// taking in the argument which should be a filename in this case
 		Parser parse = new Parser("test/syntaxtree/bitcoin.pas", true);
 
-		// Creates symbol table and parse tree strings
 		String parseTree = parse.program().indentedToString(0);
 		String expectedResult = "Program: BitcoinConversion\n" + "|-- Declarations\n" + "|-- --- Name: dollars\n"
 				+ "|-- --- Name: yen\n" + "|-- --- Name: bitcoins\n" + "|-- SubProgramDeclarations\n"
@@ -50,23 +47,20 @@ public class SyntaxTreeTest {
 		assertEquals(expectedResult, parseTree);
 
 		
+		// Illegal program test
+		//
+		//
+		parse = new Parser("test/syntaxtree/illegal.pas", true);
+		parseTree = parse.program().indentedToString(0);
+		if (parseTree == expectedResult)
+			assertTrue(false);
+		else
+			assertTrue(true);
 		
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	}
 
 }
