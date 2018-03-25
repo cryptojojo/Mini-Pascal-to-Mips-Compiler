@@ -46,7 +46,6 @@ public class SyntaxTreeTest {
 				+ "|-- --- Write\n" + "|-- --- --- Name: bitcoins\n" + "";
 		assertEquals(expectedResult, parseTree);
 
-		
 		// Illegal program test
 		//
 		//
@@ -56,10 +55,23 @@ public class SyntaxTreeTest {
 			assertTrue(false);
 		else
 			assertTrue(true);
-		
-		
-		
-		
+
+		// Procedure program test
+		//
+		//
+
+		parse = new Parser("test/syntaxtree/procedure.pas", true);
+		parseTree = parse.program().indentedToString(0);
+		System.out.println(parseTree);
+
+		expectedResult = "Program: ProcedureTest\n" + "|-- Declarations\n" + "|-- --- Name: a\n"
+				+ "|-- SubProgramDeclarations\n" + "|-- --- SubProgram: test\n" + "|-- --- --- Declarations\n"
+				+ "|-- --- --- SubProgramDeclarations\n" + "|-- --- --- Compound Statement\n"
+				+ "|-- --- --- --- Assignment\n" + "|-- --- --- --- --- Name: a\n" + "|-- --- --- --- --- Value: 5\n"
+				+ "|-- Compound Statement\n" + "|-- --- Procedure: test\n" + "|-- --- Write\n" + "|-- --- --- Name: a\n"
+				+ "";
+
+		assertEquals(expectedResult, parseTree);
 
 	}
 
