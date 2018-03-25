@@ -56,13 +56,11 @@ public class SyntaxTreeTest {
 		else
 			assertTrue(true);
 
-		// Procedure program test
+		// Procedure call test
 		//
 		//
-
 		parse = new Parser("test/syntaxtree/procedure.pas", true);
 		parseTree = parse.program().indentedToString(0);
-		System.out.println(parseTree);
 
 		expectedResult = "Program: ProcedureTest\n" + "|-- Declarations\n" + "|-- --- Name: a\n"
 				+ "|-- SubProgramDeclarations\n" + "|-- --- SubProgram: test\n" + "|-- --- --- Declarations\n"
@@ -70,6 +68,41 @@ public class SyntaxTreeTest {
 				+ "|-- --- --- --- Assignment\n" + "|-- --- --- --- --- Name: a\n" + "|-- --- --- --- --- Value: 5\n"
 				+ "|-- Compound Statement\n" + "|-- --- Procedure: test\n" + "|-- --- Write\n" + "|-- --- --- Name: a\n"
 				+ "";
+
+		assertEquals(expectedResult, parseTree);
+
+		// if-then test (variable vs variable operation )
+		//
+		//
+		parse = new Parser("test/syntaxtree/if_then_var_var.pas", true);
+		parseTree = parse.program().indentedToString(0);
+
+		expectedResult = "Program: ifVar\n" + "|-- Declarations\n" + "|-- --- Name: a\n" + "|-- --- Name: b\n"
+				+ "|-- --- Name: c\n" + "|-- --- Name: d\n" + "|-- SubProgramDeclarations\n"
+				+ "|-- Compound Statement\n" + "|-- --- Assignment\n" + "|-- --- --- Name: a\n"
+				+ "|-- --- --- Value: 4\n" + "|-- --- Assignment\n" + "|-- --- --- Name: b\n" + "|-- --- --- Value: 5\n"
+				+ "|-- --- If\n" + "|-- --- --- Operation: LESSTHAN\n" + "|-- --- --- --- Name: a\n"
+				+ "|-- --- --- --- Name: b\n" + "|-- --- --- Assignment\n" + "|-- --- --- --- Name: a\n"
+				+ "|-- --- --- --- Value: 1\n" + "|-- --- --- Assignment\n" + "|-- --- --- --- Name: b\n"
+				+ "|-- --- --- --- Value: 2\n" + "";
+
+		assertEquals(expectedResult, parseTree);
+
+		// if-then test (variable vs number operation )
+		//
+		//
+		parse = new Parser("test/syntaxtree/if_then_var_num.pas", true);
+		parseTree = parse.program().indentedToString(0);
+		System.out.println(parseTree);
+
+		expectedResult = "Program: ifNum\n" + "|-- Declarations\n" + "|-- --- Name: a\n" + "|-- --- Name: b\n"
+				+ "|-- --- Name: c\n" + "|-- --- Name: d\n" + "|-- SubProgramDeclarations\n"
+				+ "|-- Compound Statement\n" + "|-- --- Assignment\n" + "|-- --- --- Name: a\n"
+				+ "|-- --- --- Value: 4\n" + "|-- --- Assignment\n" + "|-- --- --- Name: b\n" + "|-- --- --- Value: 5\n"
+				+ "|-- --- If\n" + "|-- --- --- Operation: LESSTHAN\n" + "|-- --- --- --- Name: a\n"
+				+ "|-- --- --- --- Value: 10\n" + "|-- --- --- Assignment\n" + "|-- --- --- --- Name: a\n"
+				+ "|-- --- --- --- Value: 1\n" + "|-- --- --- Assignment\n" + "|-- --- --- --- Name: b\n"
+				+ "|-- --- --- --- Value: 2\n" + "";
 
 		assertEquals(expectedResult, parseTree);
 
