@@ -65,7 +65,7 @@ public class Parser {
 	// Production rule functions
 
 	/**
-	 * verify if the code in correct pascal
+	 * verify if the code in correct pascal and create top node of the syntax tree
 	 * 
 	 * @return
 	 */
@@ -720,7 +720,7 @@ public class Parser {
 	 * 
 	 * @param to
 	 *            be printed
-	 *  
+	 * 
 	 */
 	public void addToTable(String lexeme, SymbolType type) {
 		symTab.add(lexeme, type);

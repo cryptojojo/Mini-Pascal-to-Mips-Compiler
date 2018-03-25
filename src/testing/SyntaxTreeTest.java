@@ -10,6 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import parser.Parser;
+import scanner.TokenType;
+import syntaxtree.DeclarationsNode;
+import syntaxtree.ProgramNode;
+import syntaxtree.SyntaxTreeNode;
+import syntaxtree.VariableNode;
 
 public class SyntaxTreeTest {
 
@@ -24,19 +29,44 @@ public class SyntaxTreeTest {
 	@Test
 	public void test() {
 
-		// taking in the argument which should be a filename in this case
-		Parser parse = new Parser("program potato; begin end .", false);
+		// Regular, valid program test
+		//
+		//
 
-		String expectedResult = "Program: potato\n" + "|-- Declarations\n" + "|-- SubProgramDeclarations\n"
-				+ "|-- Compound Statement\n" + "";
+		// taking in the argument which should be a filename in this case
+		Parser parse = new Parser("test/syntaxtree/bitcoin.pas", true);
 
 		// Creates symbol table and parse tree strings
 		String parseTree = parse.program().indentedToString(0);
-
-		System.out.println(parseTree);
-
+		String expectedResult = "Program: BitcoinConversion\n" + "|-- Declarations\n" + "|-- --- Name: dollars\n"
+				+ "|-- --- Name: yen\n" + "|-- --- Name: bitcoins\n" + "|-- SubProgramDeclarations\n"
+				+ "|-- Compound Statement\n" + "|-- --- Assignment\n" + "|-- --- --- Name: dollars\n"
+				+ "|-- --- --- Value: 1000000\n" + "|-- --- Assignment\n" + "|-- --- --- Name: yen\n"
+				+ "|-- --- --- Operation: MULTIPLY\n" + "|-- --- --- --- Name: dollars\n"
+				+ "|-- --- --- --- Value: 102\n" + "|-- --- Assignment\n" + "|-- --- --- Name: bitcoins\n"
+				+ "|-- --- --- Operation: DIVIDE\n" + "|-- --- --- --- Name: potato\n" + "|-- --- --- --- Value: 8500\n"
+				+ "|-- --- Write\n" + "|-- --- --- Name: dollars\n" + "|-- --- Write\n" + "|-- --- --- Name: yen\n"
+				+ "|-- --- Write\n" + "|-- --- --- Name: bitcoins\n" + "";
 		assertEquals(expectedResult, parseTree);
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }
