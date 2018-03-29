@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 import parser.*;
+import semanticanalysis.SemanticAnalysis;
 import syntaxtree.*;
 
 /**
@@ -16,6 +17,7 @@ public class CompilerMain {
 	// Instance Variables
 	public static Parser parse;
 	public static String filename;
+	public static SemanticAnalysis semAnalysis;
 
 	public static void main(String[] args) {
 
@@ -25,15 +27,23 @@ public class CompilerMain {
 
 		String noExtFileName = filename.substring(0, filename.lastIndexOf('.'));
 
-
 		// Creates symbol table and parse tree strings
-		String parseTree = parse.program().indentedToString(0);
+		ProgramNode progNode = parse.program();
+
+		// creates semantic analysis object given the program node
+		semAnalysis = new SemanticAnalysis(progNode);
+
+		// semantic analysis is analyzed and put into a string
+		String parseTree = semAnalysis.analyze().indentedToString(0);
+
+		// symbol table is put into a string
 		String symbolTable = parse.getSymbolTableStr();
 
+		// prints the tree and the symbol table to the console
 		System.out.print(parseTree);
 		System.out.print(symbolTable);
-		
-		// prints the symbol table to a text file called SymbolTableOut.txt
+
+		// prints the symbol table to a text file called [input name].table
 		PrintWriter symTabWriter;
 		try {
 			symTabWriter = new PrintWriter(noExtFileName + ".table");
@@ -44,6 +54,7 @@ public class CompilerMain {
 			e.printStackTrace();
 		}
 
+		// prints the parse tree to a text file called [input name].tree
 		PrintWriter pareseTreeWriter;
 		try {
 			pareseTreeWriter = new PrintWriter(noExtFileName + ".tree");
