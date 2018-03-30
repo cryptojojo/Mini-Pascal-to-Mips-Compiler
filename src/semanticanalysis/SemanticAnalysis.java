@@ -1,5 +1,7 @@
 package semanticanalysis;
 
+import java.util.ArrayList;
+
 import scanner.TokenType;
 import syntaxtree.*;
 
@@ -30,7 +32,9 @@ public class SemanticAnalysis {
 	}
 
 	private void verifyVarDecs() {
-		DeclarationsNode decs = progNode.getVariables();
+		// gets all the variables declared with their corresponding types.
+		DeclarationsNode decsNode = progNode.getVariables();
+		ArrayList<VariableNode> decs = decsNode.getDeclarations();
 
 	}
 

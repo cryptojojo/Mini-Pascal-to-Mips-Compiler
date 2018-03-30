@@ -27,6 +27,11 @@ public class DeclarationsNode extends SyntaxTreeNode {
 
 	}
 
+	public ArrayList<VariableNode> getDeclarations() {
+		return this.vars;
+
+	}
+
 	/**
 	 * Creates a String representation of this declarations node and its children.
 	 * 

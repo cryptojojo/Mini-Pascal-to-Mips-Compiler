@@ -1,27 +1,27 @@
 Program: BitcoinConversion
 |-- Declarations
-|-- --- Name: dollars
-|-- --- Name: yen
-|-- --- Name: bitcoins
+|-- --- Name: dollars Type: null
+|-- --- Name: yen Type: null
+|-- --- Name: bitcoins Type: null
 |-- SubProgramDeclarations
 |-- Compound Statement
 |-- --- Assignment
-|-- --- --- Name: dollars
+|-- --- --- Name: dollars Type: null
 |-- --- --- Value: 1000000
 |-- --- Assignment
-|-- --- --- Name: yen
+|-- --- --- Name: yen Type: null
 |-- --- --- Operation: MULTIPLY
-|-- --- --- --- Name: dollars
+|-- --- --- --- Name: dollars Type: null
 |-- --- --- --- Value: 102
 |-- --- Assignment
-|-- --- --- Name: bitcoins
+|-- --- --- Name: bitcoins Type: null
 |-- --- --- Operation: DIVIDE
-|-- --- --- --- Name: potato
+|-- --- --- --- Name: potato Type: null
 |-- --- --- --- Value: 8500
 |-- --- Write
-|-- --- --- Name: dollars
+|-- --- --- Name: dollars Type: null
 |-- --- Write
-|-- --- --- Name: yen
+|-- --- --- Name: yen Type: null
 |-- --- Write
-|-- --- --- Name: bitcoins
+|-- --- --- Name: bitcoins Type: null
 
