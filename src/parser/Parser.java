@@ -100,7 +100,7 @@ public class Parser {
 		match(TokenType.ID);
 		symTab.addVariableName(lexi);
 		idList.add(name);
-		if (lookahead!= null && (this.lookahead.getType() == TokenType.COMMA)) {
+		if (lookahead != null && (this.lookahead.getType() == TokenType.COMMA)) {
 			match(TokenType.COMMA);
 			idList.addAll(identifier_list());
 		} else {
@@ -115,7 +115,7 @@ public class Parser {
 	 */
 	public DeclarationsNode declarations() {
 		DeclarationsNode decNode = new DeclarationsNode();
-		if (lookahead!= null && (this.lookahead.getType() == TokenType.VAR)) {
+		if (lookahead != null && (this.lookahead.getType() == TokenType.VAR)) {
 			match(TokenType.VAR);
 			ArrayList<String> identList = identifier_list();
 
@@ -138,27 +138,28 @@ public class Parser {
 	 */
 	public TokenType type(ArrayList<String> idList) {
 		TokenType t = null;
-		if (lookahead!= null && (lookahead.getType() == TokenType.ARRAY)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.ARRAY)) {
 			match(TokenType.ARRAY);
 			match(TokenType.LEFTBRACKET);
 
-			if (lookahead!= null && (lookahead.getType() == TokenType.INTEGER))
+			if (lookahead != null && (lookahead.getType() == TokenType.INTEGER))
 				match(TokenType.INTEGER);
-			if (lookahead!= null && (lookahead.getType() == TokenType.REAL))
+			if (lookahead != null && (lookahead.getType() == TokenType.REAL))
 				match(TokenType.REAL);
 
 			match(TokenType.COLON);
 
-			if (lookahead!= null && (lookahead.getType() == TokenType.INTEGER))
+			if (lookahead != null && (lookahead.getType() == TokenType.INTEGER))
 				match(TokenType.INTEGER);
-			if (lookahead!= null && (lookahead.getType() == TokenType.REAL))
+			if (lookahead != null && (lookahead.getType() == TokenType.REAL))
 				match(TokenType.REAL);
 
 			match(TokenType.RIGHTBRACKET);
 			match(TokenType.OF);
 			t = standard_type();
 
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.INTEGER || lookahead.getType() == TokenType.REAL)) {
+		} else if (lookahead != null
+				&& (lookahead.getType() == TokenType.INTEGER || lookahead.getType() == TokenType.REAL)) {
 			t = standard_type();
 
 		} else
@@ -170,10 +171,10 @@ public class Parser {
 	 * taking in a number, either an integer or a real
 	 */
 	public TokenType standard_type() {
-		if (lookahead!= null && (this.lookahead.getType() == TokenType.INTEGER)) {
+		if (lookahead != null && (this.lookahead.getType() == TokenType.INTEGER)) {
 			match(TokenType.INTEGER);
 			return TokenType.INTEGER;
-		} else if (lookahead!= null && (this.lookahead.getType() == TokenType.REAL)) {
+		} else if (lookahead != null && (this.lookahead.getType() == TokenType.REAL)) {
 			match(TokenType.REAL);
 			return TokenType.REAL;
 		} else {
@@ -188,10 +189,11 @@ public class Parser {
 	 */
 	public SubProgramDeclarationsNode subprogram_declarations() {
 		SubProgramDeclarationsNode subPorgDecNode = new SubProgramDeclarationsNode();
-		if (lookahead!= null && (lookahead.getType() == TokenType.FUNCTION || lookahead.getType() == TokenType.PROCEDURE)) {
+		if (lookahead != null
+				&& (lookahead.getType() == TokenType.FUNCTION || lookahead.getType() == TokenType.PROCEDURE)) {
 			subPorgDecNode.addSubProgramDeclaration(subprogram_declaration());
 			match(TokenType.SEMI);
-			subPorgDecNode.addall(subprogram_declarations().getProcs());
+			subPorgDecNode.addall(subprogram_declarations().getSubProgs());
 		}
 		// else lambda case
 		return subPorgDecNode;
@@ -213,7 +215,7 @@ public class Parser {
 	 */
 	public SubProgramNode subprogram_head() {
 		SubProgramNode spNode = null;
-		if (lookahead!= null && (lookahead.getType() == TokenType.FUNCTION)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.FUNCTION)) {
 			match(TokenType.FUNCTION);
 			String functName = lookahead.getLexeme();
 			spNode = new SubProgramNode(functName);
@@ -222,7 +224,7 @@ public class Parser {
 			match(TokenType.COLON);
 			symTab.addFunctionName(functName);
 			match(TokenType.SEMI);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.PROCEDURE)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.PROCEDURE)) {
 			match(TokenType.PROCEDURE);
 			String procName = lookahead.getLexeme();
 			spNode = new SubProgramNode(procName);
@@ -240,7 +242,7 @@ public class Parser {
 	 */
 	public ArrayList<String> arguments() {
 		ArrayList<String> args = new ArrayList<String>();
-		if (lookahead!= null && (this.lookahead.getType() == TokenType.LEFTPAR)) {
+		if (lookahead != null && (this.lookahead.getType() == TokenType.LEFTPAR)) {
 			match(TokenType.LEFTPAR);
 			args = parameter_list();
 			match(TokenType.RIGHTPAR);
@@ -259,7 +261,7 @@ public class Parser {
 		ArrayList<String> idList = identifier_list();
 		match(TokenType.COLON);
 		type(idList);
-		if (lookahead!= null && (this.lookahead.getType() == TokenType.SEMI)) {
+		if (lookahead != null && (this.lookahead.getType() == TokenType.SEMI)) {
 			match(TokenType.SEMI);
 			idList.addAll(parameter_list());
 		} else {
@@ -284,9 +286,10 @@ public class Parser {
 	 */
 	public CompoundStatementNode optional_statements() {
 		CompoundStatementNode compStatNode = new CompoundStatementNode();
-		if (lookahead!= null && (this.lookahead.getType() == TokenType.ID || (this.lookahead.getType() == TokenType.BEGIN)
-				|| (this.lookahead.getType() == TokenType.IF) || (this.lookahead.getType() == TokenType.WHILE)
-				|| (this.lookahead.getType() == TokenType.READ) || (this.lookahead.getType() == TokenType.WRITE))) {
+		if (lookahead != null && (this.lookahead.getType() == TokenType.ID
+				|| (this.lookahead.getType() == TokenType.BEGIN) || (this.lookahead.getType() == TokenType.IF)
+				|| (this.lookahead.getType() == TokenType.WHILE) || (this.lookahead.getType() == TokenType.READ)
+				|| (this.lookahead.getType() == TokenType.WRITE))) {
 			compStatNode.addAllStateNodes(statement_list());
 
 		} else {
@@ -307,7 +310,7 @@ public class Parser {
 			statNodeList.add(statNode);
 		}
 
-		if (lookahead!= null && (lookahead.getType() == TokenType.SEMI)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.SEMI)) {
 			match(TokenType.SEMI);
 			statNodeList.addAll(statement_list());
 		}
@@ -320,7 +323,7 @@ public class Parser {
 	 */
 	public StatementNode statement() {
 		StatementNode state = null;
-		if (lookahead!= null && (lookahead.getType() == TokenType.ID)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.ID)) {
 			if (symTab.isVariableName(lookahead.getLexeme()) || symTab.isArrayName((lookahead.getLexeme()))) {
 				AssignmentStatementNode assign = new AssignmentStatementNode();
 				assign.setLvalue(variable());
@@ -331,9 +334,9 @@ public class Parser {
 				return procedure_statement();
 			} else
 				error("Name not found in symbol table.");
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.BEGIN))
+		} else if (lookahead != null && (lookahead.getType() == TokenType.BEGIN))
 			state = compound_statement();
-		else if (lookahead!= null && (lookahead.getType() == TokenType.IF)) {
+		else if (lookahead != null && (lookahead.getType() == TokenType.IF)) {
 			IfStatementNode ifState = new IfStatementNode();
 			match(TokenType.IF);
 			ifState.setTest(expression());
@@ -343,21 +346,21 @@ public class Parser {
 			ifState.setElseStatement(statement());
 
 			return ifState;
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.WHILE)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.WHILE)) {
 			WhileStatementNode whileState = new WhileStatementNode();
 			match(TokenType.WHILE);
 			whileState.setTest(expression());
 			match(TokenType.DO);
 			whileState.setDoStatement(statement());
 			return whileState;
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.READ)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.READ)) {
 			match(TokenType.READ);
 			match(TokenType.LEFTPAR);
 			String varName = lookahead.getLexeme();
 			match(TokenType.ID);
 			match(TokenType.RIGHTPAR);
 			return new ReadNode(new VariableNode(varName));
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.WRITE)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.WRITE)) {
 			match(TokenType.WRITE);
 			match(TokenType.LEFTPAR);
 			WriteNode write = new WriteNode(expression());
@@ -378,7 +381,7 @@ public class Parser {
 	public VariableNode variable() {
 		VariableNode var = new VariableNode(lookahead.getLexeme());
 		match(TokenType.ID);
-		if (lookahead!= null && (lookahead.getType() == TokenType.LEFTBRACKET)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.LEFTBRACKET)) {
 			match(TokenType.LEFTBRACKET);
 			expression();
 			match(TokenType.RIGHTBRACKET);
@@ -396,7 +399,7 @@ public class Parser {
 		String procName = lookahead.getLexeme();
 		psNode.setVariable(new VariableNode(procName));
 		match(TokenType.ID);
-		if (lookahead!= null && (lookahead.getType() == TokenType.LEFTPAR)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.LEFTPAR)) {
 			match(TokenType.LEFTPAR);
 			psNode.addAllExpressions(expression_list());
 			match(TokenType.RIGHTPAR);
@@ -411,7 +414,7 @@ public class Parser {
 	public ArrayList<ExpressionNode> expression_list() {
 		ArrayList<ExpressionNode> exList = new ArrayList<>();
 		exList.add(expression());
-		if (lookahead!= null && (lookahead.getType() == TokenType.COMMA)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.COMMA)) {
 			match(TokenType.COMMA);
 			exList.addAll(expression_list());
 		}
@@ -441,12 +444,13 @@ public class Parser {
 	 */
 	public ExpressionNode simple_expression() {
 		ExpressionNode expNode = null;
-		if (lookahead!= null && (lookahead.getType() == TokenType.ID || lookahead.getType() == TokenType.INTEGER
+		if (lookahead != null && (lookahead.getType() == TokenType.ID || lookahead.getType() == TokenType.INTEGER
 				|| lookahead.getType() == TokenType.REAL || lookahead.getType() == TokenType.LEFTPAR
 				|| lookahead.getType() == TokenType.NOT)) {
 			expNode = term();
 			expNode = simple_part(expNode);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.PLUS || lookahead.getType() == TokenType.MINUS)) {
+		} else if (lookahead != null
+				&& (lookahead.getType() == TokenType.PLUS || lookahead.getType() == TokenType.MINUS)) {
 			SignNode uoNode = sign();
 			expNode = term();
 			uoNode.setExpression(simple_part(expNode));
@@ -507,17 +511,17 @@ public class Parser {
 	 */
 	public ExpressionNode factor() {
 		ExpressionNode exper = null;
-		if (lookahead!= null && (lookahead.getType() == TokenType.ID)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.ID)) {
 			String name = lookahead.getLexeme();
 			match(TokenType.ID);
-			if (lookahead!= null && (lookahead.getType() == TokenType.LEFTBRACKET)) {
+			if (lookahead != null && (lookahead.getType() == TokenType.LEFTBRACKET)) {
 				ArrayNode arrNode = new ArrayNode(name);
 				match(TokenType.LEFTBRACKET);
 				ExpressionNode temp = expression();
 				arrNode.setExpNode(temp);
 				match(TokenType.RIGHTBRACKET);
 				return arrNode;
-			} else if (lookahead!= null && (lookahead.getType() == TokenType.LEFTPAR)) {
+			} else if (lookahead != null && (lookahead.getType() == TokenType.LEFTPAR)) {
 				FunctionNode funcNode = new FunctionNode(name);
 				match(TokenType.LEFTPAR);
 				funcNode.setExpNode(expression_list());
@@ -526,20 +530,21 @@ public class Parser {
 			} else {
 				return new VariableNode(name);
 			}
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.INTEGER || lookahead.getType() == TokenType.REAL)) {
+		} else if (lookahead != null
+				&& (lookahead.getType() == TokenType.INTEGER || lookahead.getType() == TokenType.REAL)) {
 			exper = new ValueNode(lookahead.getLexeme());
 
-			if (lookahead!= null && (lookahead.getType() == TokenType.INTEGER)) {
+			if (lookahead != null && (lookahead.getType() == TokenType.INTEGER)) {
 				match(TokenType.INTEGER);
-			} else if (lookahead!= null && (lookahead.getType() == TokenType.REAL)) {
+			} else if (lookahead != null && (lookahead.getType() == TokenType.REAL)) {
 				match(TokenType.REAL);
 			}
 
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.LEFTPAR)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.LEFTPAR)) {
 			match(TokenType.LEFTPAR);
 			exper = expression();
 			match(TokenType.RIGHTPAR);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.NOT)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.NOT)) {
 			SignNode uoNode = new SignNode(TokenType.NOT);
 			match(TokenType.NOT);
 			uoNode.setExpression(factor());
@@ -554,10 +559,10 @@ public class Parser {
 	 */
 	public SignNode sign() {
 		SignNode sig = null;
-		if (lookahead!= null && (lookahead.getType() == TokenType.PLUS)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.PLUS)) {
 			sig = new SignNode(TokenType.PLUS);
 			match(TokenType.PLUS);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.MINUS)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.MINUS)) {
 			sig = new SignNode(TokenType.MINUS);
 			match(TokenType.MINUS);
 		} else
@@ -588,17 +593,17 @@ public class Parser {
 	 * matching the relop and recognizing the token
 	 */
 	public void relop() {
-		if (lookahead!= null && (lookahead.getType() == TokenType.EQUAL)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.EQUAL)) {
 			match(TokenType.EQUAL);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.NOTEQUAL)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.NOTEQUAL)) {
 			match(TokenType.NOTEQUAL);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.LESSTHAN)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.LESSTHAN)) {
 			match(TokenType.LESSTHAN);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.LESSTHANEQ)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.LESSTHANEQ)) {
 			match(TokenType.LESSTHANEQ);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.GREATERTHANEQ)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.GREATERTHANEQ)) {
 			match(TokenType.GREATERTHANEQ);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.GREATERTHAN)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.GREATERTHAN)) {
 			match(TokenType.GREATERTHAN);
 		} else {
 			error("Relop");
@@ -625,11 +630,11 @@ public class Parser {
 	 * matching the addop and recognizing the token
 	 */
 	public void addop() {
-		if (lookahead!= null && (lookahead.getType() == TokenType.PLUS)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.PLUS)) {
 			match(TokenType.PLUS);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.MINUS)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.MINUS)) {
 			match(TokenType.MINUS);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.OR)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.OR)) {
 			match(TokenType.OR);
 		} else {
 			error("Addop");
@@ -657,15 +662,15 @@ public class Parser {
 	 * matching the mulop and recognizing the token
 	 */
 	public void mulop() {
-		if (lookahead!= null && (lookahead.getType() == TokenType.MULTIPLY)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.MULTIPLY)) {
 			match(TokenType.MULTIPLY);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.DIVIDE)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.DIVIDE)) {
 			match(TokenType.DIVIDE);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.DIV)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.DIV)) {
 			match(TokenType.DIV);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.MOD)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.MOD)) {
 			match(TokenType.MOD);
-		} else if (lookahead!= null && (lookahead.getType() == TokenType.AND)) {
+		} else if (lookahead != null && (lookahead.getType() == TokenType.AND)) {
 			match(TokenType.AND);
 		} else {
 			error(" in mulop");
@@ -676,7 +681,7 @@ public class Parser {
 	 * recognizing the assign operator
 	 */
 	public void assignop() {
-		if (lookahead!= null && (lookahead.getType() == TokenType.COLON)) {
+		if (lookahead != null && (lookahead.getType() == TokenType.COLON)) {
 			match(TokenType.COLON);
 			match(TokenType.EQUAL);
 		} else {
@@ -692,7 +697,7 @@ public class Parser {
 	 */
 	public void match(TokenType expected) {
 		// System.out.println("match (" + expected + ")");
-		if (lookahead!= null && (this.lookahead.getType() == expected)) {
+		if (lookahead != null && (this.lookahead.getType() == expected)) {
 			try {
 				this.lookahead = scanner.nextToken();
 				if (this.lookahead == null) {

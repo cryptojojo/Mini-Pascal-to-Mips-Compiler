@@ -20,8 +20,8 @@ public class SubProgramDeclarationsNode extends SyntaxTreeNode {
 		subPList.addAll(aSubProgram);
 	}
 
-	public ArrayList<SubProgramNode> getProcs() {
-		return subPList;
+	public ArrayList<SubProgramNode> getSubProgs() {
+		return this.subPList;
 	}
 
 	/**

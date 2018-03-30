@@ -39,6 +39,10 @@ public class VariableNode extends ExpressionNode {
 		return (this.name);
 	}
 
+	public TokenType getType() {
+		return (this.type);
+	}
+
 	/**
 	 * Returns the name of the variable as the description of this node.
 	 * 

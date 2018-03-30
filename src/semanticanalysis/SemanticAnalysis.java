@@ -32,9 +32,10 @@ public class SemanticAnalysis {
 	}
 
 	private void verifyVarDecs() {
-		// gets all the variables declared with their corresponding types.
-		DeclarationsNode decsNode = progNode.getVariables();
-		ArrayList<VariableNode> decs = decsNode.getDeclarations();
+		// gets variables and statements
+		ArrayList<VariableNode> declarations = progNode.getVariables().getDeclarations();
+		ArrayList<StatementNode> statements = progNode.getMain().getStateNodes();
+		ArrayList<SubProgramNode> subprograms = progNode.getFunctions().getSubProgs();
 
 	}
 
