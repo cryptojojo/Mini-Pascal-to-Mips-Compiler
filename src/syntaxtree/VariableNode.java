@@ -26,6 +26,7 @@ public class VariableNode extends ExpressionNode {
 
 	public VariableNode(String attr, TokenType t) {
 		super(t);
+		this.type = t;
 		this.name = attr;
 	}
 

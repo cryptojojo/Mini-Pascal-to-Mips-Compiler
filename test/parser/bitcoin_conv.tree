@@ -1,8 +1,8 @@
 Program: BitcoinConversion
 |-- Declarations
-|-- --- Name: dollars Type: null
-|-- --- Name: yen Type: null
-|-- --- Name: bitcoins Type: null
+|-- --- Name: dollars Type: INTEGER
+|-- --- Name: yen Type: INTEGER
+|-- --- Name: bitcoins Type: INTEGER
 |-- SubProgramDeclarations
 |-- Compound Statement
 |-- --- Assignment
