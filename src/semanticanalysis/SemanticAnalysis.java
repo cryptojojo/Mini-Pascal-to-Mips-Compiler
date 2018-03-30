@@ -20,12 +20,28 @@ public class SemanticAnalysis {
 
 	}
 
-
 	public ProgramNode analyze() {
 
-
+		verifyVarDecs();
+		assignTypes();
+		verifyTypesMatch();
 
 		return progNode;
+	}
+
+	private void verifyVarDecs() {
+		DeclarationsNode decs = progNode.getVariables();
+
+	}
+
+	private void assignTypes() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void verifyTypesMatch() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

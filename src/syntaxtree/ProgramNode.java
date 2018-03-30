@@ -40,6 +40,13 @@ public class ProgramNode extends SyntaxTreeNode {
 	public void setMain(CompoundStatementNode main) {
 		this.main = main;
 	}
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * Creates a String representation of this program node and its children.
