@@ -408,8 +408,6 @@ public class Parser {
 	public ProcedureNode procedure_statement() {
 		ProcedureNode psNode = new ProcedureNode();
 		String procName = lookahead.getLexeme();
-		if (!allVarNames.contains(procName))
-			allVarNames.add(procName);
 		psNode.setVariable(new VariableNode(procName));
 		match(TokenType.ID);
 		if (lookahead != null && (lookahead.getType() == TokenType.LEFTPAR)) {

@@ -4,10 +4,15 @@ Program: BitcoinConversion
 |-- --- Name: yen (INTEGER)
 |-- --- Name: bitcoins (INTEGER)
 |-- SubProgramDeclarations
+|-- --- SubProgram: getDollars
+|-- --- --- Declarations
+|-- --- --- SubProgramDeclarations
+|-- --- --- Compound Statement
+|-- --- --- --- Assignment
+|-- --- --- --- --- Name: dollars (null)
+|-- --- --- --- --- Value: 100
 |-- Compound Statement
-|-- --- Assignment
-|-- --- --- Name: dollars (null)
-|-- --- --- Value: 1000000
+|-- --- Procedure: getDollars
 |-- --- Assignment
 |-- --- --- Name: yen (null)
 |-- --- --- Operation: MULTIPLY
@@ -16,7 +21,7 @@ Program: BitcoinConversion
 |-- --- Assignment
 |-- --- --- Name: bitcoins (null)
 |-- --- --- Operation: DIVIDE
-|-- --- --- --- Name: potato (null)
+|-- --- --- --- Name: dollars (null)
 |-- --- --- --- Value: 8500
 |-- --- Write
 |-- --- --- Name: dollars (null)

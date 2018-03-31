@@ -40,14 +40,11 @@ public class SemanticAnalysis {
 		// gets an array list of the variable names that were used
 		ArrayList<String> varsUsed = progNode.getAllVarNames();
 
-		for (int i = 0; i < varsUsed.size(); i++)
-		{
+		// checks to see if a variable is used but wasn't declared
+		for (int i = 0; i < varsUsed.size(); i++) {
 			if (!varsDeclared.contains(varsUsed.get(i)))
 				System.out.println("DECLARATION ERROR: The variable '" + varsUsed.get(i) + "' was never declared");
 		}
-
-			System.out.println(varsUsed);
-		System.out.println(varsDeclared);
 
 	}
 

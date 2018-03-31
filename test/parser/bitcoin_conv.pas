@@ -1,9 +1,15 @@
 program BitcoinConversion;
 var dollars, yen, bitcoins : integer;
+
+procedure getDollars;
 begin
-  dollars:= 1000000;
+    dollars := 100;
+end;
+
+begin
+  getDollars;
   yen:= dollars * 102;
-  bitcoins := potato/ 8500;
+  bitcoins := dollars / 8500;
 
   write(dollars);
   write(yen);
