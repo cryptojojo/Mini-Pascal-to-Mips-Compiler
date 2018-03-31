@@ -33,17 +33,17 @@ public class SemanticAnalysis {
 
 	private void verifyVarDecs() {
 		// creates an array list of the variable names that were declared
-		ArrayList<String> varsDeclared = new ArrayList<String>();
+		ArrayList<String> varsDeclaredNames = new ArrayList<String>();
 		for (int i = 0; i < progNode.getVariables().getDeclarations().size(); i++)
-			varsDeclared.add(progNode.getVariables().getDeclarations().get(i).getName());
+			varsDeclaredNames.add(progNode.getVariables().getDeclarations().get(i).getName());
 
 		// gets an array list of the variable names that were used
-		ArrayList<String> varsUsed = progNode.getAllVarNames();
+		ArrayList<String> varsUsedNames = progNode.getAllVarNames();
 
 		// checks to see if a variable is used but wasn't declared
-		for (int i = 0; i < varsUsed.size(); i++) {
-			if (!varsDeclared.contains(varsUsed.get(i)))
-				System.out.println("DECLARATION ERROR: The variable '" + varsUsed.get(i) + "' was never declared");
+		for (int i = 0; i < varsUsedNames.size(); i++) {
+			if (!varsDeclaredNames.contains(varsUsedNames.get(i)))
+				System.out.println("DECLARATION ERROR: The variable '" + varsUsedNames.get(i) + "' was never declared");
 		}
 
 	}
@@ -52,13 +52,11 @@ public class SemanticAnalysis {
 
 		// maybe something like this
 
-		ArrayList<VariableNode> declarations = progNode.getVariables().getDeclarations();
+		ArrayList<VariableNode> varsDeclared = progNode.getVariables().getDeclarations();
+
 		ArrayList<StatementNode> statements = progNode.getMain().getStateNodes();
 		ArrayList<SubProgramNode> subprograms = progNode.getFunctions().getSubProgs();
 
-		
-		
-		
 	}
 
 	private void verifyTypesMatch() {

@@ -38,6 +38,7 @@ public class ValueNode extends ExpressionNode {
 	}
 
 	public void setType(TokenType type) {
+		super.setType(type);
 		this.t = type;
 	}
 

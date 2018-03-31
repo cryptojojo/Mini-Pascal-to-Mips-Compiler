@@ -16,16 +16,16 @@ public class OperationNode extends ExpressionNode {
 	private ExpressionNode right;
 
 	/** The kind of operation. */
-	private TokenType operation;
+	private TokenType opType;
 
 	/**
 	 * Creates an operation node given an operation token.
 	 * 
-	 * @param op
+	 * @param operation
 	 *            The token representing this node's math operation.
 	 */
-	public OperationNode(TokenType op) {
-		this.operation = op;
+	public OperationNode(TokenType opType) {
+		this.opType = opType;
 	}
 
 	// Getters
@@ -37,8 +37,8 @@ public class OperationNode extends ExpressionNode {
 		return (this.right);
 	}
 
-	public TokenType getOperation() {
-		return (this.operation);
+	public TokenType getoperation() {
+		return (this.opType);
 	}
 
 	// Setters
@@ -52,8 +52,9 @@ public class OperationNode extends ExpressionNode {
 		this.right = node;
 	}
 
-	public void setOperation(TokenType op) {
-		this.operation = op;
+	public void setoperation(TokenType opType) {
+		super.setType(opType);
+		this.opType = opType;
 	}
 
 	/**
@@ -63,7 +64,7 @@ public class OperationNode extends ExpressionNode {
 	 */
 	@Override
 	public String toString() {
-		return operation.toString();
+		return opType.toString();
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class OperationNode extends ExpressionNode {
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);
-		answer += "Operation: " + this.operation + " (Expression Type: "+ left.getType() + ")\n";
+		answer += "operation: " + this.opType + " (Expression Type: " + left.getType() + ")\n";
 		answer += left.indentedToString(level + 1);
 		answer += right.indentedToString(level + 1);
 		return (answer);
@@ -87,7 +88,7 @@ public class OperationNode extends ExpressionNode {
 		boolean answer = false;
 		if (o instanceof OperationNode) {
 			OperationNode other = (OperationNode) o;
-			if ((this.operation == other.operation) && this.left.equals(other.left) && this.right.equals(other.right))
+			if ((this.opType == other.opType) && this.left.equals(other.left) && this.right.equals(other.right))
 				answer = true;
 		}
 		return answer;

@@ -15,12 +15,12 @@ Program: BitcoinConversion
 |-- --- Procedure: getDollars
 |-- --- Assignment
 |-- --- --- Name: yen (Expression Type: null)
-|-- --- --- Operation: MULTIPLY (Expression Type: null)
+|-- --- --- operation: MULTIPLY (Expression Type: null)
 |-- --- --- --- Name: dollars (Expression Type: null)
 |-- --- --- --- Value: 102 (Expression Type: null)
 |-- --- Assignment
 |-- --- --- Name: bitcoins (Expression Type: null)
-|-- --- --- Operation: DIVIDE (Expression Type: null)
+|-- --- --- operation: DIVIDE (Expression Type: null)
 |-- --- --- --- Name: dollars (Expression Type: null)
 |-- --- --- --- Value: 8500 (Expression Type: null)
 |-- --- Write

@@ -22,11 +22,11 @@ public class SignNode extends ExpressionNode {
 	}
 
 	public void setExpression(ExpressionNode node) {
-
 		this.exp = node;
 	}
 
 	public void setOperation(TokenType op) {
+		super.setType(oper);
 		this.oper = op;
 	}
 
