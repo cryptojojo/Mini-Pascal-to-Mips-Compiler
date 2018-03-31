@@ -10,7 +10,7 @@ import scanner.TokenType;
 /**
  * Represents a value or number in an expression.
  * 
- * @author Erik Steinmetz
+ * @author Erik Steinmetz, Joseph Miller <miller12 @ augsburg.edu>
  */
 public class ValueNode extends ExpressionNode {
 
@@ -24,7 +24,8 @@ public class ValueNode extends ExpressionNode {
 	 * @param attr
 	 *            The attribute for this value node.
 	 */
-	public ValueNode(String attr) {
+	public ValueNode(String attr, TokenType type) {
+		this.t = type;
 		this.attribute = attr;
 	}
 
@@ -66,7 +67,7 @@ public class ValueNode extends ExpressionNode {
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);
-		answer += "Value: " + this.attribute + " (Expression Type: " + t +  ")\n";
+		answer += "Value: " + this.attribute + " (Expression Type: " + t + ")\n";
 		return answer;
 	}
 

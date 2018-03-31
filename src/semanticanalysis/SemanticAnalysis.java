@@ -54,7 +54,13 @@ public class SemanticAnalysis {
 
 		ArrayList<VariableNode> varsDeclared = progNode.getVariables().getDeclarations();
 
+		
 		ArrayList<StatementNode> statements = progNode.getMain().getStateNodes();
+		
+		
+		for (int i =0; i < statements.size(); i++)
+		System.out.println(statements.get(i).indentedToString(0));
+		
 		ArrayList<SubProgramNode> subprograms = progNode.getFunctions().getSubProgs();
 
 	}

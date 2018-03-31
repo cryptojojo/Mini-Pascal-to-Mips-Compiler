@@ -5,7 +5,7 @@ package syntaxtree;
  * Represents an if statement in Pascal. An if statement includes a boolean
  * expression, and two statements.
  * 
- * @author Erik Steinmetz
+ * @author Erik Steinmetz, Joseph Miller <miller12 @ augsburg.edu>
  */
 public class IfStatementNode extends StatementNode {
 	private ExpressionNode test;

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Represents a Pascal Program
  * 
- * @author Erik Steinmetz
+ * @author Erik Steinmetz, Joseph Miller <miller12 @ augsburg.edu>
  */
 public class ProgramNode extends SyntaxTreeNode {
 

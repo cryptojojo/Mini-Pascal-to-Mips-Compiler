@@ -5,7 +5,7 @@ import scanner.TokenType;
 /**
  * General representation of any expression.
  * 
- * @author erik
+ * @author Erik Steinmetz, Joseph Miller <miller12 @ augsburg.edu>
  */
 public abstract class ExpressionNode extends SyntaxTreeNode {
 

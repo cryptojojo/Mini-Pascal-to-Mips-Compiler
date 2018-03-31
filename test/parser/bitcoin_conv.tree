@@ -10,19 +10,19 @@ Program: BitcoinConversion
 |-- --- --- Compound Statement
 |-- --- --- --- Assignment
 |-- --- --- --- --- Name: dollars (Expression Type: null)
-|-- --- --- --- --- Value: 100 (Expression Type: null)
+|-- --- --- --- --- Value: 100 (Expression Type: INTEGER)
 |-- Compound Statement
 |-- --- Procedure: getDollars
 |-- --- Assignment
 |-- --- --- Name: yen (Expression Type: null)
 |-- --- --- operation: MULTIPLY (Expression Type: null)
 |-- --- --- --- Name: dollars (Expression Type: null)
-|-- --- --- --- Value: 102 (Expression Type: null)
+|-- --- --- --- Value: 102 (Expression Type: INTEGER)
 |-- --- Assignment
 |-- --- --- Name: bitcoins (Expression Type: null)
 |-- --- --- operation: DIVIDE (Expression Type: null)
 |-- --- --- --- Name: dollars (Expression Type: null)
-|-- --- --- --- Value: 8500 (Expression Type: null)
+|-- --- --- --- Value: 8500 (Expression Type: INTEGER)
 |-- --- Write
 |-- --- --- Name: dollars (Expression Type: null)
 |-- --- Write

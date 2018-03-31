@@ -545,7 +545,13 @@ public class Parser {
 			}
 		} else if (lookahead != null
 				&& (lookahead.getType() == TokenType.INTEGER || lookahead.getType() == TokenType.REAL)) {
-			exper = new ValueNode(lookahead.getLexeme());
+
+			System.out.println(lookahead.getType());
+			
+			if (lookahead.getLexeme().contains("."))
+				exper = new ValueNode(lookahead.getLexeme(), TokenType.REAL);
+			else
+				exper = new ValueNode(lookahead.getLexeme(), TokenType.INTEGER);
 
 			if (lookahead != null && (lookahead.getType() == TokenType.INTEGER)) {
 				match(TokenType.INTEGER);

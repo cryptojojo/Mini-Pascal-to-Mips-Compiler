@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Represents a collection of subprogram declarations.
  * 
- * @author Erik Steinmetz
+ * @author Erik Steinmetz, Joseph Miller <miller12 @ augsburg.edu>
  */
 public class SubProgramDeclarationsNode extends SyntaxTreeNode {
 

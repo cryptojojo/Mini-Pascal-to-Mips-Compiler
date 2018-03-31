@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Represents a set of declarations in a Pascal program.
  * 
- * @author Erik Steinmetz
+ * @author Erik Steinmetz, Joseph Miller <miller12 @ augsburg.edu>
  */
 public class DeclarationsNode extends SyntaxTreeNode {
 

@@ -4,7 +4,7 @@ package syntaxtree;
 /**
  * Represents a single assignment statement.
  * 
- * @author Erik Steinmetz
+ * @author Erik Steinmetz, Joseph Miller <miller12 @ augsburg.edu>
  */
 public class AssignmentStatementNode extends StatementNode {
 

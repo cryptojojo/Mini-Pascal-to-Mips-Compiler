@@ -6,7 +6,7 @@ import scanner.TokenType;
 /**
  * Represents a variable in the syntax tree.
  * 
- * @author Erik Steinmetz
+ * @author Erik Steinmetz, Joseph Miller <miller12 @ augsburg.edu>
  */
 public class VariableNode extends ExpressionNode {
 

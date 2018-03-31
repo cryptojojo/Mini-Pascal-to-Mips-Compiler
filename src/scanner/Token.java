@@ -171,7 +171,7 @@ public class Token {
 		} else if (og == 4) {
 			set = TokenType.INTEGER;
 		} else if (og == 5) {
-			set = TokenType.FLOAT;
+			set = TokenType.REAL;
 		} else if (og == 6) {
 			set = TokenType.POSEXP;
 		} else if (og == 7) {
