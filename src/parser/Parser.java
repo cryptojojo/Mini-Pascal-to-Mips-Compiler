@@ -20,6 +20,7 @@ import syntaxtree.*;
 public class Parser {
 
 	SymbolTable symTab = new SymbolTable();
+	ArrayList<String> allVarNames = new ArrayList<String>();
 
 	// Instance Variables
 	private Token lookahead;
@@ -86,6 +87,8 @@ public class Parser {
 		progNode.setMain(compoundStatement);
 		progNode.setFunctions(subProgramDeclarations);
 
+		progNode.setAllVarNames(allVarNames);
+
 		return progNode; // if it makes it this far, it is a pascal program
 
 	}
@@ -123,6 +126,9 @@ public class Parser {
 			TokenType t = type(identList);
 			for (String ident : identList) {
 				decNode.addVariable(new VariableNode(ident, t));
+
+				if (!allVarNames.contains(ident))
+					allVarNames.add(ident);
 			}
 			match(TokenType.SEMI);
 			decNode.addDeclarations(declarations());
@@ -359,6 +365,8 @@ public class Parser {
 			String varName = lookahead.getLexeme();
 			match(TokenType.ID);
 			match(TokenType.RIGHTPAR);
+			if (!allVarNames.contains(varName))
+				allVarNames.add(varName);
 			return new ReadNode(new VariableNode(varName));
 		} else if (lookahead != null && (lookahead.getType() == TokenType.WRITE)) {
 			match(TokenType.WRITE);
@@ -387,6 +395,9 @@ public class Parser {
 			match(TokenType.RIGHTBRACKET);
 		}
 		// else lambda case
+
+		if (!allVarNames.contains(var.getName()))
+			allVarNames.add(var.getName());
 		return var;
 	}
 
@@ -397,6 +408,8 @@ public class Parser {
 	public ProcedureNode procedure_statement() {
 		ProcedureNode psNode = new ProcedureNode();
 		String procName = lookahead.getLexeme();
+		if (!allVarNames.contains(procName))
+			allVarNames.add(procName);
 		psNode.setVariable(new VariableNode(procName));
 		match(TokenType.ID);
 		if (lookahead != null && (lookahead.getType() == TokenType.LEFTPAR)) {
@@ -528,6 +541,8 @@ public class Parser {
 				match(TokenType.RIGHTPAR);
 				return funcNode;
 			} else {
+				if (!allVarNames.contains(name))
+					allVarNames.add(name);
 				return new VariableNode(name);
 			}
 		} else if (lookahead != null

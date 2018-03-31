@@ -5,6 +5,8 @@
  */
 package syntaxtree;
 
+import scanner.TokenType;
+
 /**
  * Represents a value or number in an expression.
  * 
@@ -14,6 +16,7 @@ public class ValueNode extends ExpressionNode {
 
 	/** The attribute associated with this node. */
 	String attribute;
+	TokenType t;
 
 	/**
 	 * Creates a ValueNode with the given attribute.
@@ -68,4 +71,5 @@ public class ValueNode extends ExpressionNode {
 		}
 		return answer;
 	}
+
 }

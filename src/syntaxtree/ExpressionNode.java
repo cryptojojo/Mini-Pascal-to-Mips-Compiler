@@ -15,12 +15,12 @@ public abstract class ExpressionNode extends SyntaxTreeNode {
 		type = null;
 	}
 
-	public ExpressionNode(TokenType t) {
-		this.type = t;
+	public ExpressionNode(TokenType type) {
+		this.type = type;
 	}
 
-	public void setType(TokenType t) {
-		this.type = t;
+	public void setType(TokenType type) {
+		this.type = type;
 	}
 
 	public TokenType getType() {

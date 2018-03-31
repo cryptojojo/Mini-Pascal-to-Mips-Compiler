@@ -1,6 +1,8 @@
 
 package syntaxtree;
 
+import java.util.ArrayList;
+
 /**
  * Represents a Pascal Program
  * 
@@ -12,6 +14,8 @@ public class ProgramNode extends SyntaxTreeNode {
 	private DeclarationsNode variables;
 	private SubProgramDeclarationsNode functions;
 	private CompoundStatementNode main;
+
+	private ArrayList<String> allVarNames;
 
 	public ProgramNode(String aName) {
 		this.name = aName;
@@ -40,13 +44,14 @@ public class ProgramNode extends SyntaxTreeNode {
 	public void setMain(CompoundStatementNode main) {
 		this.main = main;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	public void setAllVarNames(ArrayList<String> allVarNames) {
+		this.allVarNames = allVarNames;
+	}
+
+	public ArrayList<String> getAllVarNames() {
+		return this.allVarNames;
+	}
 
 	/**
 	 * Creates a String representation of this program node and its children.
@@ -64,4 +69,5 @@ public class ProgramNode extends SyntaxTreeNode {
 		answer += main.indentedToString(level + 1);
 		return answer;
 	}
+
 }

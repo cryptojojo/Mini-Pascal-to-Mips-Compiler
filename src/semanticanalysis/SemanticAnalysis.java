@@ -32,15 +32,32 @@ public class SemanticAnalysis {
 	}
 
 	private void verifyVarDecs() {
-		// gets variables and statements
-		ArrayList<VariableNode> declarations = progNode.getVariables().getDeclarations();
-		ArrayList<StatementNode> statements = progNode.getMain().getStateNodes();
-		ArrayList<SubProgramNode> subprograms = progNode.getFunctions().getSubProgs();
+		// creates an array list of the variable names that were declared
+		ArrayList<String> varsDeclared = new ArrayList<String>();
+		for (int i = 0; i < progNode.getVariables().getDeclarations().size(); i++)
+			varsDeclared.add(progNode.getVariables().getDeclarations().get(i).getName());
+
+		// gets an array list of the variable names that were used
+		ArrayList<String> varsUsed = progNode.getAllVarNames();
+
+		for (int i = 0; i < varsUsed.size(); i++)
+		{
+			if (!varsDeclared.contains(varsUsed.get(i)))
+				System.out.println("DECLARATION ERROR: The variable '" + varsUsed.get(i) + "' was never declared");
+		}
+
+			System.out.println(varsUsed);
+		System.out.println(varsDeclared);
 
 	}
 
 	private void assignTypes() {
-		// TODO Auto-generated method stub
+
+		// maybe something like this
+
+		ArrayList<VariableNode> declarations = progNode.getVariables().getDeclarations();
+		ArrayList<StatementNode> statements = progNode.getMain().getStateNodes();
+		ArrayList<SubProgramNode> subprograms = progNode.getFunctions().getSubProgs();
 
 	}
 
