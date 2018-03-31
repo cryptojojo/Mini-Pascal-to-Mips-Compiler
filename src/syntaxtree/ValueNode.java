@@ -37,6 +37,14 @@ public class ValueNode extends ExpressionNode {
 		return (this.attribute);
 	}
 
+	public void setType(TokenType type) {
+		this.t = type;
+	}
+
+	public TokenType getType() {
+		return this.t;
+	}
+
 	/**
 	 * Returns the attribute as the description of this node.
 	 * 
@@ -57,7 +65,7 @@ public class ValueNode extends ExpressionNode {
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);
-		answer += "Value: " + this.attribute + "\n";
+		answer += "Value: " + this.attribute + " (Expression Type: " + t +  ")\n";
 		return answer;
 	}
 

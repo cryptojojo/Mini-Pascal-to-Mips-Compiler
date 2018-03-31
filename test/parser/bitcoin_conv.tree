@@ -1,34 +1,34 @@
 Program: BitcoinConversion
 |-- Declarations
-|-- --- Name: dollars (INTEGER)
-|-- --- Name: yen (INTEGER)
-|-- --- Name: bitcoins (INTEGER)
+|-- --- Name: dollars (Expression Type: INTEGER)
+|-- --- Name: yen (Expression Type: INTEGER)
+|-- --- Name: bitcoins (Expression Type: INTEGER)
 |-- SubProgramDeclarations
 |-- --- SubProgram: getDollars
 |-- --- --- Declarations
 |-- --- --- SubProgramDeclarations
 |-- --- --- Compound Statement
 |-- --- --- --- Assignment
-|-- --- --- --- --- Name: dollars (null)
-|-- --- --- --- --- Value: 100
+|-- --- --- --- --- Name: dollars (Expression Type: null)
+|-- --- --- --- --- Value: 100 (Expression Type: null)
 |-- Compound Statement
 |-- --- Procedure: getDollars
 |-- --- Assignment
-|-- --- --- Name: yen (null)
-|-- --- --- Operation: MULTIPLY
-|-- --- --- --- Name: dollars (null)
-|-- --- --- --- Value: 102
+|-- --- --- Name: yen (Expression Type: null)
+|-- --- --- Operation: MULTIPLY (Expression Type: null)
+|-- --- --- --- Name: dollars (Expression Type: null)
+|-- --- --- --- Value: 102 (Expression Type: null)
 |-- --- Assignment
-|-- --- --- Name: bitcoins (null)
-|-- --- --- Operation: DIVIDE
-|-- --- --- --- Name: dollars (null)
-|-- --- --- --- Value: 8500
+|-- --- --- Name: bitcoins (Expression Type: null)
+|-- --- --- Operation: DIVIDE (Expression Type: null)
+|-- --- --- --- Name: dollars (Expression Type: null)
+|-- --- --- --- Value: 8500 (Expression Type: null)
 |-- --- Write
-|-- --- --- Name: dollars (null)
+|-- --- --- Name: dollars (Expression Type: null)
 |-- --- Write
-|-- --- --- Name: yen (null)
+|-- --- --- Name: yen (Expression Type: null)
 |-- --- Write
-|-- --- --- Name: bitcoins (null)
+|-- --- --- Name: bitcoins (Expression Type: null)
 |-- --- Write
-|-- --- --- Name: potato (null)
+|-- --- --- Name: potato (Expression Type: null)
 

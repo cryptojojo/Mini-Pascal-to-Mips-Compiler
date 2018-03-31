@@ -25,7 +25,7 @@ public class SemanticAnalysis {
 	public ProgramNode analyze() {
 
 		verifyVarDecs();
-		assignTypes();
+		assignExpTypes();
 		verifyTypesMatch();
 
 		return progNode;
@@ -48,7 +48,7 @@ public class SemanticAnalysis {
 
 	}
 
-	private void assignTypes() {
+	private void assignExpTypes() {
 
 		// maybe something like this
 
@@ -56,6 +56,9 @@ public class SemanticAnalysis {
 		ArrayList<StatementNode> statements = progNode.getMain().getStateNodes();
 		ArrayList<SubProgramNode> subprograms = progNode.getFunctions().getSubProgs();
 
+		
+		
+		
 	}
 
 	private void verifyTypesMatch() {

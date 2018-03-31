@@ -24,10 +24,15 @@ public class VariableNode extends ExpressionNode {
 		this.name = attr;
 	}
 
-	public VariableNode(String attr, TokenType t) {
-		super(t);
-		this.type = t;
+	public VariableNode(String attr, TokenType type) {
+		this.type = type;
 		this.name = attr;
+		super.setType(type);
+	}
+
+	public void setType(TokenType type) {
+		this.type = type;
+		super.setType(type);
 	}
 
 	/**
@@ -63,7 +68,7 @@ public class VariableNode extends ExpressionNode {
 	@Override
 	public String indentedToString(int level) {
 		String answer = this.indentation(level);
-		answer += "Name: " + this.name + " (" + this.type + ")\n";
+		answer += "Name: " + this.name + " (Expression Type: " + this.type + ")\n";
 		return answer;
 	}
 
