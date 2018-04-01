@@ -2,6 +2,7 @@ package semanticanalysis;
 
 import java.util.ArrayList;
 
+import parser.SymbolTable;
 import scanner.TokenType;
 import syntaxtree.*;
 
@@ -15,10 +16,12 @@ import syntaxtree.*;
  */
 public class SemanticAnalysis {
 
-	ProgramNode progNode = null;
+	private ProgramNode progNode = null;
+	private SymbolTable symTab = null;
 
-	public SemanticAnalysis(ProgramNode progNode) {
+	public SemanticAnalysis(ProgramNode progNode, SymbolTable symTab) {
 		this.progNode = progNode;
+		this.symTab = symTab;
 
 	}
 
@@ -54,13 +57,11 @@ public class SemanticAnalysis {
 
 		ArrayList<VariableNode> varsDeclared = progNode.getVariables().getDeclarations();
 
-		
 		ArrayList<StatementNode> statements = progNode.getMain().getStateNodes();
-		
-		
-		for (int i =0; i < statements.size(); i++)
-		System.out.println(statements.get(i).indentedToString(0));
-		
+
+		// for (int i = 0; i < statements.size(); i++)
+		// System.out.println(statements.get(i).indentedToString(0));
+
 		ArrayList<SubProgramNode> subprograms = progNode.getFunctions().getSubProgs();
 
 	}

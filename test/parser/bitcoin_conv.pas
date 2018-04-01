@@ -9,7 +9,7 @@ end;
 begin
   getDollars;
   yen:= dollars * 102;
-  bitcoins := dollars / 8500;
+  bitcoins := dollars / 85.00;
 
   write(dollars);
   write(yen);

@@ -31,7 +31,7 @@ public class CompilerMain {
 		ProgramNode progNode = parse.program();
 
 		// creates semantic analysis object given the program node
-		semAnalysis = new SemanticAnalysis(progNode);
+		semAnalysis = new SemanticAnalysis(progNode, parse.getSymbolTable());
 
 		// semantic analysis is analyzed and put into a string
 		String parseTree = semAnalysis.analyze().indentedToString(0);

@@ -22,7 +22,7 @@ Program: BitcoinConversion
 |-- --- --- Name: bitcoins (Expression Type: null)
 |-- --- --- operation: DIVIDE (Expression Type: null)
 |-- --- --- --- Name: dollars (Expression Type: null)
-|-- --- --- --- Value: 8500 (Expression Type: INTEGER)
+|-- --- --- --- Value: 85.00 (Expression Type: REAL)
 |-- --- Write
 |-- --- --- Name: dollars (Expression Type: null)
 |-- --- Write

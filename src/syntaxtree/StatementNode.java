@@ -8,6 +8,4 @@ package syntaxtree;
  */
 public abstract class StatementNode extends SyntaxTreeNode {
 
-	
-	
 }

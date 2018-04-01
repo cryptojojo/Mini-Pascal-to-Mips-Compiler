@@ -8,6 +8,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 
 import scanner.*;
+import semanticanalysis.SemanticAnalysis;
 import syntaxtree.*;
 
 /**
@@ -20,6 +21,9 @@ import syntaxtree.*;
 public class Parser {
 
 	SymbolTable symTab = new SymbolTable();
+	
+
+	
 	ArrayList<String> allVarNames = new ArrayList<String>();
 
 	// Instance Variables
@@ -79,6 +83,9 @@ public class Parser {
 		symTab.addProgramName(lexi);
 		match(TokenType.SEMI);
 		DeclarationsNode declarations = declarations();
+		
+
+		
 		SubProgramDeclarationsNode subProgramDeclarations = subprogram_declarations();
 		CompoundStatementNode compoundStatement = compound_statement();
 		match(TokenType.PERIOD);
@@ -546,8 +553,6 @@ public class Parser {
 		} else if (lookahead != null
 				&& (lookahead.getType() == TokenType.INTEGER || lookahead.getType() == TokenType.REAL)) {
 
-			System.out.println(lookahead.getType());
-			
 			if (lookahead.getLexeme().contains("."))
 				exper = new ValueNode(lookahead.getLexeme(), TokenType.REAL);
 			else
@@ -737,6 +742,10 @@ public class Parser {
 	 */
 	public String getSymbolTableStr() {
 		return symTab.toString();
+	}
+	
+	public SymbolTable getSymbolTable() {
+		return symTab;
 	}
 
 	/**
