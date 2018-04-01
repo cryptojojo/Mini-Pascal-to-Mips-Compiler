@@ -64,8 +64,32 @@ public class SemanticAnalysis {
 
 	private void setExpTypes(CompoundStatementNode compStatNode) {
 
-		
-		
+		ArrayList<StatementNode> statementList = compStatNode.getStateNodes();
+		for (StatementNode currentStat : statementList) {
+			if (currentStat instanceof AssignmentStatementNode) {
+
+			}
+			if (currentStat instanceof WhileStatementNode) {
+
+			}
+			if (currentStat instanceof ProcedureNode) {
+
+			}
+			if (currentStat instanceof IfStatementNode) {
+
+			}
+			if (currentStat instanceof CompoundStatementNode) {
+
+			}
+			if (currentStat instanceof WriteNode) {
+
+			}
+			if (currentStat instanceof ReadNode) {
+
+			}
+
+		}
+
 	}
 
 	private void verifyTypesMatch() {
