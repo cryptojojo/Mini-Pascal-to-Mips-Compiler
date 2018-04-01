@@ -28,6 +28,12 @@ public class SemanticAnalysis {
 
 	}
 
+	/**
+	 * function called by main, organizing/executing semantic analysis, also puts
+	 * declared variables with their types into a hashmap
+	 * 
+	 * @return the program node after its gone through semantic analysis
+	 */
 	public ProgramNode analyze() {
 
 		// Puts declared variables in a hashmap with their types so that the type can be
@@ -44,6 +50,10 @@ public class SemanticAnalysis {
 		return progNode;
 	}
 
+	/**
+	 * verifies that all variable in the program are declared before use, yields an
+	 * error to console when one has not been declared but doesn't stop compilation
+	 */
 	private void verifyVarDecs() {
 
 		// creates an array list of the variable names that were declared
@@ -62,6 +72,10 @@ public class SemanticAnalysis {
 
 	}
 
+	/**
+	 * gets the compound statement nodes from the main program and the subdeclartion
+	 * node and sends them to setExpTypes so their expressions can be assigned types
+	 */
 	private void assignExpTypes() {
 
 		CompoundStatementNode mainCompStatNode = progNode.getMain();
@@ -74,6 +88,12 @@ public class SemanticAnalysis {
 
 	}
 
+	/**
+	 * parses through the statements and assigns a type (real or integer) to each
+	 * expression
+	 * 
+	 * @param compStatNode
+	 */
 	private void setExpTypes(CompoundStatementNode compStatNode) {
 
 		ArrayList<StatementNode> statementList = compStatNode.getStateNodes();
