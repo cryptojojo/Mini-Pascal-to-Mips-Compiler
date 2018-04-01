@@ -121,13 +121,26 @@ public class SemanticAnalysis {
 
 	private void setExpTypes(ExpressionNode expNode) {
 
+		
 	}
 
-	private void getLNode() {
+	private ExpressionNode getLNode(ExpressionNode expNode) {
+		ExpressionNode ans = null;
+
+		if (expNode instanceof OperationNode)
+			ans = ((OperationNode) expNode).getLeft();
+
+		return ans;
 
 	}
 
-	private void getRNode() {
+	private ExpressionNode getRNode(ExpressionNode expNode) {
+		ExpressionNode ans = null;
+
+		if (expNode instanceof OperationNode)
+			ans = ((OperationNode) expNode).getRight();
+
+		return ans;
 
 	}
 
