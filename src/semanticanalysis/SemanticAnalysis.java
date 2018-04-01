@@ -121,9 +121,53 @@ public class SemanticAnalysis {
 
 	private void setExpTypes(ExpressionNode expNode) {
 
+		if (expNode instanceof ValueNode && expNode.getType() == null)
+			setVarVal(expNode);
+
+		if (getLNode(expNode) instanceof OperationNode)
+			setExpTypes(getLNode(expNode));
+		else if (getLNode(expNode) instanceof VariableNode || getLNode(expNode) instanceof ValueNode)
+			setVarVal(getLNode(expNode));
+
+		if (getRNode(expNode) instanceof OperationNode)
+			setExpTypes(getRNode(expNode));
+		else if (getRNode(expNode) instanceof VariableNode || getRNode(expNode) instanceof ValueNode)
+			setVarVal(getRNode(expNode));
+
+		if (expNode instanceof OperationNode) {
+
+			// if one is a real number the expression should be real, only if both are
+			// integer should the expression be integer
+			if (getLNode(expNode).getType() == TokenType.REAL || getRNode(expNode).getType() == TokenType.REAL)
+				expNode.setType(TokenType.REAL);
+			else
+				expNode.setType(TokenType.INTEGER);
+
+		}
+
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	private void setVarVal(ExpressionNode expressionNode) {
 		
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private ExpressionNode getLNode(ExpressionNode expNode) {
 		ExpressionNode ans = null;
 
