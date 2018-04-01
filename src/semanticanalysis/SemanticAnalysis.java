@@ -29,8 +29,9 @@ public class SemanticAnalysis {
 	}
 
 	/**
-	 * function called by main, organizing/executing semantic analysis, also puts
-	 * declared variables with their types into a hashmap
+	 * function called by main, organizing/executing semantic analysis, puts
+	 * declared variables with their types into a hashmap, and gets the compound
+	 * statements so their expressions can be given types
 	 * 
 	 * @return the program node after its gone through semantic analysis
 	 */
@@ -44,7 +45,17 @@ public class SemanticAnalysis {
 		}
 
 		verifyVarDecs();
-		assignExpTypes();
+
+		// gets the compound statement nodes from the main program and the subdeclartion
+		// node and sends them to setExpTypes so their expressions can be assigned types
+		CompoundStatementNode mainCompStatNode = progNode.getMain();
+		assignExpTypes(mainCompStatNode);
+
+		for (int i = 0; i < progNode.getFunctions().getSubProgs().size(); i++) {
+			CompoundStatementNode subCompStatNode = progNode.getFunctions().getSubProgs().get(i).getMain();
+			assignExpTypes(subCompStatNode);
+		}
+
 		verifyTypesMatch();
 
 		return progNode;
@@ -73,28 +84,12 @@ public class SemanticAnalysis {
 	}
 
 	/**
-	 * gets the compound statement nodes from the main program and the subdeclartion
-	 * node and sends them to setExpTypes so their expressions can be assigned types
-	 */
-	private void assignExpTypes() {
-
-		CompoundStatementNode mainCompStatNode = progNode.getMain();
-		setExpTypes(mainCompStatNode);
-
-		for (int i = 0; i < progNode.getFunctions().getSubProgs().size(); i++) {
-			CompoundStatementNode subCompStatNode = progNode.getFunctions().getSubProgs().get(i).getMain();
-			setExpTypes(subCompStatNode);
-		}
-
-	}
-
-	/**
 	 * parses through the statements and assigns a type (real or integer) to each
 	 * expression
 	 * 
 	 * @param compStatNode
 	 */
-	private void setExpTypes(CompoundStatementNode compStatNode) {
+	private void assignExpTypes(CompoundStatementNode compStatNode) {
 
 		ArrayList<StatementNode> statementList = compStatNode.getStateNodes();
 		for (StatementNode currentStat : statementList) {
@@ -121,6 +116,18 @@ public class SemanticAnalysis {
 			}
 
 		}
+
+	}
+
+	private void setExpTypes(ExpressionNode expNode) {
+
+	}
+
+	private void getLNode() {
+
+	}
+
+	private void getRNode() {
 
 	}
 
