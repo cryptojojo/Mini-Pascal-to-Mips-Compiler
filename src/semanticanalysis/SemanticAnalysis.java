@@ -1,8 +1,11 @@
 package semanticanalysis;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import parser.SymbolTable;
+import parser.SymbolType;
+import scanner.TokenType;
 import syntaxtree.*;
 
 /**
@@ -17,6 +20,7 @@ public class SemanticAnalysis {
 
 	private ProgramNode progNode = null;
 	private SymbolTable symTab = null;
+	private HashMap<String, TokenType> varTypes = new HashMap<String, TokenType>();
 
 	public SemanticAnalysis(ProgramNode progNode, SymbolTable symTab) {
 		this.progNode = progNode;
@@ -26,6 +30,13 @@ public class SemanticAnalysis {
 
 	public ProgramNode analyze() {
 
+		// Puts declared variables in a hashmap with their types so that the type can be
+		// easily accessed when setting types to expressions
+		ArrayList<VariableNode> varNodes = progNode.getVariables().getDeclarations();
+		for (int i = 0; i < varNodes.size(); i++) {
+			varTypes.put(varNodes.get(i).getName(), varNodes.get(i).getType());
+		}
+
 		verifyVarDecs();
 		assignExpTypes();
 		verifyTypesMatch();
@@ -34,6 +45,7 @@ public class SemanticAnalysis {
 	}
 
 	private void verifyVarDecs() {
+
 		// creates an array list of the variable names that were declared
 		ArrayList<String> varsDeclaredNames = new ArrayList<String>();
 		for (int i = 0; i < progNode.getVariables().getDeclarations().size(); i++)
@@ -56,7 +68,7 @@ public class SemanticAnalysis {
 		setExpTypes(mainCompStatNode);
 
 		for (int i = 0; i < progNode.getFunctions().getSubProgs().size(); i++) {
-			CompoundStatementNode subCompStatNode = progNode.getFunctions().getSubProgs().get(8).getMain();
+			CompoundStatementNode subCompStatNode = progNode.getFunctions().getSubProgs().get(i).getMain();
 			setExpTypes(subCompStatNode);
 		}
 
