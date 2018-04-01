@@ -3,7 +3,6 @@ package semanticanalysis;
 import java.util.ArrayList;
 
 import parser.SymbolTable;
-import scanner.TokenType;
 import syntaxtree.*;
 
 /**
@@ -53,17 +52,20 @@ public class SemanticAnalysis {
 
 	private void assignExpTypes() {
 
-		// maybe something like this
+		CompoundStatementNode mainCompStatNode = progNode.getMain();
+		setExpTypes(mainCompStatNode);
 
-		ArrayList<VariableNode> varsDeclared = progNode.getVariables().getDeclarations();
+		for (int i = 0; i < progNode.getFunctions().getSubProgs().size(); i++) {
+			CompoundStatementNode subCompStatNode = progNode.getFunctions().getSubProgs().get(8).getMain();
+			setExpTypes(subCompStatNode);
+		}
 
-		ArrayList<StatementNode> statements = progNode.getMain().getStateNodes();
+	}
 
-		// for (int i = 0; i < statements.size(); i++)
-		// System.out.println(statements.get(i).indentedToString(0));
+	private void setExpTypes(CompoundStatementNode compStatNode) {
 
-		ArrayList<SubProgramNode> subprograms = progNode.getFunctions().getSubProgs();
-
+		
+		
 	}
 
 	private void verifyTypesMatch() {

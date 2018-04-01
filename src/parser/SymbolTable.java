@@ -2,6 +2,8 @@ package parser;
 
 import java.util.HashMap;
 
+import scanner.TokenType;
+
 /**
  * the symbol table for putting all identifiers in to check later regarding
  * their type
@@ -207,5 +209,7 @@ public class SymbolTable {
 		return symTableString;
 
 	}
+
+
 
 }
