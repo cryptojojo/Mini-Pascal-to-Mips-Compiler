@@ -93,16 +93,21 @@ public class SemanticAnalysisTest {
 		semAnalysis = new SemanticAnalysis(parse.program(), parse.getSymbolTable());
 		parseTree = semAnalysis.analyze().indentedToString(0);
 
-		System.out.println(parseTree);
-
-		expectedResult = "Program: ifVar\n" + "|-- Declarations\n" + "|-- --- Name: a\n" + "|-- --- Name: b\n"
-				+ "|-- --- Name: c\n" + "|-- --- Name: d\n" + "|-- SubProgramDeclarations\n"
-				+ "|-- Compound Statement\n" + "|-- --- Assignment\n" + "|-- --- --- Name: a\n"
-				+ "|-- --- --- Value: 4\n" + "|-- --- Assignment\n" + "|-- --- --- Name: b\n" + "|-- --- --- Value: 5\n"
-				+ "|-- --- If\n" + "|-- --- --- Operation: LESSTHAN\n" + "|-- --- --- --- Name: a\n"
-				+ "|-- --- --- --- Name: b\n" + "|-- --- --- Assignment\n" + "|-- --- --- --- Name: a\n"
-				+ "|-- --- --- --- Value: 1\n" + "|-- --- --- Assignment\n" + "|-- --- --- --- Name: b\n"
-				+ "|-- --- --- --- Value: 2\n" + "";
+		expectedResult = "Program: ifVar\n" + "|-- Declarations\n" + "|-- --- Name: a (Expression Type: INTEGER)\n"
+				+ "|-- --- Name: b (Expression Type: INTEGER)\n" + "|-- --- Name: c (Expression Type: INTEGER)\n"
+				+ "|-- --- Name: d (Expression Type: INTEGER)\n" + "|-- SubProgramDeclarations\n"
+				+ "|-- Compound Statement\n" + "|-- --- Assignment\n"
+				+ "|-- --- --- Name: a (Expression Type: INTEGER)\n"
+				+ "|-- --- --- Value: 4 (Expression Type: INTEGER)\n" + "|-- --- Assignment\n"
+				+ "|-- --- --- Name: b (Expression Type: INTEGER)\n"
+				+ "|-- --- --- Value: 5 (Expression Type: INTEGER)\n" + "|-- --- If\n"
+				+ "|-- --- --- operation: LESSTHAN (Expression Type: INTEGER)\n"
+				+ "|-- --- --- --- Name: a (Expression Type: INTEGER)\n"
+				+ "|-- --- --- --- Name: b (Expression Type: INTEGER)\n" + "|-- --- --- Assignment\n"
+				+ "|-- --- --- --- Name: a (Expression Type: INTEGER)\n"
+				+ "|-- --- --- --- Value: 1 (Expression Type: INTEGER)\n" + "|-- --- --- Assignment\n"
+				+ "|-- --- --- --- Name: b (Expression Type: INTEGER)\n"
+				+ "|-- --- --- --- Value: 2 (Expression Type: INTEGER)\n" + "";
 
 		assertEquals(expectedResult, parseTree);
 
@@ -115,14 +120,21 @@ public class SemanticAnalysisTest {
 
 		System.out.println(parseTree);
 
-		expectedResult = "Program: ifNum\n" + "|-- Declarations\n" + "|-- --- Name: a\n" + "|-- --- Name: b\n"
-				+ "|-- --- Name: c\n" + "|-- --- Name: d\n" + "|-- SubProgramDeclarations\n"
-				+ "|-- Compound Statement\n" + "|-- --- Assignment\n" + "|-- --- --- Name: a\n"
-				+ "|-- --- --- Value: 4\n" + "|-- --- Assignment\n" + "|-- --- --- Name: b\n" + "|-- --- --- Value: 5\n"
-				+ "|-- --- If\n" + "|-- --- --- Operation: LESSTHAN\n" + "|-- --- --- --- Name: a\n"
-				+ "|-- --- --- --- Value: 10\n" + "|-- --- --- Assignment\n" + "|-- --- --- --- Name: a\n"
-				+ "|-- --- --- --- Value: 1\n" + "|-- --- --- Assignment\n" + "|-- --- --- --- Name: b\n"
-				+ "|-- --- --- --- Value: 2\n" + "";
+		expectedResult = "Program: ifNum\n" + "|-- Declarations\n" + "|-- --- Name: a (Expression Type: INTEGER)\n"
+				+ "|-- --- Name: b (Expression Type: INTEGER)\n" + "|-- --- Name: c (Expression Type: INTEGER)\n"
+				+ "|-- --- Name: d (Expression Type: INTEGER)\n" + "|-- SubProgramDeclarations\n"
+				+ "|-- Compound Statement\n" + "|-- --- Assignment\n"
+				+ "|-- --- --- Name: a (Expression Type: INTEGER)\n"
+				+ "|-- --- --- Value: 4 (Expression Type: INTEGER)\n" + "|-- --- Assignment\n"
+				+ "|-- --- --- Name: b (Expression Type: INTEGER)\n"
+				+ "|-- --- --- Value: 5 (Expression Type: INTEGER)\n" + "|-- --- If\n"
+				+ "|-- --- --- operation: LESSTHAN (Expression Type: INTEGER)\n"
+				+ "|-- --- --- --- Name: a (Expression Type: INTEGER)\n"
+				+ "|-- --- --- --- Value: 10 (Expression Type: INTEGER)\n" + "|-- --- --- Assignment\n"
+				+ "|-- --- --- --- Name: a (Expression Type: INTEGER)\n"
+				+ "|-- --- --- --- Value: 1 (Expression Type: INTEGER)\n" + "|-- --- --- Assignment\n"
+				+ "|-- --- --- --- Name: b (Expression Type: INTEGER)\n"
+				+ "|-- --- --- --- Value: 2 (Expression Type: INTEGER)\n" + "";
 
 		assertEquals(expectedResult, parseTree);
 
