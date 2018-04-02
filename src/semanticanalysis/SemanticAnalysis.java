@@ -95,6 +95,7 @@ public class SemanticAnalysis {
 		for (StatementNode currentStat : statementList) {
 			if (currentStat instanceof AssignmentStatementNode) {
 				setExpTypes(((AssignmentStatementNode) currentStat).getExpression());
+
 				if ((varTypes.get(((AssignmentStatementNode) currentStat).getLvalue().getName()) != null))
 					((AssignmentStatementNode) currentStat).getLvalue()
 							.setType(varTypes.get(((AssignmentStatementNode) currentStat).getLvalue().getName()));
@@ -111,13 +112,22 @@ public class SemanticAnalysis {
 
 			} else if (currentStat instanceof IfStatementNode) {
 
+				setExpTypes(((IfStatementNode) currentStat).getTest());
+
 			} else if (currentStat instanceof CompoundStatementNode) {
 
 				assignExpTypes(((CompoundStatementNode) currentStat));
 
 			} else if (currentStat instanceof WriteNode) {
 
-				setExpTypes(((WriteNode) currentStat).getContent());
+				ExpressionNode writeExp = (((WriteNode) currentStat).getContent());
+
+				if (writeExp instanceof VariableNode)
+					((WriteNode) currentStat).getContent().setType(varTypes.get(((VariableNode) writeExp).getName()));
+				else if (writeExp instanceof OperationNode) {
+					setExpTypes((((WriteNode) currentStat).getContent()));
+
+				}
 
 			} else if (currentStat instanceof ReadNode) {
 				((ReadNode) currentStat).getName();
@@ -129,9 +139,6 @@ public class SemanticAnalysis {
 	}
 
 	private void setExpTypes(ExpressionNode expNode) {
-
-		if (expNode instanceof ValueNode && expNode.getType() == null)
-			setVarVal(expNode);
 
 		if (getLNode(expNode) instanceof OperationNode)
 			setExpTypes(getLNode(expNode));
@@ -153,6 +160,9 @@ public class SemanticAnalysis {
 				expNode.setType(TokenType.INTEGER);
 
 		}
+
+		if (expNode instanceof ValueNode && expNode.getType() == null)
+			setVarVal(expNode);
 
 	}
 

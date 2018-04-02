@@ -24,13 +24,25 @@ Program: BitcoinConversion
 |-- --- --- --- Name: dollars (Expression Type: INTEGER)
 |-- --- --- --- Value: 85.00 (Expression Type: REAL)
 |-- --- Write
-|-- --- --- Name: dollars (Expression Type: null)
+|-- --- --- operation: DIVIDE (Expression Type: INTEGER)
+|-- --- --- --- Name: dollars (Expression Type: INTEGER)
+|-- --- --- --- Value: 5 (Expression Type: INTEGER)
 |-- --- Write
-|-- --- --- Name: yen (Expression Type: null)
+|-- --- --- Name: yen (Expression Type: INTEGER)
 |-- --- Write
-|-- --- --- Name: bitcoins (Expression Type: null)
+|-- --- --- Name: bitcoins (Expression Type: INTEGER)
 |-- --- Write
 |-- --- --- Name: potato (Expression Type: null)
 |-- --- Read 
  |-- --- --- Name: bitcoins (Expression Type: INTEGER)
+|-- --- If
+|-- --- --- operation: LESSTHAN (Expression Type: INTEGER)
+|-- --- --- --- Name: dollars (Expression Type: INTEGER)
+|-- --- --- --- Value: 10 (Expression Type: INTEGER)
+|-- --- --- Assignment
+|-- --- --- --- Name: yen (Expression Type: null)
+|-- --- --- --- Value: 12 (Expression Type: INTEGER)
+|-- --- --- Assignment
+|-- --- --- --- Name: yen (Expression Type: null)
+|-- --- --- --- Value: 120 (Expression Type: INTEGER)
 

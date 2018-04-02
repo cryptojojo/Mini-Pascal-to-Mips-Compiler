@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import scanner.*;
 import semanticanalysis.SemanticAnalysis;
@@ -23,6 +24,7 @@ public class Parser {
 	SymbolTable symTab = new SymbolTable();
 
 	ArrayList<String> allVarNames = new ArrayList<String>();
+	private HashMap<String, TokenType> varTypes = new HashMap<String, TokenType>();
 
 	// Instance Variables
 	private Token lookahead;
