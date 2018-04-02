@@ -94,24 +94,21 @@ public class SemanticAnalysis {
 		ArrayList<StatementNode> statementList = compStatNode.getStateNodes();
 		for (StatementNode currentStat : statementList) {
 			if (currentStat instanceof AssignmentStatementNode) {
+				setExpTypes(((AssignmentStatementNode) currentStat).getExpression());
+				if ((varTypes.get(((AssignmentStatementNode) currentStat).getLvalue().getName()) != null))
+					((AssignmentStatementNode) currentStat).getLvalue().setType(varTypes.get(((AssignmentStatementNode) currentStat).getLvalue().getName()));
 
-			}
-			if (currentStat instanceof WhileStatementNode) {
+			} else if (currentStat instanceof WhileStatementNode) {
 
-			}
-			if (currentStat instanceof ProcedureNode) {
+			} else if (currentStat instanceof ProcedureNode) {
 
-			}
-			if (currentStat instanceof IfStatementNode) {
+			} else if (currentStat instanceof IfStatementNode) {
 
-			}
-			if (currentStat instanceof CompoundStatementNode) {
+			} else if (currentStat instanceof CompoundStatementNode) {
 
-			}
-			if (currentStat instanceof WriteNode) {
+			} else if (currentStat instanceof WriteNode) {
 
-			}
-			if (currentStat instanceof ReadNode) {
+			} else if (currentStat instanceof ReadNode) {
 
 			}
 
@@ -155,8 +152,9 @@ public class SemanticAnalysis {
 			else
 				expNode.setType(TokenType.INTEGER);
 		}
-		
-		//else if (expNode instanceof VariableNode)
+
+		else if (expNode instanceof VariableNode)
+			expNode.setType(varTypes.get((((VariableNode) expNode).getName())));
 
 	}
 
