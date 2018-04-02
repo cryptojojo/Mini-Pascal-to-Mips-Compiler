@@ -21,9 +21,7 @@ import syntaxtree.*;
 public class Parser {
 
 	SymbolTable symTab = new SymbolTable();
-	
 
-	
 	ArrayList<String> allVarNames = new ArrayList<String>();
 
 	// Instance Variables
@@ -83,9 +81,7 @@ public class Parser {
 		symTab.addProgramName(lexi);
 		match(TokenType.SEMI);
 		DeclarationsNode declarations = declarations();
-		
 
-		
 		SubProgramDeclarationsNode subProgramDeclarations = subprogram_declarations();
 		CompoundStatementNode compoundStatement = compound_statement();
 		match(TokenType.PERIOD);
@@ -469,10 +465,10 @@ public class Parser {
 			expNode = simple_part(expNode);
 		} else if (lookahead != null
 				&& (lookahead.getType() == TokenType.PLUS || lookahead.getType() == TokenType.MINUS)) {
-			SignNode uoNode = sign();
+			SignNode sig = sign();
 			expNode = term();
-			uoNode.setExpression(simple_part(expNode));
-			return uoNode;
+			sig.setExpression(simple_part(expNode));
+			return sig;
 		} else
 			error(" in simple_expression");
 
@@ -743,7 +739,7 @@ public class Parser {
 	public String getSymbolTableStr() {
 		return symTab.toString();
 	}
-	
+
 	public SymbolTable getSymbolTable() {
 		return symTab;
 	}

@@ -31,4 +31,6 @@ Program: BitcoinConversion
 |-- --- --- Name: bitcoins (Expression Type: null)
 |-- --- Write
 |-- --- --- Name: potato (Expression Type: null)
+|-- --- Read 
+ |-- --- --- Name: bitcoins (Expression Type: INTEGER)
 

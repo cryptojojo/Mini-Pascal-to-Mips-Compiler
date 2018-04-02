@@ -14,7 +14,8 @@ begin
   write(dollars);
   write(yen);
   write(bitcoins);
-write(potato);
+  write(potato);
+  read(bitcoins);
 
 end
 .

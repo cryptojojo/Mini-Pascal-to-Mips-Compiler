@@ -96,20 +96,32 @@ public class SemanticAnalysis {
 			if (currentStat instanceof AssignmentStatementNode) {
 				setExpTypes(((AssignmentStatementNode) currentStat).getExpression());
 				if ((varTypes.get(((AssignmentStatementNode) currentStat).getLvalue().getName()) != null))
-					((AssignmentStatementNode) currentStat).getLvalue().setType(varTypes.get(((AssignmentStatementNode) currentStat).getLvalue().getName()));
+					((AssignmentStatementNode) currentStat).getLvalue()
+							.setType(varTypes.get(((AssignmentStatementNode) currentStat).getLvalue().getName()));
 
 			} else if (currentStat instanceof WhileStatementNode) {
 
+				setExpTypes(((WhileStatementNode) currentStat).getTest());
+
 			} else if (currentStat instanceof ProcedureNode) {
+
+				ArrayList<ExpressionNode> expNodes = ((ProcedureNode) currentStat).getExpNode();
+				for (ExpressionNode exp : expNodes)
+					setExpTypes(exp);
 
 			} else if (currentStat instanceof IfStatementNode) {
 
 			} else if (currentStat instanceof CompoundStatementNode) {
 
+				assignExpTypes(((CompoundStatementNode) currentStat));
+
 			} else if (currentStat instanceof WriteNode) {
 
-			} else if (currentStat instanceof ReadNode) {
+				setExpTypes(((WriteNode) currentStat).getContent());
 
+			} else if (currentStat instanceof ReadNode) {
+				((ReadNode) currentStat).getName();
+				((ReadNode) currentStat).getName().setType(varTypes.get(((ReadNode) currentStat).getName().getName()));
 			}
 
 		}
