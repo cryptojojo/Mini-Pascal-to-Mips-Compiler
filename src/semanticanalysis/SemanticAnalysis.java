@@ -111,6 +111,15 @@ public class SemanticAnalysis {
 			} else if (currentStat instanceof IfStatementNode) {
 
 				setExpTypes(((IfStatementNode) currentStat).getTest());
+				StatementNode thenStat = (((IfStatementNode) currentStat).getThenStatement());
+				StatementNode elseStat = (((IfStatementNode) currentStat).getElseStatement());
+
+				CompoundStatementNode ifThenComStat = new CompoundStatementNode();
+
+				ifThenComStat.addStatement(thenStat);
+				ifThenComStat.addStatement(elseStat);
+
+				assignExpTypes(ifThenComStat);
 
 			} else if (currentStat instanceof CompoundStatementNode) {
 
