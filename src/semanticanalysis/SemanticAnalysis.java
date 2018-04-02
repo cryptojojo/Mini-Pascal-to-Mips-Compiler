@@ -147,27 +147,19 @@ public class SemanticAnalysis {
 
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	private void setVarVal(ExpressionNode expressionNode) {
+	private void setVarVal(ExpressionNode expNode) {
+
+		if (expNode instanceof ValueNode) {
+			if (((ValueNode) expNode).getAttribute().contains("."))
+				expNode.setType(TokenType.REAL);
+			else
+				expNode.setType(TokenType.INTEGER);
+		}
 		
+		//else if (expNode instanceof VariableNode)
+
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	private ExpressionNode getLNode(ExpressionNode expNode) {
 		ExpressionNode ans = null;
 
