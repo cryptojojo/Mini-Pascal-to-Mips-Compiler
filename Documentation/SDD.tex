@@ -35,7 +35,7 @@ Code Generation
 
 This program will be able to take in a file with Pascal code and output each token in the order that it was written. Each of the following keywords and symbols will be identified as tokens, as well as variable names (IDs).
 
-enewcommand{\labelitemi}{$\textendash$}
+
 \begin{itemize}
 \item
 \underline{Keywords:} and, array, begin, div, do, else, end, function, if, integer, mod, not, of, or, procedure, program, real, then, var, while
@@ -83,7 +83,7 @@ This project is made of 3 Java/Class files, only one of which (Parser) relates e
 
 \subsection{Syntax Tree}
 
-The syntax tree package is a collection of classes that each represent a node in the syntax tree, and have methods and functions that connect to other nodes in the proper order. An example of some pascal code can be found in Figure ef{Tree Code} and the corresponding syntax tree code can be found in ef{Syntax Tree} These are the classes/nodes:
+The syntax tree package is a collection of classes that each represent a node in the syntax tree, and have methods and functions that connect to other nodes in the proper order. An example of some pascal code can be found in Figure \ref{Tree Code} and the corresponding syntax tree code can be found in Figure  \ref{Syntax Tree} These are the classes/nodes:
 
 \begin{itemize}
 \item
@@ -111,7 +111,36 @@ The syntax tree package is a collection of classes that each represent a node in
 
 \subsection{Semantic Analysis}
 
-Not written
+
+The semantic analysis takes in a program node and goes through the syntax tree in order to make sure all variables are declared before they're used and also declares expressions either real or integer. The methods are as shown in \ref{Semantic} and described below. None of the errors stop compilation.
+
+\begin{itemize}
+\item
+\underline{analyze}: Gets called by main to execute semantic analysise. It gets the compound statements  to be parsed for expressions and calls verifyVarDecs anf assignExpTypes. 
+\item
+\underline{verifyVarDecs}: Verifies that all variables used were declared before they were used.
+\item
+\underline{assignExpTypes}:  Gets a compound statement and goes through the statements and depending on what syntax node they are an instance of, gets the expressions to be declared.
+\item
+\underline{setExpTypes}: Takes in an expression node and sets the type of expression.
+\item
+\underline{setVarVal}: Takes in an expression node and sets a variable or value to be a certain type (real or integer)
+\item
+\underline{getLNode}: Takes in an expression node and returns the left node (not always necesarry)
+\item
+\underline{getRNode}: Takes in an expression node and returns the right node (not always necesarry)
+\end{itemize}
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=1.1\textwidth]{semantic.PNG}
+\end{center}
+\caption{\label{Semantic}Semantic Analysis Methods}
+\end{figure}
+
+
+
 
 \subsection{Code Generation}
 
@@ -131,6 +160,8 @@ Not written
 11 February 2018 - Miller - Added symbol table info under parser section
 \item
 3 March 2018 - Miller - Added syntax tree section and content
+\item
+2 April 2018 - Miller - Added semantic analysis section with figure
 
 \end{itemize}
 
