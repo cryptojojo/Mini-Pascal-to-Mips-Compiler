@@ -35,14 +35,4 @@ Program: BitcoinConversion
 |-- --- --- Name: potato (Expression Type: null)
 |-- --- Read 
  |-- --- --- Name: bitcoins (Expression Type: INTEGER)
-|-- --- If
-|-- --- --- operation: LESSTHAN (Expression Type: INTEGER)
-|-- --- --- --- Name: dollars (Expression Type: INTEGER)
-|-- --- --- --- Value: 10 (Expression Type: INTEGER)
-|-- --- --- Assignment
-|-- --- --- --- Name: yen (Expression Type: null)
-|-- --- --- --- Value: 12 (Expression Type: INTEGER)
-|-- --- --- Assignment
-|-- --- --- --- Name: yen (Expression Type: null)
-|-- --- --- --- Value: 120 (Expression Type: INTEGER)
 

@@ -20,7 +20,7 @@ other         = .
 letter        = [A-Za-z]
 word          = {letter}+ | {letter}+[0-9]+{letter}*
 
-lineterminator = \r|\n|\r\n
+lineterminator = |\n|\n
 whitespace     = {lineterminator} | [ \t\f]
 
 symbols       = [ ";" | "," | "." | ":" | "[" | "]" | "(" | ")" | "+" | "-" | "=" | "<>" | "<" | "<=" | ">" | ">=" | "*" | "/" | ":=" ]

@@ -204,7 +204,7 @@ public class SymbolTable {
 
 			String key = name.toString();
 			String value = table.get(name).toString();
-			symTableString += "\r\n  " + value + ": " + key;
+			symTableString += "\n  " + value + ": " + key;
 		}
 		return symTableString;
 

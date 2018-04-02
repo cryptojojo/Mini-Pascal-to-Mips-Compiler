@@ -35,7 +35,7 @@ Code Generation
 
 This program will be able to take in a file with Pascal code and output each token in the order that it was written. Each of the following keywords and symbols will be identified as tokens, as well as variable names (IDs).
 
-\renewcommand{\labelitemi}{$\textendash$}
+enewcommand{\labelitemi}{$\textendash$}
 \begin{itemize}
 \item
 \underline{Keywords:} and, array, begin, div, do, else, end, function, if, integer, mod, not, of, or, procedure, program, real, then, var, while
@@ -52,7 +52,7 @@ This project is made of 3 Java/Class files:
 \item
 \textbf{TokenType}: creates the specifications for a the TokenType attribute of the Token attribute
 \end{itemize}
-Illegal symbols and sequences not accepted by our simple pascal compiler will have the TokenType: ERROR. A visual of the tokens created can be seen in Figure \ref{Output}, one of which produces an error.
+Illegal symbols and sequences not accepted by our simple pascal compiler will have the TokenType: ERROR. A visual of the tokens created can be seen in Figure ef{Output}, one of which produces an error.
 
 \begin{figure}
 \begin{center}
@@ -83,7 +83,7 @@ This project is made of 3 Java/Class files, only one of which (Parser) relates e
 
 \subsection{Syntax Tree}
 
-The syntax tree package is a collection of classes that each represent a node in the syntax tree, and have methods and functions that connect to other nodes in the proper order. An example of some pascal code can be found in Figure \ref{Tree Code} and the corresponding syntax tree code can be found in \ref{Syntax Tree} These are the classes/nodes:
+The syntax tree package is a collection of classes that each represent a node in the syntax tree, and have methods and functions that connect to other nodes in the proper order. An example of some pascal code can be found in Figure ef{Tree Code} and the corresponding syntax tree code can be found in ef{Syntax Tree} These are the classes/nodes:
 
 \begin{itemize}
 \item
