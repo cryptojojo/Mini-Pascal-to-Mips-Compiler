@@ -56,8 +56,6 @@ public class SemanticAnalysis {
 			assignExpTypes(subCompStatNode);
 		}
 
-		verifyTypesMatch();
-
 		return progNode;
 	}
 
@@ -197,11 +195,6 @@ public class SemanticAnalysis {
 			ans = ((OperationNode) expNode).getRight();
 
 		return ans;
-
-	}
-
-	private void verifyTypesMatch() {
-		// TODO Auto-generated method stub
 
 	}
 

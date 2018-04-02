@@ -23,11 +23,7 @@ begin
   read(bitcoins);
 
 
-if dollars < 10
-  then
-    yen := 12
-  else
-    yen := 120
+
 
 end
 .
