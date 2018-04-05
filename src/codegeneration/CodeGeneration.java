@@ -1,6 +1,5 @@
 package codegeneration;
 
-import syntaxtree.ProgramNode;
 import syntaxtree.*;
 
 /**
@@ -22,12 +21,23 @@ public class CodeGeneration {
 	}
 
 	public void generate() {
+		// variable declarations
 		asmCode += ".data\n\n";
-		for (VariableNode varNodes : progNode.getVariables().getDeclarations()) {
-			asmCode += varNodes.getName() + " : .word\n";
+		for (VariableNode varNode : progNode.getVariables().getDeclarations()) {
+			asmCode += varNode.getName() + " : .word\n";
 		}
 
+		// set up main
 		asmCode += "\n.text\n\nmain:\n";
+
+		// statements
+		for (StatementNode statNode : progNode.getMain().getStateNodes()) {
+			codeStatement(statNode);
+		}
+
+	}
+
+	public void codeStatement(StatementNode statNode) {
 
 	}
 
