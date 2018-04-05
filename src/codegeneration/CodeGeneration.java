@@ -39,6 +39,22 @@ public class CodeGeneration {
 
 	public void codeStatement(StatementNode statNode) {
 
+		if (statNode instanceof AssignmentStatementNode) {
+
+		} else if (statNode instanceof WhileStatementNode) {
+
+		} else if (statNode instanceof ProcedureNode) {
+
+		} else if (statNode instanceof IfStatementNode) {
+
+		} else if (statNode instanceof CompoundStatementNode) {
+
+		} else if (statNode instanceof ReadNode) {
+
+		} else if (statNode instanceof WriteNode) {
+
+		}
+
 	}
 
 	public String getAsmCode() {
