@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import parser.SymbolTable;
-import parser.SymbolType;
+import parser.DataType;
 import scanner.TokenType;
 import syntaxtree.*;
 
@@ -20,6 +20,7 @@ public class SemanticAnalysis {
 
 	private ProgramNode progNode = null;
 	private SymbolTable symTab = null;
+	// Switch to datatype!! not too hard :)
 	private HashMap<String, TokenType> varTypes = new HashMap<String, TokenType>();
 
 	public SemanticAnalysis(ProgramNode progNode, SymbolTable symTab) {
@@ -145,6 +146,11 @@ public class SemanticAnalysis {
 
 	}
 
+	/**
+	 * sets the expression types for the given expression node
+	 * 
+	 * @param expNode
+	 */
 	private void setExpTypes(ExpressionNode expNode) {
 
 		if (getLNode(expNode) instanceof OperationNode)
@@ -173,6 +179,11 @@ public class SemanticAnalysis {
 
 	}
 
+	/**
+	 * sets the variable or value node for the given expression node
+	 * 
+	 * @param expNode
+	 */
 	private void setVarVal(ExpressionNode expNode) {
 
 		if (expNode instanceof ValueNode) {
@@ -187,6 +198,12 @@ public class SemanticAnalysis {
 
 	}
 
+	/**
+	 * gets the left expression node from the given expression node
+	 * 
+	 * @param expNode
+	 * @return the left expression node
+	 */
 	private ExpressionNode getLNode(ExpressionNode expNode) {
 		ExpressionNode ans = null;
 
@@ -197,6 +214,12 @@ public class SemanticAnalysis {
 
 	}
 
+	/**
+	 * gets the right expression node from the given expression node
+	 * 
+	 * @param expNode
+	 * @return the right expression node
+	 */
 	private ExpressionNode getRNode(ExpressionNode expNode) {
 		ExpressionNode ans = null;
 

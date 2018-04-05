@@ -9,6 +9,9 @@ import semanticanalysis.SemanticAnalysis;
 import syntaxtree.*;
 
 /**
+ * driver for the compiler, creates and prints MIPs assembly, symbol table, and
+ * syntax tree files
+ * 
  * @author Joseph Miller <miller12 @ augsburg.edu>
  * @version JDK/JRE 1.8.0_141
  */
@@ -37,23 +40,24 @@ public class CompilerMain {
 
 		// progNode is now analyzed
 		progNode = semAnalysis.analyze();
-		
+
 		// semantic analysis is analyzed and put into a string
 		String parseTree = progNode.indentedToString(0);
 
 		// symbol table is put into a string
 		String symbolTable = parse.getSymbolTableStr();
-		
-		
 
 		// prints the tree and the symbol table to the console
-		//System.out.print(parseTree);
-		//System.out.print(symbolTable);
-		
+		// System.out.print(parseTree);
+		// System.out.print(symbolTable);
 
-		//Code generation
+		// Code generation
 		codeGen = new CodeGeneration(progNode);
+		// generates the code
+		codeGen.generate();
+		// gets the string containing the asm code
 		String asmCode = codeGen.getAsmCode();
+
 		System.out.println(asmCode);
 
 		// prints the symbol table to a text file called [input name].table
@@ -77,7 +81,7 @@ public class CompilerMain {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		// prints the parse tree to a text file called [input name].tree
 		PrintWriter asmWriter;
 		try {
