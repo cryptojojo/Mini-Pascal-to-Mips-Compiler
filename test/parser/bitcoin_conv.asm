@@ -1,8 +1,9 @@
 .data
 
-dollars : .word
-yen : .word
-bitcoins : .word
+dollars : .word 0
+yen : .word 0
+bitcoins : .word 0
+__newline__: .asciiz "\n"
 
 .text
 

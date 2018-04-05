@@ -24,10 +24,10 @@ public class CodeGeneration {
 		// variable declarations
 		asmCode += ".data\n\n";
 		for (VariableNode varNode : progNode.getVariables().getDeclarations()) {
-			asmCode += varNode.getName() + " : .word\n";
+			asmCode += varNode.getName() + " : .word 0\n";
 		}
-		
-		
+
+		asmCode += "__newline__: .asciiz \"\\n\"\n";
 
 		// set up main
 		asmCode += "\n.text\n\nmain:\n";
