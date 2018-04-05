@@ -3,6 +3,7 @@ package compiler;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+import codegeneration.CodeGeneration;
 import parser.*;
 import semanticanalysis.SemanticAnalysis;
 import syntaxtree.*;
@@ -18,6 +19,7 @@ public class CompilerMain {
 	public static Parser parse;
 	public static String filename;
 	public static SemanticAnalysis semAnalysis;
+	public static CodeGeneration codeGen;
 
 	public static void main(String[] args) {
 
@@ -33,15 +35,26 @@ public class CompilerMain {
 		// creates semantic analysis object given the program node
 		semAnalysis = new SemanticAnalysis(progNode, parse.getSymbolTable());
 
+		// progNode is now analyzed
+		progNode = semAnalysis.analyze();
+		
 		// semantic analysis is analyzed and put into a string
-		String parseTree = semAnalysis.analyze().indentedToString(0);
+		String parseTree = progNode.indentedToString(0);
 
 		// symbol table is put into a string
 		String symbolTable = parse.getSymbolTableStr();
+		
+		
 
 		// prints the tree and the symbol table to the console
-		System.out.print(parseTree);
-		System.out.print(symbolTable);
+		//System.out.print(parseTree);
+		//System.out.print(symbolTable);
+		
+
+		//Code generation
+		codeGen = new CodeGeneration(progNode);
+		String asmCode = codeGen.getAsmCode();
+		System.out.println(asmCode);
 
 		// prints the symbol table to a text file called [input name].table
 		PrintWriter symTabWriter;
@@ -60,6 +73,17 @@ public class CompilerMain {
 			pareseTreeWriter = new PrintWriter(noExtFileName + ".tree");
 			pareseTreeWriter.println(parseTree);
 			pareseTreeWriter.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// prints the parse tree to a text file called [input name].tree
+		PrintWriter asmWriter;
+		try {
+			asmWriter = new PrintWriter(noExtFileName + ".asm");
+			asmWriter.println(asmCode);
+			asmWriter.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
