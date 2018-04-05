@@ -1,6 +1,7 @@
 package codegeneration;
 
 import syntaxtree.ProgramNode;
+import syntaxtree.*;
 
 /**
  * generates the assembly code from the syntax tree
@@ -10,15 +11,24 @@ import syntaxtree.ProgramNode;
  */
 public class CodeGeneration {
 
-	private int currentTReg = 0;
+	private int currentTReg;
 	private ProgramNode progNode;
-	private String asmCode = "";
+	private String asmCode;
 
 	public CodeGeneration(ProgramNode progNode) {
 		this.progNode = progNode;
+		currentTReg = 0;
+		asmCode = "";
 	}
 
 	public void generate() {
+		asmCode += ".data\n\n";
+		for (VariableNode varNodes : progNode.getVariables().getDeclarations()) {
+			asmCode += varNodes.getName() + " : .word\n";
+		}
+
+		asmCode += "\n.text\n\nmain:\n";
+
 	}
 
 	public String getAsmCode() {
