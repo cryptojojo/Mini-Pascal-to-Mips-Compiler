@@ -48,6 +48,9 @@ public class CodeGeneration {
 		} else if (statNode instanceof IfStatementNode) {
 
 		} else if (statNode instanceof CompoundStatementNode) {
+			for (StatementNode compStatNode : ((CompoundStatementNode) statNode).getStateNodes()) {
+				codeStatement(compStatNode);
+			}
 
 		} else if (statNode instanceof ReadNode) {
 
@@ -57,6 +60,11 @@ public class CodeGeneration {
 
 	}
 
+	
+	
+	
+	
+	
 	public String getAsmCode() {
 		return asmCode;
 	}
