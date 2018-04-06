@@ -34,12 +34,21 @@ public class CodeGeneration {
 
 		// statements
 		for (StatementNode statNode : progNode.getMain().getStateNodes()) {
-			codeStatement(statNode, currentReg);
+			String strReg = "$s" + currentReg;
+			codeStatement(statNode, strReg);
+		}
+
+		for (SubProgramNode subNode : progNode.getFunctions().getSubProgs()) {
+			codeSubprogs(subNode);
 		}
 
 	}
 
-	public void codeStatement(StatementNode statNode, int reg) {
+	private void codeSubprogs(SubProgramNode subNode) {
+
+	}
+
+	private void codeStatement(StatementNode statNode, String reg) {
 
 		if (statNode instanceof AssignmentStatementNode) {
 
@@ -63,9 +72,41 @@ public class CodeGeneration {
 
 	}
 
-	private void codeWrite(WriteNode writeNode, int reg) {
-		asmCode += "\n#Syscall\n" + /* Expression */ "addi\t$v0,\t$zero,\t1\n" + "add\t$a0,\t" + reg + ",\t$zero\n"
-				+ "syscall\n" + "li\t$v0,\t4" + "\nla\t$a0,__newline__\n" + "syscall\n";
+	private void codeAssignment(AssignmentStatementNode assignNode, String reg) {
+
+	}
+
+	private void codeValue(ValueNode valNode, String reg) {
+
+	}
+
+	private void codeOperation(OperationNode opNode, String reg) {
+
+	}
+
+	private void codeProcStatement(ProcedureNode procStat) {
+
+	}
+
+	private void codeIf(IfStatementNode ifStat) {
+
+	}
+
+	private void codeWhile(WhileStatementNode whileStat, String reg) {
+
+	}
+
+	private void codeExp(ExpressionNode expNode, String reg) {
+
+	}
+
+	private void codeRead(ReadNode readNode) {
+
+	}
+
+	private void codeWrite(WriteNode write, String reg) {
+		asmCode += "\n#Syscall\n" /* figure out */ + "addi\t$v0,\t$zero,\t1\n" + "add\t$a0,\t" + reg + ",\t$zero\n"
+				+ "syscall\n" + "li\t$v0,\t4" + "\nla\t$a0, __newline__\n" + "syscall\n";
 	}
 
 	public String getAsmCode() {
