@@ -106,8 +106,8 @@ public class CodeGeneration {
 	}
 
 	private void codeWrite(WriteNode write, String reg) {
-		asmCode += "\n#Syscall\n" /* figure out */ + "addi\t$v0,\t$zero,\t1\n" + "add\t$a0,\t" + reg + ",\t$zero\n"
-				+ "syscall\n" + "li\t$v0,\t4" + "\nla\t$a0, __newline__\n" + "syscall\n";
+		asmCode += "\n#Syscall\n" /* figure out */ + "addi   $v0,   $zero,   1\n" + "add   $a0,   " + reg
+				+ ",   $zero\n" + "syscall\n" + "li   $v0,   4" + "\nla   $a0, __newline__\n" + "syscall\n";
 	}
 
 	// -----
@@ -118,8 +118,7 @@ public class CodeGeneration {
 
 	private void codeExp(ExpressionNode expNode, String reg) {
 
-		StringBuilder code = new StringBuilder();
-		asmCode += "\n#Expression\n";
+		asmCode += "\n#Expression statement\n";
 		if (expNode instanceof ValueNode) {
 			codeValue((ValueNode) expNode, reg);
 		} else if (expNode instanceof OperationNode) {
@@ -127,19 +126,65 @@ public class CodeGeneration {
 		} else if (expNode instanceof VariableNode) {
 			String var = memTable.get(((VariableNode) expNode).getName());
 
-			code.append("lw\t").append(reg).append(",  ").append(var).append("\n");
+			asmCode += "lw   " + reg + ",  " + var + "\n";
 
-			asmCode += "lw\t" + reg + ",  " + var + "\n";
+			asmCode += "lw   " + reg + ",  " + var + "\n";
 		}
 
 	}
 
 	private void codeValue(ValueNode valNode, String reg) {
-		asmCode += "li\t" + reg + ",\t" + valNode.getAttribute() + "\n";
+		asmCode += "li   " + reg + ",   " + valNode.getAttribute() + "\n";
 
 	}
 
 	private void codeOperation(OperationNode opNode, String reg) {
+
+	}
+
+	// -----
+	//
+	// Pop and push stack
+	//
+	// -----
+
+	/**
+	 * Push all the $s registers, $fp and $sp to the stack
+	 *
+	 * @return The assembly code which executes this operation
+	 */
+	private void stackPush() {
+
+		asmCode += "\n#Stack Push \n";
+		asmCode += "addi   $sp,  $sp,  -";
+		asmCode += 8 * 4 + 8 + '\n';
+
+		for (int i = 8 - 1; i >= 0; i--) {
+			asmCode += "sw   " + "$s" + i + ",   " + 4 * (i + 2) + "($sp)\n";
+		}
+
+		asmCode += "sw   $fp,   4($sp)\n";
+		asmCode += "sw   $ra,   0($sp)\n";
+
+	}
+
+	/**
+	 * Pop all the $s registers, $fp and $sp from the stack
+	 *
+	 * @return The assembly code which executes this operation
+	 */
+	private void stackPop() {
+
+		asmCode += "\n#Stack Pop \n";
+
+		for (int i = 8 - 1; i >= 0; i--) {
+			asmCode += "lw   " + "$s" + i + ",   " + 4 * (i + 2) + "($sp)\n";
+		}
+		asmCode += "lw   $fp,   4($sp)\n";
+		asmCode += "lw   $ra,   0($sp)\n";
+		asmCode += "addi   $sp,   $sp,   ";
+		asmCode += (8 * 4 + 8) + "\n";
+		asmCode += "jr   $ra\n";
 
 	}
 

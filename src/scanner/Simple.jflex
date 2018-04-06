@@ -21,7 +21,7 @@ letter        = [A-Za-z]
 word          = {letter}+ | {letter}+[0-9]+{letter}*
 
 lineterminator = |\n|\n
-whitespace     = {lineterminator} | [ \t\f]
+whitespace     = {lineterminator} | [    \f]
 
 symbols       = [ ";" | "," | "." | ":" | "[" | "]" | "(" | ")" | "+" | "-" | "=" | "<>" | "<" | "<=" | ">" | ">=" | "*" | "/" | ":=" ]
 

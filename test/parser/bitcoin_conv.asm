@@ -41,4 +41,3 @@ li	$v0,	4
 la	$a0, __newline__
 syscall
 
-{yen=MemAddressNULL, dollars=MemAddressNULL, bitcoins=MemAddressNULL}
