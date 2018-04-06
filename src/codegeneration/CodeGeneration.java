@@ -140,6 +140,29 @@ public class CodeGeneration {
 
 	private void codeOperation(OperationNode opNode, String reg) {
 
+		ExpressionNode leftExp = opNode.getLeft();
+		String regL = "$s" + currentReg++;
+		codeExp(leftExp, regL);
+
+		ExpressionNode rightExp = opNode.getRight();
+		String regR = "$s" + currentReg++;
+		codeExp(rightExp, regR);
+
+		TokenType opType = opNode.getOperation();
+
+		
+		
+		
+		if (opType == TokenType.PLUS) {
+			asmCode += "add   " + reg + ",   " + regL + ",   " + regR + "\n";
+		} else if (opType == TokenType.MINUS) {
+			asmCode += "sub   " + reg + ",   " + regL + ",   " + regR + "\n";
+		}
+
+		
+		
+		this.currentReg -= 2;
+
 	}
 
 	// -----
@@ -148,11 +171,6 @@ public class CodeGeneration {
 	//
 	// -----
 
-	/**
-	 * Push all the $s registers, $fp and $sp to the stack
-	 *
-	 * @return The assembly code which executes this operation
-	 */
 	private void stackPush() {
 
 		asmCode += "\n#Stack Push \n";
@@ -168,11 +186,6 @@ public class CodeGeneration {
 
 	}
 
-	/**
-	 * Pop all the $s registers, $fp and $sp from the stack
-	 *
-	 * @return The assembly code which executes this operation
-	 */
 	private void stackPop() {
 
 		asmCode += "\n#Stack Pop \n";
