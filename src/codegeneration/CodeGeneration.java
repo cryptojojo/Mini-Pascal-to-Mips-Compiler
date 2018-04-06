@@ -44,19 +44,23 @@ public class CodeGeneration {
 
 	}
 
-	private void codeSubprogs(SubProgramNode subNode) {
-
-	}
-
 	private void codeStatement(StatementNode statNode, String reg) {
 
 		if (statNode instanceof AssignmentStatementNode) {
 
+			codeAssignment((AssignmentStatementNode) statNode, reg);
+
 		} else if (statNode instanceof WhileStatementNode) {
+
+			codeWhile((WhileStatementNode) statNode, reg);
 
 		} else if (statNode instanceof ProcedureNode) {
 
+			codeProc((ProcedureNode) statNode);
+
 		} else if (statNode instanceof IfStatementNode) {
+
+			codeIf((IfStatementNode) statNode, reg);
 
 		} else if (statNode instanceof CompoundStatementNode) {
 			for (StatementNode compStatNode : ((CompoundStatementNode) statNode).getStateNodes()) {
@@ -64,6 +68,7 @@ public class CodeGeneration {
 			}
 
 		} else if (statNode instanceof ReadNode) {
+			codeRead((ReadNode) statNode);
 
 		} else if (statNode instanceof WriteNode) {
 			codeWrite((WriteNode) statNode, reg);
@@ -72,23 +77,17 @@ public class CodeGeneration {
 
 	}
 
+	private void codeSubprogs(SubProgramNode subNode) {
+
+	}
+
+	// -----
+	//
+	// Coding the statements
+	//
+	// -----
+
 	private void codeAssignment(AssignmentStatementNode assignNode, String reg) {
-
-	}
-
-	private void codeValue(ValueNode valNode, String reg) {
-
-	}
-
-	private void codeOperation(OperationNode opNode, String reg) {
-
-	}
-
-	private void codeProcStatement(ProcedureNode procStat) {
-
-	}
-
-	private void codeIf(IfStatementNode ifStat) {
 
 	}
 
@@ -96,7 +95,11 @@ public class CodeGeneration {
 
 	}
 
-	private void codeExp(ExpressionNode expNode, String reg) {
+	private void codeProc(ProcedureNode procStat) {
+
+	}
+
+	private void codeIf(IfStatementNode ifStat, String reg) {
 
 	}
 
@@ -108,6 +111,30 @@ public class CodeGeneration {
 		asmCode += "\n#Syscall\n" /* figure out */ + "addi\t$v0,\t$zero,\t1\n" + "add\t$a0,\t" + reg + ",\t$zero\n"
 				+ "syscall\n" + "li\t$v0,\t4" + "\nla\t$a0, __newline__\n" + "syscall\n";
 	}
+
+	// -----
+	//
+	// Coding the expression stuff
+	//
+	// -----
+
+	private void codeExp(ExpressionNode expNode, String reg) {
+
+	}
+
+	private void codeValue(ValueNode valNode, String reg) {
+
+	}
+
+	private void codeOperation(OperationNode opNode, String reg) {
+
+	}
+
+	// -----
+	//
+	// Return the asm code
+	//
+	// -----
 
 	public String getAsmCode() {
 		return asmCode;
