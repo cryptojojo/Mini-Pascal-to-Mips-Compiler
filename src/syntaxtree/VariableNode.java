@@ -1,6 +1,7 @@
 
 package syntaxtree;
 
+import parser.DataType;
 import scanner.TokenType;
 
 /**
@@ -12,7 +13,7 @@ public class VariableNode extends ExpressionNode {
 
 	/** The name of the variable associated with this node. */
 	String name;
-	TokenType type;
+	DataType type;
 
 	/**
 	 * Creates a ValueNode with the given attribute.
@@ -24,13 +25,13 @@ public class VariableNode extends ExpressionNode {
 		this.name = attr;
 	}
 
-	public VariableNode(String attr, TokenType type) {
+	public VariableNode(String attr, DataType type) {
 		this.type = type;
 		this.name = attr;
 		super.setType(type);
 	}
 
-	public void setType(TokenType type) {
+	public void setType(DataType type) {
 		this.type = type;
 		super.setType(type);
 	}
@@ -44,7 +45,7 @@ public class VariableNode extends ExpressionNode {
 		return (this.name);
 	}
 
-	public TokenType getType() {
+	public DataType getType() {
 		return (this.type);
 	}
 

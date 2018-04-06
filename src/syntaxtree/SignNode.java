@@ -1,5 +1,6 @@
 package syntaxtree;
 
+import parser.DataType;
 import scanner.TokenType;
 
 /**
@@ -13,8 +14,8 @@ public class SignNode extends ExpressionNode {
 	private ExpressionNode exp;
 	private TokenType oper;
 
-	public SignNode(TokenType op) {
-		this.oper = op;
+	public SignNode(TokenType plus) {
+		this.oper = plus;
 	}
 
 	public ExpressionNode getExpression() {
@@ -26,7 +27,7 @@ public class SignNode extends ExpressionNode {
 	}
 
 	public void setOperation(TokenType op) {
-		super.setType(oper);
+		//super.setType(oper);
 		this.oper = op;
 	}
 

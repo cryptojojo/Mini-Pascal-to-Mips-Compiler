@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import parser.SymbolTable;
 import parser.DataType;
-import scanner.TokenType;
 import syntaxtree.*;
 
 /**
@@ -21,7 +20,7 @@ public class SemanticAnalysis {
 	private ProgramNode progNode = null;
 	private SymbolTable symTab = null;
 	// Switch to datatype!! not too hard :)
-	private HashMap<String, TokenType> varTypes = new HashMap<String, TokenType>();
+	private HashMap<String, DataType> varTypes = new HashMap<String, DataType>();
 
 	public SemanticAnalysis(ProgramNode progNode, SymbolTable symTab) {
 		this.progNode = progNode;
@@ -167,10 +166,10 @@ public class SemanticAnalysis {
 
 			// if one is a real number the expression should be real, only if both are
 			// integer should the expression be integer
-			if (getLNode(expNode).getType() == TokenType.REAL || getRNode(expNode).getType() == TokenType.REAL)
-				expNode.setType(TokenType.REAL);
+			if (getLNode(expNode).getType() == DataType.DATREAL || getRNode(expNode).getType() == DataType.DATREAL)
+				expNode.setType(DataType.DATREAL);
 			else
-				expNode.setType(TokenType.INTEGER);
+				expNode.setType(DataType.DATINTEGER);
 
 		}
 
@@ -188,9 +187,9 @@ public class SemanticAnalysis {
 
 		if (expNode instanceof ValueNode) {
 			if (((ValueNode) expNode).getAttribute().contains("."))
-				expNode.setType(TokenType.REAL);
+				expNode.setType(DataType.DATREAL);
 			else
-				expNode.setType(TokenType.INTEGER);
+				expNode.setType(DataType.DATINTEGER);
 		}
 
 		else if (expNode instanceof VariableNode)

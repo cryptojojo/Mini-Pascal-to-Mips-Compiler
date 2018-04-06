@@ -1,5 +1,6 @@
 package syntaxtree;
 
+import parser.DataType;
 import scanner.TokenType;
 
 /**
@@ -16,7 +17,7 @@ public class OperationNode extends ExpressionNode {
 	private ExpressionNode right;
 
 	/** The kind of operation. */
-	private TokenType opType;
+	private DataType opType;
 
 	/**
 	 * Creates an operation node given an operation token.
@@ -24,7 +25,7 @@ public class OperationNode extends ExpressionNode {
 	 * @param operation
 	 *            The token representing this node's math operation.
 	 */
-	public OperationNode(TokenType opType) {
+	public OperationNode(DataType opType) {
 		this.opType = opType;
 	}
 
@@ -37,7 +38,7 @@ public class OperationNode extends ExpressionNode {
 		return (this.right);
 	}
 
-	public TokenType getoperation() {
+	public DataType getoperation() {
 		return (this.opType);
 	}
 
@@ -52,7 +53,7 @@ public class OperationNode extends ExpressionNode {
 		this.right = node;
 	}
 
-	public void setoperation(TokenType opType) {
+	public void setoperation(DataType opType) {
 		super.setType(opType);
 		this.opType = opType;
 	}

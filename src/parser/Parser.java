@@ -128,7 +128,7 @@ public class Parser {
 			ArrayList<String> identList = identifier_list();
 
 			match(TokenType.COLON);
-			TokenType t = type(identList);
+			DataType t = type(identList);
 			for (String ident : identList) {
 				decNode.addVariable(new VariableNode(ident, t));
 
@@ -147,8 +147,8 @@ public class Parser {
 	/**
 	 * can be just standard_type or can also be an array of standard_type
 	 */
-	public TokenType type(ArrayList<String> idList) {
-		TokenType t = null;
+	public DataType type(ArrayList<String> idList) {
+		DataType t = null;
 		if (lookahead != null && (lookahead.getType() == TokenType.ARRAY)) {
 			match(TokenType.ARRAY);
 			match(TokenType.LEFTBRACKET);
@@ -181,16 +181,16 @@ public class Parser {
 	/**
 	 * taking in a number, either an integer or a real
 	 */
-	public TokenType standard_type() {
+	public DataType standard_type() {
 		if (lookahead != null && (this.lookahead.getType() == TokenType.INTEGER)) {
 			match(TokenType.INTEGER);
-			return TokenType.INTEGER;
+			return DataType.DATINTEGER;
 		} else if (lookahead != null && (this.lookahead.getType() == TokenType.REAL)) {
 			match(TokenType.REAL);
-			return TokenType.REAL;
+			return DataType.DATREAL;
 		} else {
 			error("in the standard_type function");
-			return TokenType.ERROR;
+			return null;
 		}
 	}
 
@@ -446,7 +446,14 @@ public class Parser {
 	public ExpressionNode expression() {
 		ExpressionNode left = simple_expression();
 		if (isRelop(lookahead)) {
-			OperationNode opNode = new OperationNode(lookahead.getType());
+
+			DataType opType = null;
+			if (lookahead.getType() == TokenType.INTEGER)
+				opType = DataType.DATINTEGER;
+			if (lookahead.getType() == TokenType.REAL)
+				opType = DataType.DATREAL;
+
+			OperationNode opNode = new OperationNode(opType);
 			opNode.setLeft(left);
 			match(lookahead.getType());
 			opNode.setRight(simple_expression());
@@ -483,7 +490,14 @@ public class Parser {
 	public ExpressionNode simple_part(ExpressionNode left) {
 
 		if (isAddop(lookahead)) {
-			OperationNode operNode = new OperationNode(lookahead.getType());
+
+			DataType opType = null;
+			if (lookahead.getType() == TokenType.INTEGER)
+				opType = DataType.DATINTEGER;
+			if (lookahead.getType() == TokenType.REAL)
+				opType = DataType.DATREAL;
+
+			OperationNode operNode = new OperationNode(opType);
 			match(lookahead.getType());
 			ExpressionNode right = term();
 			operNode.setLeft(left);
@@ -509,7 +523,14 @@ public class Parser {
 	 */
 	public ExpressionNode term_part(ExpressionNode posLeft) {
 		if (isMulop(lookahead)) {
-			OperationNode operNode = new OperationNode(lookahead.getType());
+
+			DataType opType = null;
+			if (lookahead.getType() == TokenType.INTEGER)
+				opType = DataType.DATINTEGER;
+			if (lookahead.getType() == TokenType.REAL)
+				opType = DataType.DATREAL;
+
+			OperationNode operNode = new OperationNode(opType);
 			match(lookahead.getType());
 			ExpressionNode right = factor();
 			operNode.setLeft(posLeft);
@@ -552,9 +573,9 @@ public class Parser {
 				&& (lookahead.getType() == TokenType.INTEGER || lookahead.getType() == TokenType.REAL)) {
 
 			if (lookahead.getLexeme().contains("."))
-				exper = new ValueNode(lookahead.getLexeme(), TokenType.REAL);
+				exper = new ValueNode(lookahead.getLexeme(), DataType.DATREAL);
 			else
-				exper = new ValueNode(lookahead.getLexeme(), TokenType.INTEGER);
+				exper = new ValueNode(lookahead.getLexeme(), DataType.DATINTEGER);
 
 			if (lookahead != null && (lookahead.getType() == TokenType.INTEGER)) {
 				match(TokenType.INTEGER);

@@ -1,38 +1,38 @@
 Program: BitcoinConversion
 |-- Declarations
-|-- --- Name: dollars (Expression Type: INTEGER)
-|-- --- Name: yen (Expression Type: INTEGER)
-|-- --- Name: bitcoins (Expression Type: INTEGER)
+|-- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- Name: yen (Expression Type: DATINTEGER)
+|-- --- Name: bitcoins (Expression Type: DATINTEGER)
 |-- SubProgramDeclarations
 |-- --- SubProgram: getDollars
 |-- --- --- Declarations
 |-- --- --- SubProgramDeclarations
 |-- --- --- Compound Statement
 |-- --- --- --- Assignment
-|-- --- --- --- --- Name: dollars (Expression Type: INTEGER)
-|-- --- --- --- --- Value: 100 (Expression Type: INTEGER)
+|-- --- --- --- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- --- --- --- Value: 100 (Expression Type: DATINTEGER)
 |-- Compound Statement
 |-- --- Procedure: getDollars
 |-- --- Assignment
-|-- --- --- Name: yen (Expression Type: INTEGER)
-|-- --- --- operation: MULTIPLY (Expression Type: INTEGER)
-|-- --- --- --- Name: dollars (Expression Type: INTEGER)
-|-- --- --- --- Value: 102 (Expression Type: INTEGER)
+|-- --- --- Name: yen (Expression Type: DATINTEGER)
+|-- --- --- operation: null (Expression Type: DATINTEGER)
+|-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- --- --- Value: 102 (Expression Type: DATINTEGER)
 |-- --- Assignment
-|-- --- --- Name: bitcoins (Expression Type: INTEGER)
-|-- --- --- operation: DIVIDE (Expression Type: INTEGER)
-|-- --- --- --- Name: dollars (Expression Type: INTEGER)
-|-- --- --- --- Value: 85.00 (Expression Type: REAL)
+|-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
+|-- --- --- operation: null (Expression Type: DATINTEGER)
+|-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- --- --- Value: 85.00 (Expression Type: DATREAL)
 |-- --- Write
-|-- --- --- operation: DIVIDE (Expression Type: INTEGER)
-|-- --- --- --- Name: dollars (Expression Type: INTEGER)
-|-- --- --- --- Value: 5 (Expression Type: INTEGER)
+|-- --- --- operation: null (Expression Type: DATINTEGER)
+|-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- --- --- Value: 5 (Expression Type: DATINTEGER)
 |-- --- Write
-|-- --- --- Name: yen (Expression Type: INTEGER)
+|-- --- --- Name: yen (Expression Type: DATINTEGER)
 |-- --- Write
-|-- --- --- Name: bitcoins (Expression Type: INTEGER)
+|-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
 |-- --- Write
 |-- --- --- Name: potato (Expression Type: null)
 |-- --- Read 
- |-- --- --- Name: bitcoins (Expression Type: INTEGER)
+ |-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
 

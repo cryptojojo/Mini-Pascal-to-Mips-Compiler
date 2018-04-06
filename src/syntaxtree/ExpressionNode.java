@@ -1,5 +1,6 @@
 package syntaxtree;
 
+import parser.DataType;
 import scanner.TokenType;
 
 /**
@@ -9,21 +10,21 @@ import scanner.TokenType;
  */
 public abstract class ExpressionNode extends SyntaxTreeNode {
 
-	TokenType type;
+	DataType type;
 
 	public ExpressionNode() {
 		type = null;
 	}
 
-	public ExpressionNode(TokenType type) {
+	public ExpressionNode(DataType type) {
 		this.type = type;
 	}
 
-	public void setType(TokenType type) {
-		this.type = type;
+	public void setType(DataType dataType) {
+		this.type = dataType;
 	}
 
-	public TokenType getType() {
+	public DataType getType() {
 		return type;
 	}
 
