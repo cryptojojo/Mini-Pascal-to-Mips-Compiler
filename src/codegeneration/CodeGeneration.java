@@ -47,34 +47,23 @@ public class CodeGeneration {
 	private void codeStatement(StatementNode statNode, String reg) {
 
 		if (statNode instanceof AssignmentStatementNode) {
-
 			codeAssignment((AssignmentStatementNode) statNode, reg);
-
 		} else if (statNode instanceof WhileStatementNode) {
-
 			codeWhile((WhileStatementNode) statNode, reg);
-
 		} else if (statNode instanceof ProcedureNode) {
-
 			codeProc((ProcedureNode) statNode);
-
 		} else if (statNode instanceof IfStatementNode) {
 
 			codeIf((IfStatementNode) statNode, reg);
-
 		} else if (statNode instanceof CompoundStatementNode) {
 			for (StatementNode compStatNode : ((CompoundStatementNode) statNode).getStateNodes()) {
 				codeStatement(compStatNode, reg);
 			}
-
 		} else if (statNode instanceof ReadNode) {
 			codeRead((ReadNode) statNode);
-
 		} else if (statNode instanceof WriteNode) {
 			codeWrite((WriteNode) statNode, reg);
-
 		}
-
 	}
 
 	private void codeSubprogs(SubProgramNode subNode) {
@@ -123,6 +112,7 @@ public class CodeGeneration {
 	}
 
 	private void codeValue(ValueNode valNode, String reg) {
+		asmCode += "li\t" + reg + ",\t" + valNode.getAttribute() + "\n";
 
 	}
 
