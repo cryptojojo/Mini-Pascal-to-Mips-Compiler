@@ -1,5 +1,10 @@
 package codegeneration;
 
+import java.util.HashMap;
+
+import parser.DataType;
+import parser.SymbolType;
+import scanner.TokenType;
 import syntaxtree.*;
 
 /**
@@ -13,6 +18,7 @@ public class CodeGeneration {
 	private int currentReg;
 	private ProgramNode progNode;
 	private String asmCode;
+	private HashMap<String, String> memTable = new HashMap<String, String>();
 
 	public CodeGeneration(ProgramNode progNode) {
 		this.progNode = progNode;
@@ -24,6 +30,9 @@ public class CodeGeneration {
 		// variable declarations
 		asmCode += ".data\n\n";
 		for (VariableNode varNode : progNode.getVariables().getDeclarations()) {
+
+			memTable.put(varNode.getName(), "MemAddressNULL");
+
 			asmCode += varNode.getName() + " : .word 0\n";
 		}
 
@@ -108,6 +117,20 @@ public class CodeGeneration {
 	// -----
 
 	private void codeExp(ExpressionNode expNode, String reg) {
+
+		StringBuilder code = new StringBuilder();
+		asmCode += "\n#Expression\n";
+		if (expNode instanceof ValueNode) {
+			codeValue((ValueNode) expNode, reg);
+		} else if (expNode instanceof OperationNode) {
+			codeOperation((OperationNode) expNode, reg);
+		} else if (expNode instanceof VariableNode) {
+			String var = memTable.get(((VariableNode) expNode).getName());
+
+			code.append("lw\t").append(reg).append(",  ").append(var).append("\n");
+
+			asmCode += "lw\t" + reg + ",  " + var + "\n";
+		}
 
 	}
 

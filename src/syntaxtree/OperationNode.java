@@ -17,7 +17,7 @@ public class OperationNode extends ExpressionNode {
 	private ExpressionNode right;
 
 	/** The kind of operation. */
-	private DataType opType;
+	private TokenType opType;
 
 	/**
 	 * Creates an operation node given an operation token.
@@ -25,7 +25,7 @@ public class OperationNode extends ExpressionNode {
 	 * @param operation
 	 *            The token representing this node's math operation.
 	 */
-	public OperationNode(DataType opType) {
+	public OperationNode(TokenType opType) {
 		this.opType = opType;
 	}
 
@@ -38,7 +38,7 @@ public class OperationNode extends ExpressionNode {
 		return (this.right);
 	}
 
-	public DataType getoperation() {
+	public TokenType getOperation() {
 		return (this.opType);
 	}
 
@@ -53,8 +53,8 @@ public class OperationNode extends ExpressionNode {
 		this.right = node;
 	}
 
-	public void setoperation(DataType opType) {
-		super.setType(opType);
+	public void setoperation(TokenType opType) {
+		//super.setType(opType);
 		this.opType = opType;
 	}
 

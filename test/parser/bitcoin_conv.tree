@@ -15,16 +15,16 @@ Program: BitcoinConversion
 |-- --- Procedure: getDollars
 |-- --- Assignment
 |-- --- --- Name: yen (Expression Type: DATINTEGER)
-|-- --- --- operation: null (Expression Type: DATINTEGER)
+|-- --- --- operation: MULTIPLY (Expression Type: DATINTEGER)
 |-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
 |-- --- --- --- Value: 102 (Expression Type: DATINTEGER)
 |-- --- Assignment
 |-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
-|-- --- --- operation: null (Expression Type: DATINTEGER)
+|-- --- --- operation: DIVIDE (Expression Type: DATINTEGER)
 |-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
 |-- --- --- --- Value: 85.00 (Expression Type: DATREAL)
 |-- --- Write
-|-- --- --- operation: null (Expression Type: DATINTEGER)
+|-- --- --- operation: DIVIDE (Expression Type: DATINTEGER)
 |-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
 |-- --- --- --- Value: 5 (Expression Type: DATINTEGER)
 |-- --- Write

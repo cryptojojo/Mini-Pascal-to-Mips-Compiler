@@ -447,13 +447,7 @@ public class Parser {
 		ExpressionNode left = simple_expression();
 		if (isRelop(lookahead)) {
 
-			DataType opType = null;
-			if (lookahead.getType() == TokenType.INTEGER)
-				opType = DataType.DATINTEGER;
-			if (lookahead.getType() == TokenType.REAL)
-				opType = DataType.DATREAL;
-
-			OperationNode opNode = new OperationNode(opType);
+			OperationNode opNode = new OperationNode(lookahead.getType());
 			opNode.setLeft(left);
 			match(lookahead.getType());
 			opNode.setRight(simple_expression());
@@ -491,13 +485,7 @@ public class Parser {
 
 		if (isAddop(lookahead)) {
 
-			DataType opType = null;
-			if (lookahead.getType() == TokenType.INTEGER)
-				opType = DataType.DATINTEGER;
-			if (lookahead.getType() == TokenType.REAL)
-				opType = DataType.DATREAL;
-
-			OperationNode operNode = new OperationNode(opType);
+			OperationNode operNode = new OperationNode(lookahead.getType());
 			match(lookahead.getType());
 			ExpressionNode right = term();
 			operNode.setLeft(left);
@@ -524,13 +512,7 @@ public class Parser {
 	public ExpressionNode term_part(ExpressionNode posLeft) {
 		if (isMulop(lookahead)) {
 
-			DataType opType = null;
-			if (lookahead.getType() == TokenType.INTEGER)
-				opType = DataType.DATINTEGER;
-			if (lookahead.getType() == TokenType.REAL)
-				opType = DataType.DATREAL;
-
-			OperationNode operNode = new OperationNode(opType);
+			OperationNode operNode = new OperationNode(lookahead.getType());
 			match(lookahead.getType());
 			ExpressionNode right = factor();
 			operNode.setLeft(posLeft);
