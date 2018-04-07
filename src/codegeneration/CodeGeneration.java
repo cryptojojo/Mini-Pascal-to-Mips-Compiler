@@ -105,9 +105,11 @@ public class CodeGeneration {
 
 	}
 
-	private void codeWrite(WriteNode write, String reg) {
-		asmCode += "\n#Syscall\n" /* figure out */ + "addi   $v0,   $zero,   1\n" + "add   $a0,   " + reg
-				+ ",   $zero\n" + "syscall\n" + "li   $v0,   4" + "\nla   $a0, __newline__\n" + "syscall\n";
+	private void codeWrite(WriteNode writeNode, String reg) {
+		asmCode += "\n#Write Statement\n";
+		codeExp(writeNode.getContent(), reg);
+		asmCode += "addi   $v0,   $zero,   1\n" + "add   $a0,   " + reg + ",   $zero\n" + "syscall\n" + "li   $v0,   4"
+				+ "\nla   $a0, __newline__\n" + "syscall\n";
 	}
 
 	// -----
@@ -128,7 +130,7 @@ public class CodeGeneration {
 
 			asmCode += "lw   " + reg + ",  " + var + "\n";
 
-			asmCode += "lw   " + reg + ",  " + var + "\n";
+
 		}
 
 	}
@@ -150,17 +152,39 @@ public class CodeGeneration {
 
 		TokenType opType = opNode.getOperation();
 
-		
-		
-		
-		if (opType == TokenType.PLUS) {
+		if (opType == TokenType.PLUS)
 			asmCode += "add   " + reg + ",   " + regL + ",   " + regR + "\n";
-		} else if (opType == TokenType.MINUS) {
+		else if (opType == TokenType.MINUS)
 			asmCode += "sub   " + reg + ",   " + regL + ",   " + regR + "\n";
-		}
+		else if (opType == TokenType.MULTIPLY) {
+			asmCode += "mult   " + regL + ",   " + regR + "\n";
+			asmCode += "mflo   " + reg + "\n";
+		} else if (opType == TokenType.DIVIDE) {
+			asmCode += "div   " + regL + ",   " + regR + "\n";
+			asmCode += "mflo   " + reg + "\n";
+		} else if (opType == TokenType.DIV) {
+			asmCode += "div   " + regL + ",   " + regR + "\n";
+			asmCode += "mflo   " + reg + "\n";
+		} else if (opType == TokenType.MOD) {
+			asmCode += "div   " + regL + ",   " + regR + "\n";
+			asmCode += "mfhi   " + reg + "\n";
+		} else if (opType == TokenType.AND)
+			asmCode += "and   " + reg + ",   " + regL + ",   " + regR + "\n";
+		else if (opType == TokenType.OR)
+			asmCode += "or   " + reg + ",   " + regL + ",   " + regR + "\n";
+		else if (opType == TokenType.LESSTHAN)
+			asmCode += "bge   " + regL + ",   " + regR + ",   ";
+		else if (opType == TokenType.GREATERTHAN)
+			asmCode += "ble   " + regL + ",   " + regR + ",   ";
+		else if (opType == TokenType.LESSTHANEQ)
+			asmCode += "bgt   " + regL + ",   " + regR + ",   ";
+		else if (opType == TokenType.GREATERTHANEQ)
+			asmCode += "blt   " + regL + ",   " + regR + ",   ";
+		else if (opType == TokenType.EQUAL)
+			asmCode += "bne   " + regL + ",   " + regR + ",   ";
+		else if (opType == TokenType.NOTEQUAL)
+			asmCode += "beq   " + regL + ",   " + regR + ",   ";
 
-		
-		
 		this.currentReg -= 2;
 
 	}

@@ -9,35 +9,54 @@ __newline__: .asciiz "\n"
 
 main:
 
-#Syscall
-addi	$v0,	$zero,	1
-add	$a0,	$s0,	$zero
+#Write Statement
+
+#Expression statement
+
+#Expression statement
+lw   $s0,  MemAddressNULL
+
+#Expression statement
+li   $s1,   5
+div   $s0,   $s1
+mflo   $s0
+addi   $v0,   $zero,   1
+add   $a0,   $s0,   $zero
 syscall
-li	$v0,	4
-la	$a0, __newline__
+li   $v0,   4
+la   $a0, __newline__
 syscall
 
-#Syscall
-addi	$v0,	$zero,	1
-add	$a0,	$s0,	$zero
+#Write Statement
+
+#Expression statement
+lw   $s0,  MemAddressNULL
+addi   $v0,   $zero,   1
+add   $a0,   $s0,   $zero
 syscall
-li	$v0,	4
-la	$a0, __newline__
+li   $v0,   4
+la   $a0, __newline__
 syscall
 
-#Syscall
-addi	$v0,	$zero,	1
-add	$a0,	$s0,	$zero
+#Write Statement
+
+#Expression statement
+lw   $s0,  MemAddressNULL
+addi   $v0,   $zero,   1
+add   $a0,   $s0,   $zero
 syscall
-li	$v0,	4
-la	$a0, __newline__
+li   $v0,   4
+la   $a0, __newline__
 syscall
 
-#Syscall
-addi	$v0,	$zero,	1
-add	$a0,	$s0,	$zero
+#Write Statement
+
+#Expression statement
+lw   $s0,  null
+addi   $v0,   $zero,   1
+add   $a0,   $s0,   $zero
 syscall
-li	$v0,	4
-la	$a0, __newline__
+li   $v0,   4
+la   $a0, __newline__
 syscall
 
