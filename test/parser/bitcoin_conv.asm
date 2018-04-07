@@ -12,7 +12,7 @@ main:
 #Assignment Statement
 
 #Expression statement
-li   $s0,   50
+li   $s0,   20000
 sw  $s0,   dollars
 
 #Assignment Statement
@@ -23,7 +23,7 @@ sw  $s0,   dollars
 lw   $s0,  dollars
 
 #Expression statement
-li   $s1,   102
+li   $s1,   107
 mult   $s0,   $s1
 mflo   $s0
 sw  $s0,   yen
@@ -36,7 +36,7 @@ sw  $s0,   yen
 lw   $s0,  dollars
 
 #Expression statement
-li   $s1,   8500
+li   $s1,   6000
 div   $s0,   $s1
 mflo   $s0
 sw  $s0,   bitcoins
@@ -44,14 +44,7 @@ sw  $s0,   bitcoins
 #Write Statement
 
 #Expression statement
-
-#Expression statement
 lw   $s0,  dollars
-
-#Expression statement
-li   $s1,   5
-div   $s0,   $s1
-mflo   $s0
 addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall
@@ -74,17 +67,6 @@ syscall
 
 #Expression statement
 lw   $s0,  bitcoins
-addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
-syscall
-li   $v0,   4
-la   $a0, __newline__
-syscall
-
-#Write Statement
-
-#Expression statement
-lw   $s0,  potato
 addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall

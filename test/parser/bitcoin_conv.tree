@@ -7,27 +7,21 @@ Program: BitcoinConversion
 |-- Compound Statement
 |-- --- Assignment
 |-- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- --- Value: 50 (Expression Type: DATINTEGER)
+|-- --- --- Value: 20000 (Expression Type: DATINTEGER)
 |-- --- Assignment
 |-- --- --- Name: yen (Expression Type: DATINTEGER)
 |-- --- --- operation: MULTIPLY (Expression Type: DATINTEGER)
 |-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- --- --- Value: 102 (Expression Type: DATINTEGER)
+|-- --- --- --- Value: 107 (Expression Type: DATINTEGER)
 |-- --- Assignment
 |-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
 |-- --- --- operation: DIVIDE (Expression Type: DATINTEGER)
 |-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- --- --- Value: 8500 (Expression Type: DATINTEGER)
+|-- --- --- --- Value: 6000 (Expression Type: DATINTEGER)
 |-- --- Write
-|-- --- --- operation: DIVIDE (Expression Type: DATINTEGER)
-|-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- --- --- Value: 5 (Expression Type: DATINTEGER)
+|-- --- --- Name: dollars (Expression Type: DATINTEGER)
 |-- --- Write
 |-- --- --- Name: yen (Expression Type: DATINTEGER)
 |-- --- Write
 |-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Name: potato (Expression Type: null)
-|-- --- Read 
- |-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
 

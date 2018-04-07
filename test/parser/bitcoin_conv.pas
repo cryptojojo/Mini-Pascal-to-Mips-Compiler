@@ -6,20 +6,16 @@ var dollars, yen, bitcoins : integer;
 begin
 
 
-  dollars := 50;
-  yen:= dollars * 102;
-  bitcoins := dollars / 8500;
+  dollars := 20000;
+  yen:= dollars * 107;
+  bitcoins := dollars / 6000;
   
   
 	
 
-  write(dollars/5);
+  write(dollars);
   write(yen);
   write(bitcoins);
-  write(potato);
-  read(bitcoins);
-
-
 
 
 end
