@@ -8,7 +8,7 @@ import scanner.TokenType;
 import syntaxtree.*;
 
 /**
- * generates the assembly code from the syntax tree
+ * generates the assembly code from the syntax tree (program node)
  * 
  * @author Joseph Miller <miller12 @ augsburg.edu>
  * @version JDK/JRE 1.8.0_141
@@ -31,7 +31,7 @@ public class CodeGeneration {
 		asmCode += ".data\n\n";
 		for (VariableNode varNode : progNode.getVariables().getDeclarations()) {
 
-			memTable.put(varNode.getName(), "MemAddressNULL");
+			memTable.put(varNode.getName(), varNode.getName());
 
 			asmCode += varNode.getName() + " : .word 0\n";
 		}
@@ -87,6 +87,10 @@ public class CodeGeneration {
 
 	private void codeAssignment(AssignmentStatementNode assignNode, String reg) {
 
+		asmCode += "\n#Assignment Statement\n";
+		codeExp(assignNode.getExpression(), reg);
+		asmCode += "sw  " + reg + ",   " + memTable.get(assignNode.getLvalue().getName()) + '\n';
+
 	}
 
 	private void codeWhile(WhileStatementNode whileStat, String reg) {
@@ -126,10 +130,9 @@ public class CodeGeneration {
 		} else if (expNode instanceof OperationNode) {
 			codeOperation((OperationNode) expNode, reg);
 		} else if (expNode instanceof VariableNode) {
-			String var = memTable.get(((VariableNode) expNode).getName());
+			String var = ((VariableNode) expNode).getName();
 
 			asmCode += "lw   " + reg + ",  " + var + "\n";
-
 
 		}
 

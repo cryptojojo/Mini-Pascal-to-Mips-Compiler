@@ -4,15 +4,10 @@ Program: BitcoinConversion
 |-- --- Name: yen (Expression Type: DATINTEGER)
 |-- --- Name: bitcoins (Expression Type: DATINTEGER)
 |-- SubProgramDeclarations
-|-- --- SubProgram: getDollars
-|-- --- --- Declarations
-|-- --- --- SubProgramDeclarations
-|-- --- --- Compound Statement
-|-- --- --- --- Assignment
-|-- --- --- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- --- --- --- Value: 100 (Expression Type: DATINTEGER)
 |-- Compound Statement
-|-- --- Procedure: getDollars
+|-- --- Assignment
+|-- --- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- --- Value: 50 (Expression Type: DATINTEGER)
 |-- --- Assignment
 |-- --- --- Name: yen (Expression Type: DATINTEGER)
 |-- --- --- operation: MULTIPLY (Expression Type: DATINTEGER)
@@ -22,7 +17,7 @@ Program: BitcoinConversion
 |-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
 |-- --- --- operation: DIVIDE (Expression Type: DATINTEGER)
 |-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- --- --- Value: 85.00 (Expression Type: DATREAL)
+|-- --- --- --- Value: 8500 (Expression Type: DATINTEGER)
 |-- --- Write
 |-- --- --- operation: DIVIDE (Expression Type: DATINTEGER)
 |-- --- --- --- Name: dollars (Expression Type: DATINTEGER)

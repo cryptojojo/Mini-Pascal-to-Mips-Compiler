@@ -9,12 +9,44 @@ __newline__: .asciiz "\n"
 
 main:
 
+#Assignment Statement
+
+#Expression statement
+li   $s0,   50
+sw  $s0,   dollars
+
+#Assignment Statement
+
+#Expression statement
+
+#Expression statement
+lw   $s0,  dollars
+
+#Expression statement
+li   $s1,   102
+mult   $s0,   $s1
+mflo   $s0
+sw  $s0,   yen
+
+#Assignment Statement
+
+#Expression statement
+
+#Expression statement
+lw   $s0,  dollars
+
+#Expression statement
+li   $s1,   8500
+div   $s0,   $s1
+mflo   $s0
+sw  $s0,   bitcoins
+
 #Write Statement
 
 #Expression statement
 
 #Expression statement
-lw   $s0,  MemAddressNULL
+lw   $s0,  dollars
 
 #Expression statement
 li   $s1,   5
@@ -30,7 +62,7 @@ syscall
 #Write Statement
 
 #Expression statement
-lw   $s0,  MemAddressNULL
+lw   $s0,  yen
 addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall
@@ -41,7 +73,7 @@ syscall
 #Write Statement
 
 #Expression statement
-lw   $s0,  MemAddressNULL
+lw   $s0,  bitcoins
 addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall
@@ -52,7 +84,7 @@ syscall
 #Write Statement
 
 #Expression statement
-lw   $s0,  null
+lw   $s0,  potato
 addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall

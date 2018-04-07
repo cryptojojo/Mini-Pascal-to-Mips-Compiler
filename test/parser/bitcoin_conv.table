@@ -2,5 +2,4 @@ Symbol Table:
   VARIABLETYPE: yen
   PROGRAMTYPE: BitcoinConversion
   VARIABLETYPE: dollars
-  PROCEDURETYPE: getDollars
   VARIABLETYPE: bitcoins
