@@ -11,19 +11,16 @@ Program: BitcoinConversion
 |-- --- Assignment
 |-- --- --- Name: yen (Expression Type: DATINTEGER)
 |-- --- --- Value: 1 (Expression Type: DATINTEGER)
-|-- --- While:
-|-- --- --- operation: LESSTHAN (Expression Type: DATINTEGER)
+|-- --- If
+|-- --- --- operation: GREATERTHAN (Expression Type: DATINTEGER)
 |-- --- --- --- Name: yen (Expression Type: DATINTEGER)
-|-- --- --- --- Value: 600 (Expression Type: DATINTEGER)
-|-- --- Do:
+|-- --- --- --- Value: 0 (Expression Type: DATINTEGER)
 |-- --- --- Compound Statement
 |-- --- --- --- Write
-|-- --- --- --- --- Name: yen (Expression Type: null)
-|-- --- --- --- Assignment
-|-- --- --- --- --- Name: yen (Expression Type: null)
-|-- --- --- --- --- operation: PLUS (Expression Type: null)
-|-- --- --- --- --- --- Name: yen (Expression Type: null)
-|-- --- --- --- --- --- Value: 100 (Expression Type: DATINTEGER)
+|-- --- --- --- --- Value: 10 (Expression Type: DATINTEGER)
+|-- --- --- Compound Statement
+|-- --- --- --- Write
+|-- --- --- --- --- Value: 20 (Expression Type: DATINTEGER)
 |-- --- Write
 |-- --- --- Name: dollars (Expression Type: DATINTEGER)
 |-- --- Write

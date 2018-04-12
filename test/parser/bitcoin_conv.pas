@@ -10,11 +10,14 @@ begin
   yen := 1;
   
   
-  while yen <600 do
-    begin
-      write(yen);
-      yen := yen + 100;
-    end;
+ if yen > 0 then
+   begin
+     write(10);
+   end
+  else
+   begin
+     write(20);
+   end;
 
 	
 

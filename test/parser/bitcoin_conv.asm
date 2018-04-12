@@ -3,7 +3,7 @@
 dollars : .word 0
 yen : .word 0
 bitcoins : .word 0
-__newline__: .asciiz "\n"
+newLine: .asciiz "\n"
 
 .text
 
@@ -21,42 +21,39 @@ sw  $s0,   dollars
 li   $s0,   1
 sw  $s0,   yen
 
-# while-do loop
-whileDoNum0:
-
-#Expression statement
+# If statement
 
 #Expression statement
 lw   $s0,  yen
 
 #Expression statement
-li   $s1,   600
-bge   $s0,   $s1,   endWhile0
+li   $s1,   0
+ble   $s0,   $s1,   else0
 
 #Write Statement
 
 #Expression statement
-lw   $s1,  yen
+li   $s0,   10
+addi   $v0,   $zero,   1
+add   $a0,   $s0,   $zero
+syscall
+li   $v0,   4
+la   $a0, newLine
+syscall
+j  endIf0
+else0:
+
+#Write Statement
+
+#Expression statement
+li   $s1,   20
 addi   $v0,   $zero,   1
 add   $a0,   $s1,   $zero
 syscall
 li   $v0,   4
-la   $a0, __newline__
+la   $a0, newLine
 syscall
-
-#Assignment Statement
-
-#Expression statement
-
-#Expression statement
-lw   $s1,  yen
-
-#Expression statement
-li   $s2,   100
-add   $s1,   $s1,   $s2
-sw  $s1,   yen
-j whileDoNum0
-endWhile0:
+endIf0:
 
 #Write Statement
 
@@ -66,7 +63,7 @@ addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall
 li   $v0,   4
-la   $a0, __newline__
+la   $a0, newLine
 syscall
 
 #Write Statement
@@ -77,7 +74,7 @@ addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall
 li   $v0,   4
-la   $a0, __newline__
+la   $a0, newLine
 syscall
 
 

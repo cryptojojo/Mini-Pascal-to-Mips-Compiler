@@ -19,12 +19,15 @@ public class CodeGeneration {
 	private ProgramNode progNode;
 	private String asmCode;
 	private int whileDoNum;
+	private int ifNum;
 	private HashMap<String, String> memTable = new HashMap<String, String>();
 
 	public CodeGeneration(ProgramNode progNode) {
 		this.progNode = progNode;
 		currentReg = 0;
 		whileDoNum = 0;
+		ifNum = 0;
+
 		asmCode = "";
 	}
 
@@ -38,7 +41,7 @@ public class CodeGeneration {
 			asmCode += varNode.getName() + " : .word 0\n";
 		}
 
-		asmCode += "__newline__: .asciiz \"\\n\"\n";
+		asmCode += "newLine: .asciiz \"\\n\"\n";
 
 		// set up main
 		asmCode += "\n.text\n\nmain:\n";
@@ -125,6 +128,32 @@ public class CodeGeneration {
 
 	private void codeIf(IfStatementNode ifStat, String reg) {
 
+		String secReg;
+		asmCode += "\n# If statement\n";
+
+		if (ifStat.getTest() instanceof ValueNode) {
+			codeExp(ifStat.getTest(), reg);
+			secReg = "$s" + ++currentReg;
+			asmCode += "li  " + secReg + ",  " + "1\n";
+			asmCode += "bne  " + reg + ",  " + secReg + ",  ";
+			asmCode += "else" + ifNum + "\n";
+		} else {
+			codeOperation((OperationNode) ifStat.getTest(), reg);
+			asmCode += "else" + ifNum + "\n";
+		}
+
+		reg = "$s" + currentReg++;
+		codeStatement(ifStat.getThenStatement(), reg);
+		asmCode += "j  endIf" + ifNum + "\n";
+
+		reg = "$s" + currentReg++;
+		asmCode += "else" + ifNum + ":\n";
+		codeStatement(ifStat.getElseStatement(), reg);
+		asmCode += "endIf" + ifNum + ":\n";
+
+		ifNum++;
+		currentReg -= 2;
+
 	}
 
 	private void codeRead(ReadNode readNode) {
@@ -135,7 +164,7 @@ public class CodeGeneration {
 		asmCode += "\n#Write Statement\n";
 		codeExp(writeNode.getContent(), reg);
 		asmCode += "addi   $v0,   $zero,   1\n" + "add   $a0,   " + reg + ",   $zero\n" + "syscall\n" + "li   $v0,   4"
-				+ "\nla   $a0, __newline__\n" + "syscall\n";
+				+ "\nla   $a0, newLine\n" + "syscall\n";
 	}
 
 	// -----
