@@ -1,9 +1,6 @@
 package codegeneration;
 
 import java.util.HashMap;
-
-import parser.DataType;
-import parser.SymbolType;
 import scanner.TokenType;
 import syntaxtree.*;
 
@@ -22,25 +19,32 @@ public class CodeGeneration {
 	private int ifNum;
 	private HashMap<String, String> memTable = new HashMap<String, String>();
 
+	/**
+	 * constructor
+	 * 
+	 * @param synatx
+	 *            tree (program node)
+	 */
 	public CodeGeneration(ProgramNode progNode) {
 		this.progNode = progNode;
 		currentReg = 0;
 		whileDoNum = 0;
 		ifNum = 0;
-
 		asmCode = "";
 	}
 
+	/**
+	 * Generates the code, called from main
+	 */
 	public void generate() {
 		// variable declarations
 		asmCode += ".data\n\n";
 		for (VariableNode varNode : progNode.getVariables().getDeclarations()) {
-
 			memTable.put(varNode.getName(), varNode.getName());
-
 			asmCode += varNode.getName() + " : .word 0\n";
 		}
 
+		// set new line
 		asmCode += "newLine: .asciiz \"\\n\"\n";
 
 		// set up main
@@ -52,6 +56,7 @@ public class CodeGeneration {
 			codeStatement(statNode, strReg);
 		}
 
+		// subprograms
 		for (SubProgramNode subNode : progNode.getFunctions().getSubProgs()) {
 			codeSubprogs(subNode);
 		}
@@ -61,6 +66,14 @@ public class CodeGeneration {
 
 	}
 
+	/**
+	 * creates code for statements, calls methods depending on their statement type
+	 * 
+	 * @param statement
+	 *            node
+	 * @param current
+	 *            register
+	 */
 	private void codeStatement(StatementNode statNode, String reg) {
 
 		if (statNode instanceof AssignmentStatementNode) {
@@ -83,16 +96,25 @@ public class CodeGeneration {
 		}
 	}
 
+	/**
+	 * method for creating subprogram nodes, not needed yet since no functions or
+	 * procedures
+	 * 
+	 * @param subprogram
+	 *            node
+	 */
 	private void codeSubprogs(SubProgramNode subNode) {
 
 	}
 
-	// -----
-	//
-	// Coding the statements
-	//
-	// -----
-
+	/**
+	 * creates the code for assignments
+	 * 
+	 * @param assignment
+	 *            node
+	 * @param current
+	 *            register
+	 */
 	private void codeAssignment(AssignmentStatementNode assignNode, String reg) {
 
 		asmCode += "\n#Assignment Statement\n";
@@ -101,6 +123,14 @@ public class CodeGeneration {
 
 	}
 
+	/**
+	 * creates the code for while statements
+	 * 
+	 * @param while
+	 *            node
+	 * @param current
+	 *            register
+	 */
 	private void codeWhile(WhileStatementNode whileStat, String reg) {
 
 		asmCode += "\n# while-do loop\n";
@@ -122,10 +152,23 @@ public class CodeGeneration {
 
 	}
 
+	/**
+	 * creates the code for procedures, not needed - maybe later
+	 * 
+	 * @param procedure
+	 *            node
+	 */
 	private void codeProc(ProcedureNode procStat) {
-
 	}
 
+	/**
+	 * creates code for if statements
+	 * 
+	 * @param if
+	 *            statement node
+	 * @param current
+	 *            register
+	 */
 	private void codeIf(IfStatementNode ifStat, String reg) {
 
 		String secReg;
@@ -156,10 +199,23 @@ public class CodeGeneration {
 
 	}
 
+	/**
+	 * creates code for read statements, not sure if needed
+	 * 
+	 * @param read
+	 *            node
+	 */
 	private void codeRead(ReadNode readNode) {
-
 	}
 
+	/**
+	 * creates code for write statements, adds new line after writing to console
+	 * 
+	 * @param write
+	 *            node
+	 * @param current
+	 *            register
+	 */
 	private void codeWrite(WriteNode writeNode, String reg) {
 		asmCode += "\n#Write Statement\n";
 		codeExp(writeNode.getContent(), reg);
@@ -167,12 +223,14 @@ public class CodeGeneration {
 				+ "\nla   $a0, newLine\n" + "syscall\n";
 	}
 
-	// -----
-	//
-	// Coding the expression stuff
-	//
-	// -----
-
+	/**
+	 * creates code for expressions
+	 * 
+	 * @param expression
+	 *            node
+	 * @param current
+	 *            register
+	 */
 	private void codeExp(ExpressionNode expNode, String reg) {
 
 		asmCode += "\n#Expression statement\n";
@@ -189,11 +247,27 @@ public class CodeGeneration {
 
 	}
 
+	/**
+	 * creates code for a value
+	 * 
+	 * @param value
+	 *            node
+	 * @param current
+	 *            register
+	 */
 	private void codeValue(ValueNode valNode, String reg) {
 		asmCode += "li   " + reg + ",   " + valNode.getAttribute() + "\n";
 
 	}
 
+	/**
+	 * creates code for an operation
+	 * 
+	 * @param operation
+	 *            node
+	 * @param current
+	 *            register
+	 */
 	private void codeOperation(OperationNode opNode, String reg) {
 
 		ExpressionNode leftExp = opNode.getLeft();
@@ -243,48 +317,11 @@ public class CodeGeneration {
 
 	}
 
-	// -----
-	//
-	// Pop and push stack
-	//
-	// -----
-
-	private void stackPush() {
-
-		asmCode += "\n#Stack Push \n";
-		asmCode += "addi   $sp,  $sp,  -";
-		asmCode += 8 * 4 + 8 + '\n';
-
-		for (int i = 8 - 1; i >= 0; i--) {
-			asmCode += "sw   " + "$s" + i + ",   " + 4 * (i + 2) + "($sp)\n";
-		}
-
-		asmCode += "sw   $fp,   4($sp)\n";
-		asmCode += "sw   $ra,   0($sp)\n";
-
-	}
-
-	private void stackPop() {
-
-		asmCode += "\n#Stack Pop \n";
-
-		for (int i = 8 - 1; i >= 0; i--) {
-			asmCode += "lw   " + "$s" + i + ",   " + 4 * (i + 2) + "($sp)\n";
-		}
-		asmCode += "lw   $fp,   4($sp)\n";
-		asmCode += "lw   $ra,   0($sp)\n";
-		asmCode += "addi   $sp,   $sp,   ";
-		asmCode += (8 * 4 + 8) + "\n";
-		asmCode += "jr   $ra\n";
-
-	}
-
-	// -----
-	//
-	// Return the asm code
-	//
-	// -----
-
+	/**
+	 * returns the assembly code code
+	 * 
+	 * @return assembly code
+	 */
 	public String getAsmCode() {
 		return asmCode;
 	}
