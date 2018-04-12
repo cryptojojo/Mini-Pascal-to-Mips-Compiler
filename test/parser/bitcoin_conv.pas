@@ -7,15 +7,19 @@ begin
 
 
   dollars := 20000;
-  yen:= dollars * 107;
-  bitcoins := dollars / 6000;
+  yen := 1;
   
   
+  while yen <600 do
+    begin
+      write(yen);
+      yen := yen + 100;
+    end;
+
 	
 
   write(dollars);
   write(yen);
-  write(bitcoins);
 
 
 end

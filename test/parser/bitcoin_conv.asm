@@ -18,28 +18,45 @@ sw  $s0,   dollars
 #Assignment Statement
 
 #Expression statement
-
-#Expression statement
-lw   $s0,  dollars
-
-#Expression statement
-li   $s1,   107
-mult   $s0,   $s1
-mflo   $s0
+li   $s0,   1
 sw  $s0,   yen
+
+# while-do loop
+whileDoNum0:
+
+#Expression statement
+
+#Expression statement
+lw   $s0,  yen
+
+#Expression statement
+li   $s1,   600
+bge   $s0,   $s1,   endWhile0
+
+#Write Statement
+
+#Expression statement
+lw   $s1,  yen
+addi   $v0,   $zero,   1
+add   $a0,   $s1,   $zero
+syscall
+li   $v0,   4
+la   $a0, __newline__
+syscall
 
 #Assignment Statement
 
 #Expression statement
 
 #Expression statement
-lw   $s0,  dollars
+lw   $s1,  yen
 
 #Expression statement
-li   $s1,   6000
-div   $s0,   $s1
-mflo   $s0
-sw  $s0,   bitcoins
+li   $s2,   100
+add   $s1,   $s1,   $s2
+sw  $s1,   yen
+j whileDoNum0
+endWhile0:
 
 #Write Statement
 
@@ -63,14 +80,7 @@ li   $v0,   4
 la   $a0, __newline__
 syscall
 
-#Write Statement
 
-#Expression statement
-lw   $s0,  bitcoins
-addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
-syscall
-li   $v0,   4
-la   $a0, __newline__
-syscall
+#Exit Program 
+li  $v0, 10 
 

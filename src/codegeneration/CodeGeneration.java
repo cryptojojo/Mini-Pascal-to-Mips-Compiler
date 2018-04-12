@@ -18,11 +18,13 @@ public class CodeGeneration {
 	private int currentReg;
 	private ProgramNode progNode;
 	private String asmCode;
+	private int whileDoNum;
 	private HashMap<String, String> memTable = new HashMap<String, String>();
 
 	public CodeGeneration(ProgramNode progNode) {
 		this.progNode = progNode;
 		currentReg = 0;
+		whileDoNum = 0;
 		asmCode = "";
 	}
 
@@ -50,6 +52,9 @@ public class CodeGeneration {
 		for (SubProgramNode subNode : progNode.getFunctions().getSubProgs()) {
 			codeSubprogs(subNode);
 		}
+
+		// exits the program
+		asmCode += "\n\n#Exit Program \nli  $v0, 10 \n";
 
 	}
 
@@ -94,6 +99,23 @@ public class CodeGeneration {
 	}
 
 	private void codeWhile(WhileStatementNode whileStat, String reg) {
+
+		asmCode += "\n# while-do loop\n";
+		asmCode += "whileDoNum" + whileDoNum + ":\n";
+
+		codeExp(whileStat.getTest(), reg);
+
+		asmCode += "endWhile" + whileDoNum + "\n";
+
+		reg = "$s" + ++currentReg;
+
+		codeStatement(whileStat.getDo(), reg);
+
+		asmCode += "j whileDoNum" + whileDoNum + "\n";
+		asmCode += "endWhile" + whileDoNum + ":\n";
+
+		whileDoNum++;
+		currentReg--;
 
 	}
 
