@@ -1,22 +1,12 @@
 Program: BitcoinConversion
 |-- Declarations
-|-- --- Name: fee (Expression Type: DATINTEGER)
+|-- --- Name: dollars (Expression Type: DATINTEGER)
 |-- SubProgramDeclarations
 |-- Compound Statement
-|-- --- Assignment
-|-- --- --- Name: fee (Expression Type: DATINTEGER)
-|-- --- --- Value: 1 (Expression Type: DATINTEGER)
-|-- --- While:
-|-- --- --- operation: LESSTHAN (Expression Type: DATINTEGER)
-|-- --- --- --- Name: fee (Expression Type: DATINTEGER)
-|-- --- --- --- Value: 50 (Expression Type: DATINTEGER)
-|-- --- Do:
-|-- --- --- Compound Statement
-|-- --- --- --- Write
-|-- --- --- --- --- Name: fee (Expression Type: null)
-|-- --- --- --- Assignment
-|-- --- --- --- --- Name: fee (Expression Type: null)
-|-- --- --- --- --- operation: PLUS (Expression Type: null)
-|-- --- --- --- --- --- Name: fee (Expression Type: null)
-|-- --- --- --- --- --- Value: 1 (Expression Type: DATINTEGER)
+|-- --- Read 
+ |-- --- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- Write
+|-- --- --- operation: PLUS (Expression Type: DATINTEGER)
+|-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- --- --- Value: 1 (Expression Type: DATINTEGER)
 

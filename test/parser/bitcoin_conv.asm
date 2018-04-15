@@ -1,54 +1,37 @@
 .data
 
-fee : .word 0
+dollars : .word 0
+input:  .asciiz  "input: " 
 newLine: .asciiz "\n"
 
 .text
 
 main:
 
-#Assignment Statement
-
-#Expression statement
-li   $s0,   1
-sw  $s0,   fee
-
-# while-do loop
-whileDoNum0:
-
-#Expression statement
-
-#Expression statement
-lw   $s0,  fee
-
-#Expression statement
-li   $s1,   50
-bge   $s0,   $s1,   endWhile0
+# Read statement 
+li  $v0,  4
+la  $a0,  input 
+syscall
+li  $v0, 5
+syscall
+sw  $v0,  dollars
 
 #Write Statement
 
 #Expression statement
-lw   $s1,  fee
+
+#Expression statement
+lw   $s0,  dollars
+
+#Expression statement
+li   $s1,   1
+add   $s0,   $s0,   $s1
 addi   $v0,   $zero,   1
-add   $a0,   $s1,   $zero
+add   $a0,   $s0,   $zero
 syscall
 li   $v0,   4
 la   $a0, newLine
 syscall
-
-#Assignment Statement
-
-#Expression statement
-
-#Expression statement
-lw   $s1,  fee
-
-#Expression statement
-li   $s2,   1
-add   $s1,   $s1,   $s2
-sw  $s1,   fee
-j whileDoNum0
-endWhile0:
 
 
 #Exit Program 

@@ -44,6 +44,9 @@ public class CodeGeneration {
 			asmCode += varNode.getName() + " : .word 0\n";
 		}
 
+		// set input
+		asmCode += "input:  .asciiz  \"Input: \" \n";
+
 		// set new line
 		asmCode += "newLine: .asciiz \"\\n\"\n";
 
@@ -201,12 +204,17 @@ public class CodeGeneration {
 	}
 
 	/**
-	 * creates code for read statements, not sure if needed
+	 * creates code for read statements
 	 * 
 	 * @param read
 	 *            node
 	 */
 	private void codeRead(ReadNode readNode) {
+
+		asmCode += "\n# Read statement \n" + "li  $v0,  4" + "\nla  $a0,  input \n" + "syscall\n";
+
+		asmCode += "li  $v0, 5\n" + "syscall\n" + "sw  $v0,  " + readNode.getName().getName() + '\n';
+
 	}
 
 	/**
