@@ -15,3 +15,8 @@
 - *InputFileName.asm*: the MIPs assembly code
 - *InputFileName.table*: the symbol table, a list of all the variables declared and their types
 - *InputFileName.tree*: an indented list of the syntax tree produced
+
+## Product
+> The final product for users
+- *Compiler.jar*: the compiler program
+- *User manual*: PDF containing info for user to use the compiler
