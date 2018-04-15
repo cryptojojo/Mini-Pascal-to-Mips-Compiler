@@ -2,11 +2,14 @@ program BitcoinConversion;
 var dollars, yen, bitcoins : integer;
 
 
+procedure assignDollars;
+begin
+  dollars := 20000;
+end;
 
 begin
 
-
-  dollars := 20000;
+  assignDollars;
   yen := 1;
   
   

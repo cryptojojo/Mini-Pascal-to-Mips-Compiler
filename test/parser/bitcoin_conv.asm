@@ -1,8 +1,6 @@
 .data
 
-dollars : .word 0
-yen : .word 0
-bitcoins : .word 0
+fee : .word 0
 newLine: .asciiz "\n"
 
 .text
@@ -12,70 +10,45 @@ main:
 #Assignment Statement
 
 #Expression statement
-li   $s0,   20000
-sw  $s0,   dollars
-
-#Assignment Statement
-
-#Expression statement
 li   $s0,   1
-sw  $s0,   yen
+sw  $s0,   fee
 
-# If statement
-
-#Expression statement
-lw   $s0,  yen
+# while-do loop
+whileDoNum0:
 
 #Expression statement
-li   $s1,   0
-ble   $s0,   $s1,   else0
+
+#Expression statement
+lw   $s0,  fee
+
+#Expression statement
+li   $s1,   50
+bge   $s0,   $s1,   endWhile0
 
 #Write Statement
 
 #Expression statement
-li   $s0,   10
-addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
-syscall
-li   $v0,   4
-la   $a0, newLine
-syscall
-j  endIf0
-else0:
-
-#Write Statement
-
-#Expression statement
-li   $s1,   20
+lw   $s1,  fee
 addi   $v0,   $zero,   1
 add   $a0,   $s1,   $zero
 syscall
 li   $v0,   4
 la   $a0, newLine
 syscall
-endIf0:
 
-#Write Statement
-
-#Expression statement
-lw   $s0,  dollars
-addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
-syscall
-li   $v0,   4
-la   $a0, newLine
-syscall
-
-#Write Statement
+#Assignment Statement
 
 #Expression statement
-lw   $s0,  yen
-addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
-syscall
-li   $v0,   4
-la   $a0, newLine
-syscall
+
+#Expression statement
+lw   $s1,  fee
+
+#Expression statement
+li   $s2,   1
+add   $s1,   $s1,   $s2
+sw  $s1,   fee
+j whileDoNum0
+endWhile0:
 
 
 #Exit Program 

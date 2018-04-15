@@ -1,5 +1,3 @@
 Symbol Table:
-  VARIABLETYPE: yen
+  VARIABLETYPE: fee
   PROGRAMTYPE: BitcoinConversion
-  VARIABLETYPE: dollars
-  VARIABLETYPE: bitcoins

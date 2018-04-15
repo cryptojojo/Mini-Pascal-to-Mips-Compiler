@@ -1,28 +1,22 @@
 Program: BitcoinConversion
 |-- Declarations
-|-- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- Name: yen (Expression Type: DATINTEGER)
-|-- --- Name: bitcoins (Expression Type: DATINTEGER)
+|-- --- Name: fee (Expression Type: DATINTEGER)
 |-- SubProgramDeclarations
 |-- Compound Statement
 |-- --- Assignment
-|-- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- --- Value: 20000 (Expression Type: DATINTEGER)
-|-- --- Assignment
-|-- --- --- Name: yen (Expression Type: DATINTEGER)
+|-- --- --- Name: fee (Expression Type: DATINTEGER)
 |-- --- --- Value: 1 (Expression Type: DATINTEGER)
-|-- --- If
-|-- --- --- operation: GREATERTHAN (Expression Type: DATINTEGER)
-|-- --- --- --- Name: yen (Expression Type: DATINTEGER)
-|-- --- --- --- Value: 0 (Expression Type: DATINTEGER)
+|-- --- While:
+|-- --- --- operation: LESSTHAN (Expression Type: DATINTEGER)
+|-- --- --- --- Name: fee (Expression Type: DATINTEGER)
+|-- --- --- --- Value: 50 (Expression Type: DATINTEGER)
+|-- --- Do:
 |-- --- --- Compound Statement
 |-- --- --- --- Write
-|-- --- --- --- --- Value: 10 (Expression Type: DATINTEGER)
-|-- --- --- Compound Statement
-|-- --- --- --- Write
-|-- --- --- --- --- Value: 20 (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Name: yen (Expression Type: DATINTEGER)
+|-- --- --- --- --- Name: fee (Expression Type: null)
+|-- --- --- --- Assignment
+|-- --- --- --- --- Name: fee (Expression Type: null)
+|-- --- --- --- --- operation: PLUS (Expression Type: null)
+|-- --- --- --- --- --- Name: fee (Expression Type: null)
+|-- --- --- --- --- --- Value: 1 (Expression Type: DATINTEGER)
 

@@ -98,7 +98,7 @@ public class CodeGeneration {
 
 	/**
 	 * method for creating subprogram nodes, not needed yet since no functions or
-	 * procedures
+	 * procedures required
 	 * 
 	 * @param subprogram
 	 *            node
@@ -153,12 +153,13 @@ public class CodeGeneration {
 	}
 
 	/**
-	 * creates the code for procedures, not needed - maybe later
+	 * creates the code for procedures, not needed yet
 	 * 
 	 * @param procedure
 	 *            node
 	 */
 	private void codeProc(ProcedureNode procStat) {
+
 	}
 
 	/**
