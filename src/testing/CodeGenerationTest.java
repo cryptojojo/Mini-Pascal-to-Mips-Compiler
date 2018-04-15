@@ -99,6 +99,31 @@ public class CodeGenerationTest {
 				+ "endIf0:\n" + "\n" + "\n" + "#Exit Program \n" + "li  $v0, 10 \n";
 		assertEquals(expectedResult, assembly);
 
+		//
+		// testing for a while statement
+		//
+
+		parse = new Parser("test/codegen/while_statement.pas", true);
+		semAnalysis = new SemanticAnalysis(parse.program(), parse.getSymbolTable());
+		progNode = semAnalysis.analyze();
+		codeGen = new CodeGeneration(progNode);
+		codeGen.generate();
+		assembly = codeGen.getAsmCode();
+		System.out.println(assembly);
+
+		expectedResult = ".data\n" + "\n" + "fee : .word 0\n" + "newLine: .asciiz \"\\n\"\n" + "\n" + ".text\n" + "\n"
+				+ "main:\n" + "\n" + "#Assignment Statement\n" + "\n" + "#Expression statement\n" + "li   $s0,   1\n"
+				+ "sw  $s0,   fee\n" + "\n" + "# while-do loop\n" + "whileDoNum0:\n" + "\n" + "#Expression statement\n"
+				+ "\n" + "#Expression statement\n" + "lw   $s0,  fee\n" + "\n" + "#Expression statement\n"
+				+ "li   $s1,   50\n" + "bge   $s0,   $s1,   endWhile0\n" + "\n" + "#Write Statement\n" + "\n"
+				+ "#Expression statement\n" + "lw   $s1,  fee\n" + "addi   $v0,   $zero,   1\n"
+				+ "add   $a0,   $s1,   $zero\n" + "syscall\n" + "li   $v0,   4\n" + "la   $a0, newLine\n" + "syscall\n"
+				+ "\n" + "#Assignment Statement\n" + "\n" + "#Expression statement\n" + "\n" + "#Expression statement\n"
+				+ "lw   $s1,  fee\n" + "\n" + "#Expression statement\n" + "li   $s2,   1\n"
+				+ "add   $s1,   $s1,   $s2\n" + "sw  $s1,   fee\n" + "j whileDoNum0\n" + "endWhile0:\n" + "\n" + "\n"
+				+ "#Exit Program \n" + "li  $v0, 10 \n";
+		assertEquals(expectedResult, assembly);
+
 	}
 
 }
