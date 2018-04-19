@@ -1,7 +1,7 @@
 .data
 
 dollars : .word 0
-input:  .asciiz  "input: " 
+input:  .asciiz  "Input: " 
 newLine: .asciiz "\n"
 
 .text
