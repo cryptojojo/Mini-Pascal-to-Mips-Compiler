@@ -473,7 +473,7 @@ public class Parser {
 			sig.setExpression(simple_part(expNode));
 			return sig;
 		} else
-			error(" in simple_expression");
+			error(" in simple expression");
 
 		return expNode;
 	}
