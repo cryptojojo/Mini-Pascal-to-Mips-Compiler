@@ -4,6 +4,8 @@ var dollars, yen, bitcoins : integer;
 
 var arr: array[0:3] of integer;
 
+var dolla : integer;
+
 begin
 
   dollars := 10000;

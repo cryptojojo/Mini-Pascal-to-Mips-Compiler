@@ -34,6 +34,10 @@ public class SymbolTable {
 
 		table.put(name, type);
 	}
+	
+	public void updatedTable(LinkedHashMap<String, SymbolType> updatedTable) {
+		this.table = updatedTable;
+	}
 
 	/**
 	 * adds the program name
@@ -177,11 +181,11 @@ public class SymbolTable {
 	}
 
 	/**
-	 * gets the symbol table (hashmap)
+	 * gets the symbol table (linkedhashmap)
 	 * 
 	 * @return the symbol table
 	 */
-	public HashMap<String, SymbolType> getTable() {
+	public LinkedHashMap<String, SymbolType> getTable() {
 		return table;
 	}
 

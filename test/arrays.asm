@@ -4,6 +4,7 @@ dollars : .word 0
 yen : .word 0
 bitcoins : .word 0
 arr : .word 0
+dolla : .word 0
 input:  .asciiz  "Input: " 
 newLine: .asciiz "\n"
 

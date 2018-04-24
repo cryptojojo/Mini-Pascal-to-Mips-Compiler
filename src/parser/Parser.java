@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 //import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import scanner.*;
 import syntaxtree.*;
@@ -23,12 +24,14 @@ public class Parser {
 	SymbolTable symTab = new SymbolTable();
 
 	ArrayList<String> allVarNames = new ArrayList<String>();
-	//private HashMap<String, TokenType> varTypes = new HashMap<String, TokenType>();
+	// private HashMap<String, TokenType> varTypes = new HashMap<String,
+	// TokenType>();
 
 	// Instance Variables
 	private Token lookahead;
 	private Scanner scanner;
 	String lexi = "";
+	boolean isArray = false;
 	// has to declare here so IDs can be added be added recursively
 
 	ArrayList<String> paramList = new ArrayList<String>();
@@ -128,11 +131,27 @@ public class Parser {
 
 			match(TokenType.COLON);
 			DataType t = type(identList);
-			for (String ident : identList) {
-				decNode.addVariable(new VariableNode(ident, t));
+			if (!isArray) {
+				for (String ident : identList) {
+					decNode.addVariable(new VariableNode(ident, t));
 
-				if (!allVarNames.contains(ident))
-					allVarNames.add(ident);
+					if (!allVarNames.contains(ident))
+						allVarNames.add(ident);
+				}
+				// match(TokenType.SEMI);
+				// decNode.addDeclarations(declarations());
+			}
+			if (isArray) {
+				for (String ident : identList) {
+					decNode.addVariable(new ArrayNode(ident, TokenType.INTEGER));
+
+					if (!allVarNames.contains(ident))
+						allVarNames.add(ident);
+
+					isArray = false;
+				}
+				// match(TokenType.SEMI);
+				// decNode.addDeclarations(declarations());
 			}
 			match(TokenType.SEMI);
 			decNode.addDeclarations(declarations());
@@ -167,10 +186,7 @@ public class Parser {
 			match(TokenType.RIGHTBRACKET);
 			match(TokenType.OF);
 			t = standard_type();
-			
-			
-			
-			
+			isArray = true;
 
 		} else if (lookahead != null
 				&& (lookahead.getType() == TokenType.INTEGER || lookahead.getType() == TokenType.REAL)) {
