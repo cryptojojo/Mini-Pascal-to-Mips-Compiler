@@ -48,7 +48,7 @@ public class CompilerMain {
 		String symbolTable = parse.getSymbolTableStr();
 
 		// prints the tree and the symbol table to the console
-		// System.out.print(parseTree);
+		System.out.print(parseTree);
 		// System.out.print(symbolTable);
 
 		// Code generation

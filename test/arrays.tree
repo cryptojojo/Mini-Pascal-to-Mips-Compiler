@@ -1,0 +1,43 @@
+Program: BitcoinConversion
+|-- Declarations
+|-- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- Name: yen (Expression Type: DATINTEGER)
+|-- --- Name: bitcoins (Expression Type: DATINTEGER)
+|-- --- Name: arr (Expression Type: DATINTEGER)
+|-- SubProgramDeclarations
+|-- Compound Statement
+|-- --- Assignment
+|-- --- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- --- Value: 10000 (Expression Type: DATINTEGER)
+|-- --- Assignment
+|-- --- --- Name: yen (Expression Type: DATINTEGER)
+|-- --- --- operation: MULTIPLY (Expression Type: DATINTEGER)
+|-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- --- --- Value: 107 (Expression Type: DATINTEGER)
+|-- --- Assignment
+|-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
+|-- --- --- operation: DIVIDE (Expression Type: DATINTEGER)
+|-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- --- --- Value: 8000 (Expression Type: DATINTEGER)
+|-- --- Write
+|-- --- --- Name: dollars (Expression Type: DATINTEGER)
+|-- --- Write
+|-- --- --- Name: yen (Expression Type: DATINTEGER)
+|-- --- Write
+|-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
+|-- --- Assignment
+|-- --- --- Name: arr (Expression Type: DATINTEGER)
+|-- --- --- Value: 1 (Expression Type: DATINTEGER)
+|-- --- Write
+|-- --- --- Array: ary, Type: null
+|-- --- --- --- Value: 0 (Expression Type: DATINTEGER)
+|-- --- Assignment
+|-- --- --- Name: arr (Expression Type: DATINTEGER)
+|-- --- --- Value: 2 (Expression Type: DATINTEGER)
+|-- --- Write
+|-- --- --- Array: ary, Type: null
+|-- --- --- --- Value: 1 (Expression Type: DATINTEGER)
+|-- --- Assignment
+|-- --- --- Name: arr (Expression Type: DATINTEGER)
+|-- --- --- Value: 3 (Expression Type: DATINTEGER)
+

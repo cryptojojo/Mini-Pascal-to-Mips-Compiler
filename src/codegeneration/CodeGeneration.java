@@ -1,5 +1,6 @@
 package codegeneration;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import scanner.TokenType;
 import syntaxtree.*;
@@ -86,7 +87,6 @@ public class CodeGeneration {
 		} else if (statNode instanceof ProcedureNode) {
 			codeProc((ProcedureNode) statNode);
 		} else if (statNode instanceof IfStatementNode) {
-
 			codeIf((IfStatementNode) statNode, reg);
 		} else if (statNode instanceof CompoundStatementNode) {
 			for (StatementNode compStatNode : ((CompoundStatementNode) statNode).getStateNodes()) {
@@ -100,8 +100,7 @@ public class CodeGeneration {
 	}
 
 	/**
-	 * method for creating subprogram nodes, not needed yet since no functions or
-	 * procedures required
+	 * method for creating subprogram nodes,
 	 * 
 	 * @param subprogram
 	 *            node
@@ -323,6 +322,29 @@ public class CodeGeneration {
 			asmCode += "beq   " + regL + ",   " + regR + ",   ";
 
 		this.currentReg -= 2;
+
+	}
+
+	private void codeArray(ArrayNode arrNode, String reg) {
+
+		String index = "$s" + currentReg++;
+		String arrayReg = "$s" + currentReg++;
+
+		codeExp(arrNode.getExpNode(), index);
+		asmCode += "li   $t0,   4\n";
+		asmCode += "mult   $t0,   " + index + "\n";
+		asmCode += "mflo   " + index + "\n";
+
+		if (memTable.get(arrNode.getName()).equals(arrNode.getName())) {
+			asmCode += "la   " + arrayReg + ",   " + memTable.get(arrNode.getName() + "\n");
+		} else {
+			asmCode += "lw   " + arrayReg + ",   " + memTable.get(arrNode.getName());
+		}
+
+		asmCode += "add   " + arrayReg + ",   " + index + ",   " + arrayReg + "\n";
+		asmCode += "lw   " + reg + ",   0(" + arrayReg + ") \n";
+
+		currentReg--;
 
 	}
 
