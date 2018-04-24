@@ -49,7 +49,7 @@ public class CompilerMain {
 
 		// prints the tree and the symbol table to the console
 		System.out.print(parseTree);
-		// System.out.print(symbolTable);
+		System.out.print(symbolTable);
 
 		// Code generation
 		codeGen = new CodeGeneration(progNode);
@@ -58,8 +58,8 @@ public class CompilerMain {
 		// gets the string containing the asm code
 		String asmCode = codeGen.getAsmCode();
 
-		//System.out.println(parseTree);
-		//System.out.println(asmCode);
+		// System.out.println(parseTree);
+		// System.out.println(asmCode);
 
 		// prints the symbol table to a text file called [input name].table
 		PrintWriter symTabWriter;

@@ -76,46 +76,6 @@ li   $v0,   4
 la   $a0, newLine
 syscall
 
-#Assignment Statement
-
-#Expression statement
-li   $s0,   1
-sw  $s0,   arr
-
-#Write Statement
-
-#Expression statement
-lw   $s0,  ary
-addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
-syscall
-li   $v0,   4
-la   $a0, newLine
-syscall
-
-#Assignment Statement
-
-#Expression statement
-li   $s0,   2
-sw  $s0,   arr
-
-#Write Statement
-
-#Expression statement
-lw   $s0,  ary
-addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
-syscall
-li   $v0,   4
-la   $a0, newLine
-syscall
-
-#Assignment Statement
-
-#Expression statement
-li   $s0,   3
-sw  $s0,   arr
-
 
 #Exit Program 
 li  $v0, 10 

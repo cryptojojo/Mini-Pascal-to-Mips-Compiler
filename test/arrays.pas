@@ -15,7 +15,7 @@ begin
   write(bitcoins);
 
 
-   arr[0] := 1;
+  { arr[0] := 1;
 
    write(ary[0]);
 
@@ -23,7 +23,7 @@ begin
    write(ary[1]);
 
    arr[2] := 3;
-    
+    }
 
 
 end

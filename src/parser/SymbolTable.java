@@ -1,8 +1,8 @@
 package parser;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
-import scanner.TokenType;
 
 /**
  * the symbol table for putting all identifiers in to check later regarding
@@ -12,13 +12,13 @@ import scanner.TokenType;
  * @version JDK/JRE 1.8.0_141
  */
 public class SymbolTable {
-	private HashMap<String, SymbolType> table;
+	private LinkedHashMap<String, SymbolType> table;
 
 	/**
 	 * Constructor for the SymbolTable class
 	 */
 	public SymbolTable() {
-		table = new HashMap<>();
+		table = new LinkedHashMap<>();
 
 	}
 

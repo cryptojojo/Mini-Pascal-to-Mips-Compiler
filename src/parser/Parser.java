@@ -6,10 +6,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.HashMap;
 
 import scanner.*;
-import semanticanalysis.SemanticAnalysis;
 import syntaxtree.*;
 
 /**
@@ -24,7 +23,7 @@ public class Parser {
 	SymbolTable symTab = new SymbolTable();
 
 	ArrayList<String> allVarNames = new ArrayList<String>();
-	private HashMap<String, TokenType> varTypes = new HashMap<String, TokenType>();
+	//private HashMap<String, TokenType> varTypes = new HashMap<String, TokenType>();
 
 	// Instance Variables
 	private Token lookahead;
@@ -168,6 +167,10 @@ public class Parser {
 			match(TokenType.RIGHTBRACKET);
 			match(TokenType.OF);
 			t = standard_type();
+			
+			
+			
+			
 
 		} else if (lookahead != null
 				&& (lookahead.getType() == TokenType.INTEGER || lookahead.getType() == TokenType.REAL)) {
@@ -313,7 +316,7 @@ public class Parser {
 	 * statements or a series of statements separated by semicolons
 	 */
 	public ArrayList<StatementNode> statement_list() {
-		ArrayList<StatementNode> statNodeList = new ArrayList();
+		ArrayList<StatementNode> statNodeList = new ArrayList<StatementNode>();
 
 		StatementNode statNode = statement();
 

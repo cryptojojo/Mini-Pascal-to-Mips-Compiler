@@ -248,9 +248,9 @@ public class CodeGeneration {
 			codeOperation((OperationNode) expNode, reg);
 		} else if (expNode instanceof VariableNode) {
 			String var = ((VariableNode) expNode).getName();
-
 			asmCode += "lw   " + reg + ",  " + var + "\n";
-
+		} else if (expNode instanceof ArrayNode) {
+			codeArray((ArrayNode) expNode, reg);
 		}
 
 	}
@@ -327,6 +327,9 @@ public class CodeGeneration {
 
 	private void codeArray(ArrayNode arrNode, String reg) {
 
+		
+		asmCode += "\n# Array Stuff\n";
+		
 		String index = "$s" + currentReg++;
 		String arrayReg = "$s" + currentReg++;
 

@@ -1,6 +1,6 @@
 Symbol Table:
-  VARIABLETYPE: arr
-  VARIABLETYPE: yen
   PROGRAMTYPE: BitcoinConversion
   VARIABLETYPE: dollars
+  VARIABLETYPE: yen
   VARIABLETYPE: bitcoins
+  VARIABLETYPE: arr
