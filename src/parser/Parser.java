@@ -138,18 +138,24 @@ public class Parser {
 					if (!allVarNames.contains(ident))
 						allVarNames.add(ident);
 				}
+
 				// match(TokenType.SEMI);
 				// decNode.addDeclarations(declarations());
 			}
 			if (isArray) {
 				for (String ident : identList) {
-					decNode.addVariable(new ArrayNode(ident, TokenType.INTEGER));
+					decNode.addVariable(new ArrayNode(ident, t));
 
 					if (!allVarNames.contains(ident))
 						allVarNames.add(ident);
+					// removes array thats been designated a variabletype
+					symTab.getTable().remove(ident);
+					// adds array as an arraytype
+					symTab.addArrayName(ident);
 
 					isArray = false;
 				}
+
 				// match(TokenType.SEMI);
 				// decNode.addDeclarations(declarations());
 			}

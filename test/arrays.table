@@ -3,5 +3,5 @@ Symbol Table:
   VARIABLETYPE: dollars
   VARIABLETYPE: yen
   VARIABLETYPE: bitcoins
-  VARIABLETYPE: arr
+  ARRAYTYPE: arr
   VARIABLETYPE: dolla

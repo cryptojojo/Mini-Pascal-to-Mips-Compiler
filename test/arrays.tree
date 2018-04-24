@@ -3,7 +3,7 @@ Program: BitcoinConversion
 |-- --- Name: dollars (Expression Type: DATINTEGER)
 |-- --- Name: yen (Expression Type: DATINTEGER)
 |-- --- Name: bitcoins (Expression Type: DATINTEGER)
-|-- --- Array: arr, Type: INTEGER
+|-- --- Array: arr, Type: DATINTEGER
 |-- --- Name: dolla (Expression Type: DATINTEGER)
 |-- SubProgramDeclarations
 |-- Compound Statement

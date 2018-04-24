@@ -1,5 +1,6 @@
 package syntaxtree;
 
+import parser.DataType;
 import scanner.TokenType;
 
 /**
@@ -11,11 +12,11 @@ import scanner.TokenType;
 public class ArrayNode extends VariableNode {
 
 	private ExpressionNode exp;
-	private TokenType type = null;
+	private DataType type = null;
 
-	public ArrayNode(String attr, TokenType type) {
+	public ArrayNode(String attr, DataType t) {
 		super(attr);
-		this.type = type;
+		this.type = t;
 	}
 
 	public ArrayNode(String attr) {
