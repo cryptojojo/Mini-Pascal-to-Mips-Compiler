@@ -32,6 +32,7 @@ public class Parser {
 	private Scanner scanner;
 	String lexi = "";
 	boolean isArray = false;
+	int arraySize = 0;
 	// has to declare here so IDs can be added be added recursively
 
 	ArrayList<String> paramList = new ArrayList<String>();
@@ -153,6 +154,8 @@ public class Parser {
 					// adds array as an arraytype
 					symTab.addArrayName(ident);
 
+					symTab.addArrayNameTable(ident, arraySize);
+
 					isArray = false;
 				}
 
@@ -173,25 +176,30 @@ public class Parser {
 	 */
 	public DataType type(ArrayList<String> idList) {
 		DataType t = null;
+		int arrayStart = 0;
+		int arrayEnd = 0;
 		if (lookahead != null && (lookahead.getType() == TokenType.ARRAY)) {
 			match(TokenType.ARRAY);
 			match(TokenType.LEFTBRACKET);
 
-			if (lookahead != null && (lookahead.getType() == TokenType.INTEGER))
+			if (lookahead != null && (lookahead.getType() == TokenType.INTEGER)) {
+				arrayStart = Integer.parseInt(lookahead.getLexeme());
 				match(TokenType.INTEGER);
-			if (lookahead != null && (lookahead.getType() == TokenType.REAL))
+			} else if (lookahead != null && (lookahead.getType() == TokenType.REAL))
 				match(TokenType.REAL);
 
 			match(TokenType.COLON);
 
-			if (lookahead != null && (lookahead.getType() == TokenType.INTEGER))
+			if (lookahead != null && (lookahead.getType() == TokenType.INTEGER)) {
+				arrayEnd = Integer.parseInt(lookahead.getLexeme());
 				match(TokenType.INTEGER);
-			if (lookahead != null && (lookahead.getType() == TokenType.REAL))
+			} else if (lookahead != null && (lookahead.getType() == TokenType.REAL))
 				match(TokenType.REAL);
 
 			match(TokenType.RIGHTBRACKET);
 			match(TokenType.OF);
 			t = standard_type();
+			arraySize = arrayEnd - arrayStart;
 			isArray = true;
 
 		} else if (lookahead != null
@@ -421,24 +429,28 @@ public class Parser {
 	public VariableNode variable() {
 		String lex = lookahead.getLexeme();
 
-		VariableNode var = null;
+		// VariableNode var = null;
 
 		match(TokenType.ID);
 		if (lookahead != null && (lookahead.getType() == TokenType.LEFTBRACKET)) {
 			match(TokenType.LEFTBRACKET);
-			expression();
+
+			ExpressionNode expNodeTemp = expression();
 			match(TokenType.RIGHTBRACKET);
-			var = new ArrayNode(lex);
+			ArrayNode arrNode = new ArrayNode(lex);
+
+			arrNode.setExpNode(expNodeTemp);
+			return arrNode;
 
 		} else {
 
-			var = new VariableNode(lex);
-			if (!allVarNames.contains(var.getName()))
-				allVarNames.add(var.getName());
+			VariableNode varNode = new VariableNode(lex);
+			if (!allVarNames.contains(varNode.getName()))
+				allVarNames.add(varNode.getName());
+			return varNode;
 		}
 		// else lambda case
 
-		return var;
 	}
 
 	/**

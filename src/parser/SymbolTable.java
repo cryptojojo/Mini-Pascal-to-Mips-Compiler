@@ -3,7 +3,6 @@ package parser;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-
 /**
  * the symbol table for putting all identifiers in to check later regarding
  * their type
@@ -13,13 +12,14 @@ import java.util.LinkedHashMap;
  */
 public class SymbolTable {
 	private LinkedHashMap<String, SymbolType> table;
+	private LinkedHashMap<String, Integer> arrayTable;
 
 	/**
 	 * Constructor for the SymbolTable class
 	 */
 	public SymbolTable() {
 		table = new LinkedHashMap<>();
-
+		arrayTable = new LinkedHashMap<>();
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class SymbolTable {
 
 		table.put(name, type);
 	}
-	
+
 	public void updatedTable(LinkedHashMap<String, SymbolType> updatedTable) {
 		this.table = updatedTable;
 	}
@@ -87,6 +87,11 @@ public class SymbolTable {
 	 */
 	public void addArrayName(String name) {
 		this.add(name, SymbolType.ARRAYTYPE);
+	}
+
+	public void addArrayNameTable(String name, Integer size) {
+		// this.add(name, SymbolType.ARRAYTYPE);
+		this.arrayTable.put(name, size);
 	}
 
 	/**
@@ -189,6 +194,10 @@ public class SymbolTable {
 		return table;
 	}
 
+	public LinkedHashMap<String, Integer> getArrayTable() {
+		return arrayTable;
+	}
+
 	/**
 	 * prints the symbol table to console
 	 * 
@@ -213,7 +222,5 @@ public class SymbolTable {
 		return symTableString;
 
 	}
-
-
 
 }

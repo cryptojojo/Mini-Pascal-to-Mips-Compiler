@@ -5,6 +5,7 @@ Program: BitcoinConversion
 |-- --- Name: bitcoins (Expression Type: DATINTEGER)
 |-- --- Array: arr, Type: DATINTEGER
 |-- --- Name: dolla (Expression Type: DATINTEGER)
+|-- --- Array: arr2, Type: DATINTEGER
 |-- SubProgramDeclarations
 |-- Compound Statement
 |-- --- Assignment
@@ -28,15 +29,19 @@ Program: BitcoinConversion
 |-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
 |-- --- Assignment
 |-- --- --- Array: arr, Type: null
+|-- --- --- --- Value: 0 (Expression Type: DATINTEGER)
 |-- --- --- Value: 1 (Expression Type: DATINTEGER)
 |-- --- Assignment
 |-- --- --- Array: arr, Type: null
+|-- --- --- --- Value: 1 (Expression Type: DATINTEGER)
 |-- --- --- Value: 2 (Expression Type: DATINTEGER)
 |-- --- Assignment
 |-- --- --- Array: arr, Type: null
+|-- --- --- --- Value: 2 (Expression Type: DATINTEGER)
 |-- --- --- Value: 3 (Expression Type: DATINTEGER)
 |-- --- Assignment
 |-- --- --- Array: arr, Type: null
+|-- --- --- --- Value: 3 (Expression Type: DATINTEGER)
 |-- --- --- Value: 4 (Expression Type: DATINTEGER)
 |-- --- Write
 |-- --- --- Array: arr, Type: null

@@ -5,6 +5,7 @@ yen : .word 0
 bitcoins : .word 0
 arr : .word   0,   0,   0, 0
 dolla : .word 0
+arr2 : .word   0,   0,   0, 0
 input:  .asciiz  "Input: " 
 newLine: .asciiz "\n"
 
@@ -83,6 +84,7 @@ syscall
 li   $s0,   1
 
 #Expression statement
+li   $s0,   0
 li   $t0   4
 mult   $t0,   $s0
 mflo   $s0
@@ -96,6 +98,7 @@ sw   $s0,   0($s1)
 li   $s0,   2
 
 #Expression statement
+li   $s0,   1
 li   $t0   4
 mult   $t0,   $s0
 mflo   $s0
@@ -109,6 +112,7 @@ sw   $s0,   0($s1)
 li   $s0,   3
 
 #Expression statement
+li   $s0,   2
 li   $t0   4
 mult   $t0,   $s0
 mflo   $s0
@@ -122,6 +126,7 @@ sw   $s0,   0($s1)
 li   $s0,   4
 
 #Expression statement
+li   $s0,   3
 li   $t0   4
 mult   $t0,   $s0
 mflo   $s0

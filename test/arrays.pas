@@ -2,9 +2,12 @@ program BitcoinConversion;
 
 var dollars, yen, bitcoins : integer;
 
-var arr: array[0:3] of integer;
+var arr: array[0:5] of integer;
 
 var dolla : integer;
+
+var arr2: array[0:2] of integer;
+
 
 begin
 
