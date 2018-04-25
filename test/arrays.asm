@@ -3,9 +3,9 @@
 dollars : .word 0
 yen : .word 0
 bitcoins : .word 0
-arr : .word   0,   0,   0, 0
+arr : .word  0,  0,  0,  0,  0, 0
 dolla : .word 0
-arr2 : .word   0,   0,   0, 0
+arr2 : .word  0,  0, 0
 input:  .asciiz  "Input: " 
 newLine: .asciiz "\n"
 
@@ -137,7 +137,7 @@ sw   $s0,   0($s1)
 #Write Statement
 
 #Expression statement
-lw   $s0,  arr
+la   $s0,   arr
 addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall
@@ -148,7 +148,7 @@ syscall
 #Write Statement
 
 #Expression statement
-lw   $s0,  arr
+la   $s0,   arr
 addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall
@@ -159,7 +159,7 @@ syscall
 #Write Statement
 
 #Expression statement
-lw   $s0,  arr
+la   $s0,   arr
 addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall
@@ -170,7 +170,7 @@ syscall
 #Write Statement
 
 #Expression statement
-lw   $s0,  arr
+la   $s0,   arr
 addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall

@@ -209,6 +209,12 @@ public class SymbolTable {
 		return table.get(name);
 
 	}
+	
+	public Integer getArraySize(String name) {
+
+		return arrayTable.get(name);
+
+	}
 
 	public String toString() {
 

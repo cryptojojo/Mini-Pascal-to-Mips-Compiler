@@ -48,10 +48,10 @@ public class CodeGeneration {
 
 			if (symTab.isArrayName(varNode.getName())) {
 				memTable.put(varNode.getName(), varNode.getName());
-				int arraySize = 4; // need to get array length somehow
+				int arraySize = symTab.getArraySize(varNode.getName()); // need to get array length somehow
 				asmCode += varNode.getName() + " : .word ";
-				for (int i = 0; i < arraySize - 1; i++) {
-					asmCode += "  0, ";
+				for (int i = 0; i < arraySize; i++) {
+					asmCode += " 0, ";
 				}
 				asmCode += "0\n";
 
@@ -143,6 +143,7 @@ public class CodeGeneration {
 			ArrayNode arrayNode = (ArrayNode) assignNode.getLvalue();
 
 			String index = "$s" + currentReg++;
+
 			String arrayReg = "$s" + currentReg++;
 
 			codeExp(arrayNode.getExpNode(), index);
@@ -288,10 +289,20 @@ public class CodeGeneration {
 			codeValue((ValueNode) expNode, reg);
 		} else if (expNode instanceof OperationNode) {
 			codeOperation((OperationNode) expNode, reg);
-		} else if (expNode instanceof VariableNode) {
+		}
+
+		else if (expNode instanceof VariableNode) {
 			String var = ((VariableNode) expNode).getName();
-			asmCode += "lw   " + reg + ",  " + var + "\n";
-		} else if (expNode instanceof ArrayNode) {
+
+			if (symTab.isArrayName(((VariableNode) expNode).getName())) {
+				asmCode += "la   " + reg + ",   " + var + "\n";
+
+			} else {
+				asmCode += "lw   " + reg + ",  " + var + "\n";
+			}
+		}
+
+		else if (expNode instanceof ArrayNode) {
 			codeArray((ArrayNode) expNode, reg);
 		}
 
