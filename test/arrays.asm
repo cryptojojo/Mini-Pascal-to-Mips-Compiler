@@ -58,7 +58,7 @@ sw   $s0,   0($s1)
 #Assignment Statement (array)
 
 #Expression statement
-li   $s0,   4
+li   $s0,   7
 
 #Expression statement
 li   $s0,   3
@@ -80,7 +80,8 @@ li   $s1,   0
 li   $t0,   4
 mult   $t0,   $s1
 mflo   $s1
-la   $s2,   nulladd   $s2,   $s1,   $s2
+la   $s2,   arr
+add   $s2,   $s1,   $s2
 lw   $s0,   0($s2) 
 addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
@@ -100,7 +101,8 @@ li   $s2,   1
 li   $t0,   4
 mult   $t0,   $s2
 mflo   $s2
-la   $s3,   nulladd   $s3,   $s2,   $s3
+la   $s3,   arr
+add   $s3,   $s2,   $s3
 lw   $s1,   0($s3) 
 addi   $v0,   $zero,   1
 add   $a0,   $s1,   $zero
@@ -120,7 +122,8 @@ li   $s3,   2
 li   $t0,   4
 mult   $t0,   $s3
 mflo   $s3
-la   $s4,   nulladd   $s4,   $s3,   $s4
+la   $s4,   arr
+add   $s4,   $s3,   $s4
 lw   $s2,   0($s4) 
 addi   $v0,   $zero,   1
 add   $a0,   $s2,   $zero
@@ -140,10 +143,32 @@ li   $s4,   3
 li   $t0,   4
 mult   $t0,   $s4
 mflo   $s4
-la   $s5,   nulladd   $s5,   $s4,   $s5
+la   $s5,   arr
+add   $s5,   $s4,   $s5
 lw   $s3,   0($s5) 
 addi   $v0,   $zero,   1
 add   $a0,   $s3,   $zero
+syscall
+li   $v0,   4
+la   $a0, newLine
+syscall
+
+#Write Statement
+
+#Expression statement
+
+# Array Stuff
+
+#Expression statement
+li   $s5,   2
+li   $t0,   4
+mult   $t0,   $s5
+mflo   $s5
+la   $s6,   arr
+add   $s6,   $s5,   $s6
+lw   $s4,   0($s6) 
+addi   $v0,   $zero,   1
+add   $a0,   $s4,   $zero
 syscall
 li   $v0,   4
 la   $a0, newLine

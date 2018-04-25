@@ -388,12 +388,9 @@ public class CodeGeneration {
 		asmCode += "mflo   " + index + "\n";
 
 		if (memTable.get(arrNode.getName()).equals(arrNode.getName())) {
-
-			System.out.println("\n\n\n\n this line was passed \n\n\n\n");
-
-			asmCode += "la   " + arrayReg + ",   " + memTable.get(arrNode.getName() + "\n");
+			asmCode += "la   " + arrayReg + ",   " + memTable.get(arrNode.getName()) + "\n";
 		} else {
-			asmCode += "lw   " + arrayReg + ",   " + memTable.get(arrNode.getName() + "\n");
+			asmCode += "lw   " + arrayReg + ",   " + memTable.get(arrNode.getName()) + "\n";
 		}
 
 		asmCode += "add   " + arrayReg + ",   " + index + ",   " + arrayReg + "\n";

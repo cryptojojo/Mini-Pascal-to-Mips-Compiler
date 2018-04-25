@@ -15,12 +15,13 @@ begin
 
   arr[1] := 2;
   arr[2] := 3;
-  arr[3] := 4;
+  arr[3] := 7;
     
   write(arr[0]);
   write(arr[1]);
   write(arr[2]);
   write(arr[3]);
+  write(arr[2])
 
 
 
