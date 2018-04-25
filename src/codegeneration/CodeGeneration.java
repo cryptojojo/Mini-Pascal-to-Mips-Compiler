@@ -142,15 +142,15 @@ public class CodeGeneration {
 
 			ArrayNode arrayNode = (ArrayNode) assignNode.getLvalue();
 
-			String index = "$s" + currentReg++;
-
-			String arrayReg = "$s" + currentReg++;
+			String index = "$s" + ++currentReg;
 
 			codeExp(arrayNode.getExpNode(), index);
 
-			asmCode += "li   $t0   4\n";
+			asmCode += "li   $t0,   4\n";
 			asmCode += "mult   $t0,   " + index + "\n";
 			asmCode += "mflo   " + index + "\n";
+
+			String arrayReg = "$s" + ++currentReg;
 
 			asmCode += "la   " + arrayReg + ",   " + memTable.get(arrayNode.getName());
 
@@ -380,12 +380,12 @@ public class CodeGeneration {
 
 		String index = "$s" + ++currentReg;
 
-		String arrayReg = "$s" + ++currentReg;
-
 		codeExp(arrNode.getExpNode(), index);
 		asmCode += "li   $t0,   4\n";
 		asmCode += "mult   $t0,   " + index + "\n";
 		asmCode += "mflo   " + index + "\n";
+
+		String arrayReg = "$s" + ++currentReg;
 
 		if (memTable.get(arrNode.getName()).equals(arrNode.getName())) {
 			asmCode += "la   " + arrayReg + ",   " + memTable.get(arrNode.getName()) + "\n";
@@ -396,7 +396,7 @@ public class CodeGeneration {
 		asmCode += "add   " + arrayReg + ",   " + index + ",   " + arrayReg + "\n";
 		asmCode += "lw   " + reg + ",   0(" + arrayReg + ") \n";
 
-		currentReg--;
+		currentReg -= 2;
 
 	}
 

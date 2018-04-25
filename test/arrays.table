@@ -1,8 +1,5 @@
 Symbol Table:
   PROGRAMTYPE: BitcoinConversion
-  VARIABLETYPE: dollars
-  VARIABLETYPE: yen
-  VARIABLETYPE: bitcoins
+  VARIABLETYPE: fee
+  VARIABLETYPE: iter
   ARRAYTYPE: arr
-  VARIABLETYPE: dolla
-  ARRAYTYPE: arr2

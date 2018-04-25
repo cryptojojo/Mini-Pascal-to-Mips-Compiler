@@ -1,42 +1,48 @@
 Program: BitcoinConversion
 |-- Declarations
-|-- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- Name: yen (Expression Type: DATINTEGER)
-|-- --- Name: bitcoins (Expression Type: DATINTEGER)
+|-- --- Name: fee (Expression Type: DATINTEGER)
+|-- --- Name: iter (Expression Type: DATINTEGER)
 |-- --- Array: arr, Type: DATINTEGER
-|-- --- Name: dolla (Expression Type: DATINTEGER)
-|-- --- Array: arr2, Type: DATINTEGER
 |-- SubProgramDeclarations
 |-- Compound Statement
 |-- --- Assignment
-|-- --- --- Array: arr, Type: null
-|-- --- --- --- Value: 0 (Expression Type: DATINTEGER)
+|-- --- --- Name: fee (Expression Type: DATINTEGER)
 |-- --- --- Value: 1 (Expression Type: DATINTEGER)
 |-- --- Assignment
-|-- --- --- Array: arr, Type: null
-|-- --- --- --- Value: 1 (Expression Type: DATINTEGER)
-|-- --- --- Value: 2 (Expression Type: DATINTEGER)
+|-- --- --- Name: iter (Expression Type: DATINTEGER)
+|-- --- --- Value: 1 (Expression Type: DATINTEGER)
+|-- --- While:
+|-- --- --- operation: LESSTHAN (Expression Type: DATINTEGER)
+|-- --- --- --- Name: iter (Expression Type: DATINTEGER)
+|-- --- --- --- Value: 5 (Expression Type: DATINTEGER)
+|-- --- Do:
+|-- --- --- Compound Statement
+|-- --- --- --- Assignment
+|-- --- --- --- --- Array: arr, Type: null
+|-- --- --- --- --- --- Name: iter (Expression Type: null)
+|-- --- --- --- --- operation: MULTIPLY (Expression Type: null)
+|-- --- --- --- --- --- Name: iter (Expression Type: null)
+|-- --- --- --- --- --- Value: 5 (Expression Type: DATINTEGER)
+|-- --- --- --- Assignment
+|-- --- --- --- --- Name: iter (Expression Type: null)
+|-- --- --- --- --- operation: PLUS (Expression Type: null)
+|-- --- --- --- --- --- Name: iter (Expression Type: null)
+|-- --- --- --- --- --- Value: 1 (Expression Type: DATINTEGER)
 |-- --- Assignment
-|-- --- --- Array: arr, Type: null
-|-- --- --- --- Value: 2 (Expression Type: DATINTEGER)
-|-- --- --- Value: 3 (Expression Type: DATINTEGER)
-|-- --- Assignment
-|-- --- --- Array: arr, Type: null
-|-- --- --- --- Value: 3 (Expression Type: DATINTEGER)
-|-- --- --- Value: 7 (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Array: arr, Type: null
-|-- --- --- --- Value: 0 (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Array: arr, Type: null
-|-- --- --- --- Value: 1 (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Array: arr, Type: null
-|-- --- --- --- Value: 2 (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Array: arr, Type: null
-|-- --- --- --- Value: 3 (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Array: arr, Type: null
-|-- --- --- --- Value: 2 (Expression Type: DATINTEGER)
+|-- --- --- Name: iter (Expression Type: DATINTEGER)
+|-- --- --- Value: 1 (Expression Type: DATINTEGER)
+|-- --- While:
+|-- --- --- operation: LESSTHAN (Expression Type: DATINTEGER)
+|-- --- --- --- Name: iter (Expression Type: DATINTEGER)
+|-- --- --- --- Value: 5 (Expression Type: DATINTEGER)
+|-- --- Do:
+|-- --- --- Compound Statement
+|-- --- --- --- Write
+|-- --- --- --- --- Array: arr, Type: null
+|-- --- --- --- --- --- Name: iter (Expression Type: null)
+|-- --- --- --- Assignment
+|-- --- --- --- --- Name: iter (Expression Type: null)
+|-- --- --- --- --- operation: PLUS (Expression Type: null)
+|-- --- --- --- --- --- Name: iter (Expression Type: null)
+|-- --- --- --- --- --- Value: 1 (Expression Type: DATINTEGER)
 
