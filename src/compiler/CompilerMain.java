@@ -56,10 +56,10 @@ public class CompilerMain {
 		// generates the code
 		codeGen.generate();
 		// gets the string containing the asm code
-		String asmCode = codeGen.getAsmCodeNoComments();
+		String asmCode = codeGen.getAsmCode();
 
 		// System.out.println(parseTree);
-		System.out.println(asmCode);
+		//System.out.println(asmCode);
 
 		// prints the symbol table to a text file called [input name].table
 		PrintWriter symTabWriter;
@@ -68,7 +68,7 @@ public class CompilerMain {
 			symTabWriter.println(symbolTable);
 			symTabWriter.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Problem created/overwriting table output file");
 			e.printStackTrace();
 		}
 
@@ -79,7 +79,7 @@ public class CompilerMain {
 			pareseTreeWriter.println(parseTree);
 			pareseTreeWriter.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Problem created/overwriting tree output file");
 			e.printStackTrace();
 		}
 
@@ -90,7 +90,7 @@ public class CompilerMain {
 			asmWriter.println(asmCode);
 			asmWriter.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Problem created/overwriting asm output file");
 			e.printStackTrace();
 		}
 

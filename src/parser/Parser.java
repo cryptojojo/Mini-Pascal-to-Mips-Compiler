@@ -96,7 +96,7 @@ public class Parser {
 
 		progNode.setAllVarNames(allVarNames);
 
-		return progNode; // if it makes it this far, it is a pascal program
+		return progNode; // if it makes it this far, it is a Pascal program
 
 	}
 
