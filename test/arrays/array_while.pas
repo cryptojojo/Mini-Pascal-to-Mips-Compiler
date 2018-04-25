@@ -1,15 +1,13 @@
-program BitcoinConversion;
+program arrayWhileLoop;
 
-var fee, iter : integer;
+var iter : integer;
 var arr: array[0:5] of integer;
 
 begin
 
-  fee := 1;
-
   iter:= 1;
 
-  while iter < 5 do
+  while iter < 20 do
   begin
     arr[iter] := iter*5;
     iter := iter+1
