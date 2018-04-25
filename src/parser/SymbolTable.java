@@ -35,10 +35,6 @@ public class SymbolTable {
 		table.put(name, type);
 	}
 
-	public void updatedTable(LinkedHashMap<String, SymbolType> updatedTable) {
-		this.table = updatedTable;
-	}
-
 	/**
 	 * adds the program name
 	 * 
@@ -89,8 +85,15 @@ public class SymbolTable {
 		this.add(name, SymbolType.ARRAYTYPE);
 	}
 
+	/**
+	 * adds an array name and size to the array table
+	 * 
+	 * @param name
+	 *            of array
+	 * @param size
+	 *            of array
+	 */
 	public void addArrayNameTable(String name, Integer size) {
-		// this.add(name, SymbolType.ARRAYTYPE);
 		this.arrayTable.put(name, size);
 	}
 
@@ -209,7 +212,14 @@ public class SymbolTable {
 		return table.get(name);
 
 	}
-	
+
+	/**
+	 * gets the array size for given array name
+	 * 
+	 * @param name
+	 *            of array
+	 * @return size of the array
+	 */
 	public Integer getArraySize(String name) {
 
 		return arrayTable.get(name);

@@ -83,7 +83,7 @@ public class CodeGeneration {
 		}
 
 		// exits the program
-		asmCode += "\n\n#Exit Program \nli  $v0, 10 \n";
+		asmCode += "\n\n#----------Exit Program---------- \nli  $v0, 10 \n";
 
 	}
 
@@ -117,7 +117,7 @@ public class CodeGeneration {
 	}
 
 	/**
-	 * method for creating subprogram nodes,
+	 * method for creating subprogram nodes
 	 * 
 	 * @param subprogram
 	 *            node
@@ -137,7 +137,7 @@ public class CodeGeneration {
 	private void codeAssignment(AssignmentStatementNode assignNode, String reg) {
 
 		if (symTab.isArrayName(assignNode.getLvalue().getName())) {
-			asmCode += "\n#Assignment Statement (array)\n";
+			asmCode += "\n#----------Assignment Statement (array)----------\n";
 			codeExp(assignNode.getExpression(), reg);
 
 			ArrayNode arrayNode = (ArrayNode) assignNode.getLvalue();
@@ -161,7 +161,7 @@ public class CodeGeneration {
 			currentReg -= 2;
 
 		} else {
-			asmCode += "\n#Assignment Statement\n";
+			asmCode += "\n#----------Assignment Statement (non-array)----------\n";
 			codeExp(assignNode.getExpression(), reg);
 			asmCode += "sw  " + reg + ",   " + memTable.get(assignNode.getLvalue().getName()) + '\n';
 		}
@@ -178,7 +178,7 @@ public class CodeGeneration {
 	 */
 	private void codeWhile(WhileStatementNode whileStat, String reg) {
 
-		asmCode += "\n# while-do loop\n";
+		asmCode += "\n#----------While-Do Loop----------\n";
 		asmCode += "whileDoNum" + whileDoNum + ":\n";
 
 		codeExp(whileStat.getTest(), reg);
@@ -218,7 +218,7 @@ public class CodeGeneration {
 	private void codeIf(IfStatementNode ifStat, String reg) {
 
 		String secReg;
-		asmCode += "\n# If statement\n";
+		asmCode += "\n#----------If statement----------\n";
 
 		if (ifStat.getTest() instanceof ValueNode) {
 			codeExp(ifStat.getTest(), reg);
@@ -253,8 +253,8 @@ public class CodeGeneration {
 	 */
 	private void codeRead(ReadNode readNode) {
 
-		asmCode += "\n# Read statement \n" + "li  $v0,  4" + "\nla  $a0,  input \n" + "syscall\n";
-
+		asmCode += "\n#----------Read statement----------\n";
+		asmCode += "li  $v0,  4" + "\nla  $a0,  input \n" + "syscall\n";
 		asmCode += "li  $v0, 5\n" + "syscall\n" + "sw  $v0,  " + readNode.getName().getName() + '\n';
 
 	}
@@ -268,7 +268,7 @@ public class CodeGeneration {
 	 *            register
 	 */
 	private void codeWrite(WriteNode writeNode, String reg) {
-		asmCode += "\n#Write Statement\n";
+		asmCode += "\n#----------Write Statement----------\n";
 		codeExp(writeNode.getContent(), reg);
 		asmCode += "addi   $v0,   $zero,   1\n" + "add   $a0,   " + reg + ",   $zero\n" + "syscall\n" + "li   $v0,   4"
 				+ "\nla   $a0, newLine\n" + "syscall\n";
@@ -284,7 +284,7 @@ public class CodeGeneration {
 	 */
 	private void codeExp(ExpressionNode expNode, String reg) {
 
-		asmCode += "\n#Expression statement\n";
+		asmCode += "\n#----------Expression statement----------\n";
 		if (expNode instanceof ValueNode) {
 			codeValue((ValueNode) expNode, reg);
 		} else if (expNode instanceof OperationNode) {
@@ -313,6 +313,7 @@ public class CodeGeneration {
 	 *            register
 	 */
 	private void codeValue(ValueNode valNode, String reg) {
+		asmCode += "\n#----------Set Value----------\n";
 		asmCode += "li   " + reg + ",   " + valNode.getAttribute() + "\n";
 
 	}
@@ -326,7 +327,7 @@ public class CodeGeneration {
 	 *            register
 	 */
 	private void codeOperation(OperationNode opNode, String reg) {
-
+		asmCode += "\n#----------Operation----------\n";
 		ExpressionNode leftExp = opNode.getLeft();
 		String regL = "$s" + currentReg++;
 		codeExp(leftExp, regL);
@@ -374,17 +375,22 @@ public class CodeGeneration {
 
 	}
 
+	/**
+	 * creates code for array nodes
+	 * 
+	 * @param array
+	 *            node
+	 * @param current
+	 *            register
+	 */
 	private void codeArray(ArrayNode arrNode, String reg) {
 
-		asmCode += "\n# Array Stuff\n";
-
+		asmCode += "\n#----------Array Stuff----------\n";
 		String index = "$s" + ++currentReg;
-
 		codeExp(arrNode.getExpNode(), index);
 		asmCode += "li   $t0,   4\n";
 		asmCode += "mult   $t0,   " + index + "\n";
 		asmCode += "mflo   " + index + "\n";
-
 		String arrayReg = "$s" + ++currentReg;
 
 		if (memTable.get(arrNode.getName()).equals(arrNode.getName())) {
@@ -392,7 +398,6 @@ public class CodeGeneration {
 		} else {
 			asmCode += "lw   " + arrayReg + ",   " + memTable.get(arrNode.getName()) + "\n";
 		}
-
 		asmCode += "add   " + arrayReg + ",   " + index + ",   " + arrayReg + "\n";
 		asmCode += "lw   " + reg + ",   0(" + arrayReg + ") \n";
 
