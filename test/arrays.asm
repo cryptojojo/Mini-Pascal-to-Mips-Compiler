@@ -3,7 +3,7 @@
 dollars : .word 0
 yen : .word 0
 bitcoins : .word 0
-arr : .word 0
+arr : .word   0,   0,   0, 0
 dolla : .word 0
 input:  .asciiz  "Input: " 
 newLine: .asciiz "\n"
@@ -77,7 +77,7 @@ li   $v0,   4
 la   $a0, newLine
 syscall
 
-#Assignment Statementb (array)
+#Assignment Statement (array)
 
 #Expression statement
 li   $s0,   1
@@ -86,7 +86,47 @@ li   $s0,   1
 li   $t0   4
 mult   $t0,   $s0
 mflo   $s0
-la   $s1,   arradd   $s1,   $s0,   $s1
+la   $s1,   arr
+add   $s1,   $s0,   $s1
+sw   $s0,   0($s1)
+
+#Assignment Statement (array)
+
+#Expression statement
+li   $s0,   2
+
+#Expression statement
+li   $t0   4
+mult   $t0,   $s0
+mflo   $s0
+la   $s1,   arr
+add   $s1,   $s0,   $s1
+sw   $s0,   0($s1)
+
+#Assignment Statement (array)
+
+#Expression statement
+li   $s0,   3
+
+#Expression statement
+li   $t0   4
+mult   $t0,   $s0
+mflo   $s0
+la   $s1,   arr
+add   $s1,   $s0,   $s1
+sw   $s0,   0($s1)
+
+#Assignment Statement (array)
+
+#Expression statement
+li   $s0,   4
+
+#Expression statement
+li   $t0   4
+mult   $t0,   $s0
+mflo   $s0
+la   $s1,   arr
+add   $s1,   $s0,   $s1
 sw   $s0,   0($s1)
 
 #Write Statement
@@ -100,17 +140,27 @@ li   $v0,   4
 la   $a0, newLine
 syscall
 
-#Assignment Statementb (array)
+#Write Statement
 
 #Expression statement
-li   $s0,   99
+lw   $s0,  arr
+addi   $v0,   $zero,   1
+add   $a0,   $s0,   $zero
+syscall
+li   $v0,   4
+la   $a0, newLine
+syscall
+
+#Write Statement
 
 #Expression statement
-li   $t0   4
-mult   $t0,   $s0
-mflo   $s0
-la   $s1,   arradd   $s1,   $s0,   $s1
-sw   $s0,   0($s1)
+lw   $s0,  arr
+addi   $v0,   $zero,   1
+add   $a0,   $s0,   $zero
+syscall
+li   $v0,   4
+la   $a0, newLine
+syscall
 
 #Write Statement
 

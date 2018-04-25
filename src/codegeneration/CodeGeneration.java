@@ -45,8 +45,21 @@ public class CodeGeneration {
 		// variable declarations
 		asmCode += ".data\n\n";
 		for (VariableNode varNode : progNode.getVariables().getDeclarations()) {
-			memTable.put(varNode.getName(), varNode.getName());
-			asmCode += varNode.getName() + " : .word 0\n";
+
+			if (symTab.isArrayName(varNode.getName())) {
+				memTable.put(varNode.getName(), varNode.getName());
+				int arraySize = 4; // need to get array length somehow
+				asmCode += varNode.getName() + " : .word ";
+				for (int i = 0; i < arraySize - 1; i++) {
+					asmCode += "  0, ";
+				}
+				asmCode += "0\n";
+
+			} else {
+				memTable.put(varNode.getName(), varNode.getName());
+				asmCode += varNode.getName() + " : .word 0\n";
+			}
+
 		}
 
 		// set input
@@ -138,7 +151,9 @@ public class CodeGeneration {
 			asmCode += "mult   $t0,   " + index + "\n";
 			asmCode += "mflo   " + index + "\n";
 
-			asmCode += "la   " + arrayReg + ",   " + memTable.get(assignNode.getLvalue().getName());
+			asmCode += "la   " + arrayReg + ",   " + memTable.get(arrayNode.getName());
+
+			asmCode += "\n";
 			asmCode += "add   " + arrayReg + ",   " + index + ",   " + arrayReg + "\n";
 			asmCode += "sw   " + reg + ",   0(" + arrayReg + ")\n";
 
@@ -367,7 +382,7 @@ public class CodeGeneration {
 		if (memTable.get(arrNode.getName()).equals(arrNode.getName())) {
 			asmCode += "la   " + arrayReg + ",   " + memTable.get(arrNode.getName() + "\n");
 		} else {
-			asmCode += "lw   " + arrayReg + ",   " + memTable.get(arrNode.getName());
+			asmCode += "lw   " + arrayReg + ",   " + memTable.get(arrNode.getName() + "\n");
 		}
 
 		asmCode += "add   " + arrayReg + ",   " + index + ",   " + arrayReg + "\n";

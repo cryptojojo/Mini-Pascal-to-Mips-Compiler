@@ -19,12 +19,16 @@ begin
 
   arr[0] := 1;
 
-write(arr[0]);
+  arr[1] := 2;
+  arr[2] := 3;
+  arr[3] := 4;
+  
+  write(arr[0]);
+  write(arr[1]);
+  write(arr[2]);
+  write(arr[3]);
    
-  arr[1] := 99;
-
-
-write(arr[0]);
+ 
 
 
 end

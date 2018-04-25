@@ -29,13 +29,25 @@ Program: BitcoinConversion
 |-- --- Assignment
 |-- --- --- Array: arr, Type: null
 |-- --- --- Value: 1 (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Array: arr, Type: null
-|-- --- --- --- Value: 0 (Expression Type: DATINTEGER)
 |-- --- Assignment
 |-- --- --- Array: arr, Type: null
-|-- --- --- Value: 99 (Expression Type: DATINTEGER)
+|-- --- --- Value: 2 (Expression Type: DATINTEGER)
+|-- --- Assignment
+|-- --- --- Array: arr, Type: null
+|-- --- --- Value: 3 (Expression Type: DATINTEGER)
+|-- --- Assignment
+|-- --- --- Array: arr, Type: null
+|-- --- --- Value: 4 (Expression Type: DATINTEGER)
 |-- --- Write
 |-- --- --- Array: arr, Type: null
 |-- --- --- --- Value: 0 (Expression Type: DATINTEGER)
+|-- --- Write
+|-- --- --- Array: arr, Type: null
+|-- --- --- --- Value: 1 (Expression Type: DATINTEGER)
+|-- --- Write
+|-- --- --- Array: arr, Type: null
+|-- --- --- --- Value: 2 (Expression Type: DATINTEGER)
+|-- --- Write
+|-- --- --- Array: arr, Type: null
+|-- --- --- --- Value: 3 (Expression Type: DATINTEGER)
 
