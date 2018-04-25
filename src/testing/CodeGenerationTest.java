@@ -31,7 +31,7 @@ public class CodeGenerationTest {
 		Parser parse = new Parser("test/codegen/assignment_bitcoin.pas", true);
 		SemanticAnalysis semAnalysis = new SemanticAnalysis(parse.program(), parse.getSymbolTable());
 		ProgramNode progNode = semAnalysis.analyze();
-		CodeGeneration codeGen = new CodeGeneration(progNode);
+		CodeGeneration codeGen = new CodeGeneration(progNode, parse.getSymbolTable());
 		codeGen.generate();
 		String assembly = codeGen.getAsmCode();
 
@@ -61,7 +61,7 @@ public class CodeGenerationTest {
 		parse = new Parser("test/codegen/if_statement_F.pas", true);
 		semAnalysis = new SemanticAnalysis(parse.program(), parse.getSymbolTable());
 		progNode = semAnalysis.analyze();
-		codeGen = new CodeGeneration(progNode);
+		codeGen = new CodeGeneration(progNode, parse.getSymbolTable());
 		codeGen.generate();
 		assembly = codeGen.getAsmCode();
 
@@ -85,7 +85,7 @@ public class CodeGenerationTest {
 		parse = new Parser("test/codegen/if_statement_T.pas", true);
 		semAnalysis = new SemanticAnalysis(parse.program(), parse.getSymbolTable());
 		progNode = semAnalysis.analyze();
-		codeGen = new CodeGeneration(progNode);
+		codeGen = new CodeGeneration(progNode, parse.getSymbolTable());
 		codeGen.generate();
 		assembly = codeGen.getAsmCode();
 
@@ -109,7 +109,7 @@ public class CodeGenerationTest {
 		parse = new Parser("test/codegen/while_statement.pas", true);
 		semAnalysis = new SemanticAnalysis(parse.program(), parse.getSymbolTable());
 		progNode = semAnalysis.analyze();
-		codeGen = new CodeGeneration(progNode);
+		codeGen = new CodeGeneration(progNode, parse.getSymbolTable());
 		codeGen.generate();
 		assembly = codeGen.getAsmCode();
 
@@ -133,7 +133,7 @@ public class CodeGenerationTest {
 		parse = new Parser("test/codegen/read_statement.pas", true);
 		semAnalysis = new SemanticAnalysis(parse.program(), parse.getSymbolTable());
 		progNode = semAnalysis.analyze();
-		codeGen = new CodeGeneration(progNode);
+		codeGen = new CodeGeneration(progNode, parse.getSymbolTable());
 		codeGen.generate();
 		assembly = codeGen.getAsmCode();
 		System.out.println(assembly);

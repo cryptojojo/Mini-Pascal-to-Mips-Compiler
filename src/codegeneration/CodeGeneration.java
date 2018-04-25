@@ -2,6 +2,8 @@ package codegeneration;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import parser.SymbolTable;
 import scanner.TokenType;
 import syntaxtree.*;
 
@@ -18,6 +20,7 @@ public class CodeGeneration {
 	private String asmCode;
 	private int whileDoNum;
 	private int ifNum;
+	private SymbolTable symTab;
 	private HashMap<String, String> memTable = new HashMap<String, String>();
 
 	/**
@@ -26,12 +29,13 @@ public class CodeGeneration {
 	 * @param synatx
 	 *            tree (program node)
 	 */
-	public CodeGeneration(ProgramNode progNode) {
+	public CodeGeneration(ProgramNode progNode, SymbolTable symTab) {
 		this.progNode = progNode;
 		currentReg = 0;
 		whileDoNum = 0;
 		ifNum = 0;
 		asmCode = "";
+		this.symTab = symTab;
 	}
 
 	/**
@@ -119,9 +123,32 @@ public class CodeGeneration {
 	 */
 	private void codeAssignment(AssignmentStatementNode assignNode, String reg) {
 
-		asmCode += "\n#Assignment Statement\n";
-		codeExp(assignNode.getExpression(), reg);
-		asmCode += "sw  " + reg + ",   " + memTable.get(assignNode.getLvalue().getName()) + '\n';
+		if (symTab.isArrayName(assignNode.getLvalue().getName())) {
+			asmCode += "\n#Assignment Statement (array)\n";
+			codeExp(assignNode.getExpression(), reg);
+
+			ArrayNode arrayNode = (ArrayNode) assignNode.getLvalue();
+
+			String index = "$s" + currentReg++;
+			String arrayReg = "$s" + currentReg++;
+
+			codeExp(arrayNode.getExpNode(), index);
+
+			asmCode += "li   $t0   4\n";
+			asmCode += "mult   $t0,   " + index + "\n";
+			asmCode += "mflo   " + index + "\n";
+
+			asmCode += "la   " + arrayReg + ",   " + memTable.get(assignNode.getLvalue().getName());
+			asmCode += "add   " + arrayReg + ",   " + index + ",   " + arrayReg + "\n";
+			asmCode += "sw   " + reg + ",   0(" + arrayReg + ")\n";
+
+			currentReg -= 2;
+
+		} else {
+			asmCode += "\n#Assignment Statement\n";
+			codeExp(assignNode.getExpression(), reg);
+			asmCode += "sw  " + reg + ",   " + memTable.get(assignNode.getLvalue().getName()) + '\n';
+		}
 
 	}
 
@@ -327,9 +354,8 @@ public class CodeGeneration {
 
 	private void codeArray(ArrayNode arrNode, String reg) {
 
-		
 		asmCode += "\n# Array Stuff\n";
-		
+
 		String index = "$s" + currentReg++;
 		String arrayReg = "$s" + currentReg++;
 

@@ -26,4 +26,16 @@ Program: BitcoinConversion
 |-- --- --- Name: yen (Expression Type: DATINTEGER)
 |-- --- Write
 |-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
+|-- --- Assignment
+|-- --- --- Array: arr, Type: null
+|-- --- --- Value: 1 (Expression Type: DATINTEGER)
+|-- --- Write
+|-- --- --- Array: arr, Type: null
+|-- --- --- --- Value: 0 (Expression Type: DATINTEGER)
+|-- --- Assignment
+|-- --- --- Array: arr, Type: null
+|-- --- --- Value: 99 (Expression Type: DATINTEGER)
+|-- --- Write
+|-- --- --- Array: arr, Type: null
+|-- --- --- --- Value: 0 (Expression Type: DATINTEGER)
 

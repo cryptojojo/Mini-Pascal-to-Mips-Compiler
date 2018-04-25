@@ -77,6 +77,52 @@ li   $v0,   4
 la   $a0, newLine
 syscall
 
+#Assignment Statementb (array)
+
+#Expression statement
+li   $s0,   1
+
+#Expression statement
+li   $t0   4
+mult   $t0,   $s0
+mflo   $s0
+la   $s1,   arradd   $s1,   $s0,   $s1
+sw   $s0,   0($s1)
+
+#Write Statement
+
+#Expression statement
+lw   $s0,  arr
+addi   $v0,   $zero,   1
+add   $a0,   $s0,   $zero
+syscall
+li   $v0,   4
+la   $a0, newLine
+syscall
+
+#Assignment Statementb (array)
+
+#Expression statement
+li   $s0,   99
+
+#Expression statement
+li   $t0   4
+mult   $t0,   $s0
+mflo   $s0
+la   $s1,   arradd   $s1,   $s0,   $s1
+sw   $s0,   0($s1)
+
+#Write Statement
+
+#Expression statement
+lw   $s0,  arr
+addi   $v0,   $zero,   1
+add   $a0,   $s0,   $zero
+syscall
+li   $v0,   4
+la   $a0, newLine
+syscall
+
 
 #Exit Program 
 li  $v0, 10 

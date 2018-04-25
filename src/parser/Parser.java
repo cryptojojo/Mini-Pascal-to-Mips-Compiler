@@ -362,7 +362,9 @@ public class Parser {
 		if (lookahead != null && (lookahead.getType() == TokenType.ID)) {
 			if (symTab.isVariableName(lookahead.getLexeme()) || symTab.isArrayName((lookahead.getLexeme()))) {
 				AssignmentStatementNode assign = new AssignmentStatementNode();
+
 				assign.setLvalue(variable());
+
 				assignop();
 				assign.setExpression(expression());
 				return assign;
@@ -417,17 +419,25 @@ public class Parser {
 	 * brackets
 	 */
 	public VariableNode variable() {
-		VariableNode var = new VariableNode(lookahead.getLexeme());
+		String lex = lookahead.getLexeme();
+
+		VariableNode var = null;
+
 		match(TokenType.ID);
 		if (lookahead != null && (lookahead.getType() == TokenType.LEFTBRACKET)) {
 			match(TokenType.LEFTBRACKET);
 			expression();
 			match(TokenType.RIGHTBRACKET);
+			var = new ArrayNode(lex);
+
+		} else {
+
+			var = new VariableNode(lex);
+			if (!allVarNames.contains(var.getName()))
+				allVarNames.add(var.getName());
 		}
 		// else lambda case
 
-		if (!allVarNames.contains(var.getName()))
-			allVarNames.add(var.getName());
 		return var;
 	}
 

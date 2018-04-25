@@ -17,15 +17,14 @@ begin
   write(bitcoins);
 
 
-  { arr[0] := 1;
+  arr[0] := 1;
 
-   write(ary[0]);
+write(arr[0]);
+   
+  arr[1] := 99;
 
-   arr[1] := 2;
-   write(ary[1]);
 
-   arr[2] := 3;
-    }
+write(arr[0]);
 
 
 end
