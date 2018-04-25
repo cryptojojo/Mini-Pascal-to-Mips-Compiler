@@ -56,7 +56,7 @@ public class CompilerMain {
 		// generates the code
 		codeGen.generate();
 		// gets the string containing the asm code
-		String asmCode = codeGen.getAsmCode();
+		String asmCode = codeGen.getAsmCodeNoComments();
 
 		// System.out.println(parseTree);
 		System.out.println(asmCode);
