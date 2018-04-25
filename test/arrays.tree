@@ -9,25 +9,6 @@ Program: BitcoinConversion
 |-- SubProgramDeclarations
 |-- Compound Statement
 |-- --- Assignment
-|-- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- --- Value: 10000 (Expression Type: DATINTEGER)
-|-- --- Assignment
-|-- --- --- Name: yen (Expression Type: DATINTEGER)
-|-- --- --- operation: MULTIPLY (Expression Type: DATINTEGER)
-|-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- --- --- Value: 107 (Expression Type: DATINTEGER)
-|-- --- Assignment
-|-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
-|-- --- --- operation: DIVIDE (Expression Type: DATINTEGER)
-|-- --- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- --- --- Value: 8000 (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Name: dollars (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Name: yen (Expression Type: DATINTEGER)
-|-- --- Write
-|-- --- --- Name: bitcoins (Expression Type: DATINTEGER)
-|-- --- Assignment
 |-- --- --- Array: arr, Type: null
 |-- --- --- --- Value: 0 (Expression Type: DATINTEGER)
 |-- --- --- Value: 1 (Expression Type: DATINTEGER)

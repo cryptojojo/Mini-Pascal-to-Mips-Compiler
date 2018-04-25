@@ -289,9 +289,9 @@ public class CodeGeneration {
 			codeValue((ValueNode) expNode, reg);
 		} else if (expNode instanceof OperationNode) {
 			codeOperation((OperationNode) expNode, reg);
-		}
-
-		else if (expNode instanceof VariableNode) {
+		} else if (expNode instanceof ArrayNode) {
+			codeArray((ArrayNode) expNode, reg);
+		} else if (expNode instanceof VariableNode) {
 			String var = ((VariableNode) expNode).getName();
 
 			if (symTab.isArrayName(((VariableNode) expNode).getName())) {
@@ -300,10 +300,6 @@ public class CodeGeneration {
 			} else {
 				asmCode += "lw   " + reg + ",  " + var + "\n";
 			}
-		}
-
-		else if (expNode instanceof ArrayNode) {
-			codeArray((ArrayNode) expNode, reg);
 		}
 
 	}
@@ -382,8 +378,9 @@ public class CodeGeneration {
 
 		asmCode += "\n# Array Stuff\n";
 
-		String index = "$s" + currentReg++;
-		String arrayReg = "$s" + currentReg++;
+		String index = "$s" + ++currentReg;
+
+		String arrayReg = "$s" + ++currentReg;
 
 		codeExp(arrNode.getExpNode(), index);
 		asmCode += "li   $t0,   4\n";
@@ -391,6 +388,9 @@ public class CodeGeneration {
 		asmCode += "mflo   " + index + "\n";
 
 		if (memTable.get(arrNode.getName()).equals(arrNode.getName())) {
+
+			System.out.println("\n\n\n\n this line was passed \n\n\n\n");
+
 			asmCode += "la   " + arrayReg + ",   " + memTable.get(arrNode.getName() + "\n");
 		} else {
 			asmCode += "lw   " + arrayReg + ",   " + memTable.get(arrNode.getName() + "\n");

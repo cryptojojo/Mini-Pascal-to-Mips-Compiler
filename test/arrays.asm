@@ -13,71 +13,6 @@ newLine: .asciiz "\n"
 
 main:
 
-#Assignment Statement
-
-#Expression statement
-li   $s0,   10000
-sw  $s0,   dollars
-
-#Assignment Statement
-
-#Expression statement
-
-#Expression statement
-lw   $s0,  dollars
-
-#Expression statement
-li   $s1,   107
-mult   $s0,   $s1
-mflo   $s0
-sw  $s0,   yen
-
-#Assignment Statement
-
-#Expression statement
-
-#Expression statement
-lw   $s0,  dollars
-
-#Expression statement
-li   $s1,   8000
-div   $s0,   $s1
-mflo   $s0
-sw  $s0,   bitcoins
-
-#Write Statement
-
-#Expression statement
-lw   $s0,  dollars
-addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
-syscall
-li   $v0,   4
-la   $a0, newLine
-syscall
-
-#Write Statement
-
-#Expression statement
-lw   $s0,  yen
-addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
-syscall
-li   $v0,   4
-la   $a0, newLine
-syscall
-
-#Write Statement
-
-#Expression statement
-lw   $s0,  bitcoins
-addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
-syscall
-li   $v0,   4
-la   $a0, newLine
-syscall
-
 #Assignment Statement (array)
 
 #Expression statement
@@ -137,7 +72,16 @@ sw   $s0,   0($s1)
 #Write Statement
 
 #Expression statement
-la   $s0,   arr
+
+# Array Stuff
+
+#Expression statement
+li   $s1,   0
+li   $t0,   4
+mult   $t0,   $s1
+mflo   $s1
+la   $s2,   nulladd   $s2,   $s1,   $s2
+lw   $s0,   0($s2) 
 addi   $v0,   $zero,   1
 add   $a0,   $s0,   $zero
 syscall
@@ -148,9 +92,18 @@ syscall
 #Write Statement
 
 #Expression statement
-la   $s0,   arr
+
+# Array Stuff
+
+#Expression statement
+li   $s2,   1
+li   $t0,   4
+mult   $t0,   $s2
+mflo   $s2
+la   $s3,   nulladd   $s3,   $s2,   $s3
+lw   $s1,   0($s3) 
 addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
+add   $a0,   $s1,   $zero
 syscall
 li   $v0,   4
 la   $a0, newLine
@@ -159,9 +112,18 @@ syscall
 #Write Statement
 
 #Expression statement
-la   $s0,   arr
+
+# Array Stuff
+
+#Expression statement
+li   $s3,   2
+li   $t0,   4
+mult   $t0,   $s3
+mflo   $s3
+la   $s4,   nulladd   $s4,   $s3,   $s4
+lw   $s2,   0($s4) 
 addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
+add   $a0,   $s2,   $zero
 syscall
 li   $v0,   4
 la   $a0, newLine
@@ -170,9 +132,18 @@ syscall
 #Write Statement
 
 #Expression statement
-la   $s0,   arr
+
+# Array Stuff
+
+#Expression statement
+li   $s4,   3
+li   $t0,   4
+mult   $t0,   $s4
+mflo   $s4
+la   $s5,   nulladd   $s5,   $s4,   $s5
+lw   $s3,   0($s5) 
 addi   $v0,   $zero,   1
-add   $a0,   $s0,   $zero
+add   $a0,   $s3,   $zero
 syscall
 li   $v0,   4
 la   $a0, newLine

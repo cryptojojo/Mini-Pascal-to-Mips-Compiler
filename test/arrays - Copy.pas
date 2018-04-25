@@ -22,7 +22,13 @@ begin
   write(arr[2]);
   write(arr[3]);
 
+  dollars := 10000;
+  yen := dollars*107;
+  bitcoins := dollars / 8000;
 
+  write(dollars);
+  write(yen);
+  write(bitcoins);
 
 end
 .
